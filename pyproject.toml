@@ -1,0 +1,19 @@
+[project]
+name = "qudt-parsing"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "pyld>=2.0.4",
+    "rdflib>=7.1.4",
+]
+
+[tool.flake8]
+max-line-length = 88
+
+[tool.pylint.'FORMAT']
+max-line-length = 88
+
+[tool.pyright]
+reportLineTooLong = true
+lineLength = 88
