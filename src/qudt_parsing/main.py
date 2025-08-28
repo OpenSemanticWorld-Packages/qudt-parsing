@@ -422,7 +422,11 @@ def classify_qudt_units(type_dict: dict, iri_dict: dict, iri_to_index: dict) -> 
     # Iterate over all "qudt:Unit" items and print their @id and label
     for unit_dict in type_dict.get("qudt:Unit", []):
         unit_type_dict["All"].append(unit_dict)
-        unit_id = unit_dict.get("@id", "No ID")
+        unit_id = unit_dict.get("@id")
+        if not unit_id:
+            raise ValueError(f"Unit without @id found: {unit_dict}")
+        if unit_id == "unit:CentiC":
+            print("Pause")
         unit_index = iri_to_index.get(unit_id)
         # Use the pointer to the jsonld graph to update the original jsonld:
         unit_dict = ontologies["qudt"]["jsonld"]["@graph"][unit_index]
@@ -439,7 +443,7 @@ def classify_qudt_units(type_dict: dict, iri_dict: dict, iri_to_index: dict) -> 
         if "qudt:DerivedUnit" in unit_dict.get("@type", []):
             unit_type_dict["Derived unit"].append(unit_dict)
             _logger.info("Derived Unit found: %s - Label: %s", unit_id, label)
-        # Prefixed units
+        # Explicitly prefixed units (as marked by the prefix property in QUDT)
         if "qudt:prefix" in unit_dict:
             unit_type_dict["Units with a prefix statement"].append(unit_dict)
             _logger.info("Prefixed Unit found: %s - Label: %s", unit_id, label)
@@ -475,11 +479,30 @@ def classify_qudt_units(type_dict: dict, iri_dict: dict, iri_to_index: dict) -> 
                     " - (also listed as Prefixed, non-composed Unit with no "
                     "Non-prefixed base)"
                 )
+            # Enrich the jsonld with scalingOf if missing and scaledBy
+            if base_unit_found:
+                if "qudt:scalingOf" not in unit_dict:
+                    unit_dict["qudt:scalingOf"] = {"@id": base_unit_name}
+                base_unit_dict = ontologies["qudt"]["jsonld"]["@graph"][
+                    iri_to_index.get(base_unit_name)
+                ]
+                if "custom:scaledBy" not in base_unit_dict:
+                    base_unit_dict["custom:scaledBy"] = []
+                if unit_id not in get_values(base_unit_dict["custom:scaledBy"], "@id"):
+                    base_unit_dict["custom:scaledBy"].append({"@id": unit_id})
+                    _logger.info(
+                        "Updated Non-prefixed base unit %s with scaledBy %s",
+                        base_unit_name,
+                        unit_id,
+                    )
 
-        # Non-prefixed units
+        # No prefix statement in QUDT -> could still be a composed unit with prefixed
+        #  components
         if "qudt:prefix" not in unit_dict:
             unit_type_dict["Units without a prefix statement"].append(unit_dict)
-            _logger.info("Non-prefixed Unit found: %s - Label: %s", unit_id, label)
+            _logger.info(
+                "Unit without prefix statement found: %s - Label: %s", unit_id, label
+            )
             # Non-prefixed non-composed unit
             if "qudt:hasFactorUnit" not in unit_dict:
                 unit_type_dict["Non-prefixed, non-composed unit"].append(unit_dict)
@@ -510,10 +533,7 @@ def classify_qudt_units(type_dict: dict, iri_dict: dict, iri_to_index: dict) -> 
                 base_unit_name = remove_prefixes(unit_dict["@id"])
                 base_unit_found = False
                 for candidate in type_dict.get("qudt:Unit", []):
-                    if (
-                        base_unit_name == candidate.get("@id", "")
-                        and "qudt:prefix" not in candidate
-                    ):
+                    if base_unit_name == candidate.get("@id", ""):
                         base_unit_found = True
                         base_units_to_prefixed_composed_units.setdefault(
                             base_unit_name, []
@@ -530,18 +550,34 @@ def classify_qudt_units(type_dict: dict, iri_dict: dict, iri_to_index: dict) -> 
                         " - (also listed as Prefixed, composed unit with missing "
                         "scalingOf)"
                     )
-                if base_unit_found and "qudt:scalingOf" not in unit_dict:
-                    unit_type_dict[
-                        (
+                if base_unit_found:
+                    if "qudt:scalingOf" not in unit_dict:
+                        unit_type_dict[
                             "Prefixed, composed unit with missing scalingOf but base "
                             "unit available"
+                        ].append(unit_dict)
+                        _logger.info(
+                            " - (also listed as Prefixed, composed unit with missing "
+                            "scalingOf but base unit available)"
                         )
-                    ].append(unit_dict)
-                    _logger.info(
-                        " - (also listed as Prefixed, composed unit with missing "
-                        "scalingOf but base unit available)"
-                    )
-                if not base_unit_found:
+                        # Enrich the jsonld with scalingOf if missing
+                        unit_dict["qudt:scalingOf"] = {"@id": base_unit_name}
+                    # Enrich the Non-prefixed base unit with scaledBy
+                    base_unit_dict = ontologies["qudt"]["jsonld"]["@graph"][
+                        iri_to_index.get(base_unit_name)
+                    ]
+                    if "custom:scaledBy" not in base_unit_dict:
+                        base_unit_dict["custom:scaledBy"] = []
+                    if unit_id not in get_values(
+                        base_unit_dict["custom:scaledBy"], "@id"
+                    ):
+                        base_unit_dict["custom:scaledBy"].append({"@id": unit_id})
+                        _logger.info(
+                            "Updated Non-prefixed base unit %s with scaledBy %s",
+                            base_unit_name,
+                            unit_id,
+                        )
+                else:  # if not base_unit_found:
                     unit_type_dict[
                         "Prefixed, composed unit with no Non-prefixed base"
                     ].append(unit_dict)
@@ -580,49 +616,6 @@ def classify_qudt_units(type_dict: dict, iri_dict: dict, iri_to_index: dict) -> 
     # - Composed unit (combination of multiple prefixed and Non-prefixed units)
     #   - Units with property hasFactorUnit
     # unit_type_dict["Composed unit"]
-
-    # todo: process (Non-)prefixed and composed units and write the relationships to
-    #  the jsonld
-    #  - find Non-prefixed base unit for each Prefixed unit (composed and non-composed)
-    #  - add them to the jsonld as qudt:scalingOf (if not already present)
-    #  - for non-prefixed base units add the prefixed units as qudt:scaledBy
-
-    # Going through the non-composed prefixed units and adding the scaledBy to the
-    # non-composed non-prefixed base units
-
-    for prefixed_unit in unit_type_dict["Prefixed, non-composed unit"]:
-        base_unit_name = remove_prefixes(prefixed_unit["@id"])
-        base_unit_found = False
-        for candidate in type_dict.get("qudt:Unit", []):
-            if (
-                base_unit_name in candidate.get("@id", "")
-                and "qudt:prefix" not in candidate
-            ):
-                base_unit_found = True
-                if "qudt:scaledBy" not in candidate:
-                    candidate["qudt:scaledBy"] = []
-                if prefixed_unit["@id"] not in get_values(
-                    candidate["qudt:scaledBy"], "@id"
-                ):
-                    candidate["qudt:scaledBy"].append({"@id": prefixed_unit["@id"]})
-                    _logger.info(
-                        "Added qudt:scaledBy %s to Non-prefixed base unit %s",
-                        prefixed_unit["@id"],
-                        candidate["@id"],
-                    )
-                if "qudt:scalingOf" not in prefixed_unit:
-                    prefixed_unit["qudt:scalingOf"] = {"@id": candidate["@id"]}
-                    _logger.info(
-                        "Added qudt:scalingOf %s to Prefixed unit %s",
-                        candidate["@id"],
-                        prefixed_unit["@id"],
-                    )
-                break
-        if not base_unit_found:
-            _logger.warning(
-                "No Non-prefixed base unit found for Prefixed unit %s",
-                prefixed_unit["@id"],
-            )
 
     return unit_type_dict, base_units_to_prefixed_composed_units
 
@@ -859,6 +852,8 @@ qudt_unit_type_dict, base_units_to_prefixed_composed_units = classify_qudt_units
 report_on_unit_types(
     qudt_type_dict, qudt_unit_type_dict, base_units_to_prefixed_composed_units
 )
+
+jsonld = ontologies["qudt"]["jsonld"]["@graph"]
 
 # Handling of quantity kinds
 qudt_quantity_kind_dict = classify_quantity_kinds(qudt_type_dict)
