@@ -450,20 +450,13 @@ def classify_qudt_units(type_dict: dict, iri_dict: dict, iri_to_index: dict) -> 
                 _logger.info(" - (also listed as Non-prefixed, non-composed Unit)")
             # See if the unit can be reduced to a Non-prefixed base unit
             base_unit_name = remove_prefixes(unit_dict["@id"])
-            found_base_units = list(
-                {
-                    base_unit_name
-                    for candidate in type_dict.get("qudt:Unit", [])
-                    if base_unit_name in candidate.get("@id", "")
-                }
-            )
+            base_unit_found = False
+            for candidate in type_dict.get("qudt:Unit", []):
+                if base_unit_name == candidate.get("@id", ""):
+                    base_unit_found = True
+                    _logger.info(" - Non-prefixed base unit found: %s", base_unit_name)
+                    break
 
-            for base_unit in found_base_units:
-                _logger.info(" - Base Non-prefixed unit found: %s", base_unit)
-            base_unit_found = any(
-                base_unit_name in candidate.get("@id", "")
-                for candidate in type_dict.get("qudt:Unit", [])
-            )
             if base_unit_found and "qudt:scalingOf" not in unit_dict:
                 unit_type_dict["Prefixed unit with missing scalingOf"].append(unit_dict)
                 _logger.info(" - (also listed as Prefixed unit with missing scalingOf)")
@@ -518,7 +511,7 @@ def classify_qudt_units(type_dict: dict, iri_dict: dict, iri_to_index: dict) -> 
                 base_unit_found = False
                 for candidate in type_dict.get("qudt:Unit", []):
                     if (
-                        base_unit_name in candidate.get("@id", "")
+                        base_unit_name == candidate.get("@id", "")
                         and "qudt:prefix" not in candidate
                     ):
                         base_unit_found = True
@@ -528,7 +521,6 @@ def classify_qudt_units(type_dict: dict, iri_dict: dict, iri_to_index: dict) -> 
                         _logger.info(
                             " - Base Non-prefixed unit found: %s", base_unit_name
                         )
-
                         break
                 if "qudt:scalingOf" not in unit_dict:
                     unit_type_dict[
