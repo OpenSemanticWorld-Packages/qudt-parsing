@@ -13,7 +13,7 @@ from osw.defaults import paths as default_paths  # noqa: E402
 default_params.wiki_domain = os.getenv("OSL_DOMAIN")
 default_paths.cred_filepath = os.getenv("OSL_CRED_FP")
 
-from osw.express import OswExpress, import_with_fallback  # noqa: E402
+from osw.express import OswExpress  # noqa: E402
 
 osw_obj = OswExpress(
     domain=default_params.wiki_domain, cred_filepath=default_paths.cred_filepath
@@ -29,8 +29,16 @@ DEPENDENCIES = {
     "CharacteristicType": "Category:OSWffe74f291d354037b318c422591c5023",
     "QuantityValueType": "Category:OSWac07a46c2cf14f3daec503136861f5ab",
     "ComposedQuantityUnitWithUnitPrefix": "Category:OSW268cc84d3dff4a7ba5fd489d53254cb0",
+    "ComposedUnit": "Category:OSW6c2aea028a8647cd97f5d7c65c09cd44",
     "MainQuantityProperty": "Category:OSW1b15ddcf042c4599bd9d431cbfdf3430",
     "SubQuantityProperty": "Category:OSW69f251a900944602a08d1cca830249b5",
 }
 
-import_with_fallback(DEPENDENCIES, globals(), osw_express=osw_obj)
+# import_with_fallback(DEPENDENCIES, globals(), osw_express=osw_obj)
+
+osw_obj.fetch_schema(
+    osw_obj.FetchSchemaParam(
+        schema_title=list(DEPENDENCIES.values()),
+        mode="replace",
+    )
+)
