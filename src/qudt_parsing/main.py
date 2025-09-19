@@ -10,6 +10,7 @@ import json
 import logging
 import os
 import pickle
+import time
 import uuid as uuid_module
 from collections.abc import Callable
 from pathlib import Path
@@ -17,10 +18,11 @@ from typing import Any, TypedDict
 
 from dotenv import load_dotenv
 from langchain.output_parsers import PydanticOutputParser
-from langchain.tools import Tool
+# from langchain.tools import Tool
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import AzureChatOpenAI
 from osw.model import entity as model
+from openai import Timeout
 from pydantic import BaseModel, Field
 from pyld import jsonld as jsonld_module
 from rdflib import Graph
@@ -29,6 +31,8 @@ _logger = logging.getLogger(__name__)
 
 ENV_FP = Path(__file__).parents[2] / ".env"
 load_dotenv(ENV_FP)
+
+LLM_MODEL = "gpt-5-2025-08-07"
 
 osl_domain = os.getenv("OSL_DOMAIN")
 
@@ -41,24 +45,25 @@ data_dir.mkdir(exist_ok=True)
 print("OpenAI configuration:")
 print("Endpoint:", os.environ["AZURE_OPENAI_ENDPOINT"])
 print("API version:", os.environ["AZURE_OPENAI_API_VERSION"])
-llm = AzureChatOpenAI(
-    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
-    api_version=os.environ["AZURE_OPENAI_API_VERSION"],
-    model="gpt-5-2025-08-07",
-    temperature=0,
-    max_retries=3,
-)
-
-messages = [
-    (
-        "system",
-        "You are a helpful translator. Translate the user sentence to French.",
-    ),
-    ("human", "I love programming."),
-]
-
-result = llm.invoke(messages)
-print("LLM-Testantwort:", result)
+# llm = AzureChatOpenAI(
+#     azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+#     api_version=os.environ["AZURE_OPENAI_API_VERSION"],
+#     model="gpt-5-2025-08-07",
+#     temperature=0,
+#     max_retries=3,
+#     timeout=300,
+# )
+#
+# messages = [
+#     (
+#         "system",
+#         "You are a helpful translator. Translate the user sentence to French.",
+#     ),
+#     ("human", "I love programming."),
+# ]
+#
+# result = llm.invoke(messages)
+# print("LLM-Testantwort:", result)
 
 
 class FunctionCallHistory:
@@ -990,15 +995,34 @@ def process_prefixed_composed_units_with_ai(
             "factors.",
         )
 
-    check_if_id_exists = Tool(
-        name="check_if_id_exists",
-        func=lambda unit_id: unit_id in id_to_index,
-        description=(
-            "Use this function to check if a guessed (Non-prefixed factor) unit ID "
-            "exists in the QUDT dump. The input is the unit ID as a string, e.g. "
-            "'qudt:GM'. The output is a boolean indicating whether the ID exists."
+    # check_if_id_exists = Tool(
+    #     name="check_if_id_exists",
+    #     func=lambda unit_id: unit_id in id_to_index,
+    #     description=(
+    #         "Use this function to check if a guessed (Non-prefixed factor) unit ID "
+    #         "exists in the QUDT dump. The input is the unit ID as a string, e.g. "
+    #         "'qudt:GM'. The output is a boolean indicating whether the ID exists."
+    #     ),
+    # )
+
+    # Components to be used in the chain
+
+    output_parser = PydanticOutputParser(pydantic_object=BaseComposedUnit)
+
+    # format_instructions = output_parser.get_format_instructions()
+
+    prompt = PromptTemplate(
+        template=(
+            "You are an expert assistant for structured data tasks.\n"
+            "Answer the user query.\n{format_instructions}\n{query}\n"
         ),
+        input_variables=["query"],
+        partial_variables={
+            "format_instructions": output_parser.get_format_instructions()
+        },
     )
+
+
     # Pickle file to store the results - avoid re-running the LLM for already
     #  processed units
     pickle_fp = (
@@ -1018,8 +1042,12 @@ def process_prefixed_composed_units_with_ai(
     else:
         _logger.info(f"No pickle file found at {pickle_fp}, starting fresh.")
 
+
+    full_runs = 0
     # Process all prefixed composed units without a Non-prefixed base unit
-    for pcu_dict in unit_type_dict["Prefixed, composed unit with no non-prefixed base"]:
+    for pcu_dict in unit_type_dict[
+        "Prefixed, composed unit with no non-prefixed base"
+    ]:
         pcu_id = pcu_dict["@id"]
         _logger.info(f"Processing unit: {pcu_id}")
         pcu_id_wo_onto_prefix = pcu_id.split(":")[-1]
@@ -1099,7 +1127,6 @@ def process_prefixed_composed_units_with_ai(
             base_unit_dict["qudt:applicableSystem"] = applicable_systems
 
         # 3.2 Use LLM to provide missing attributes
-
         factor_unit_ids = get_values(
             get_values(pcu_dict.get("qudt:hasFactorUnit", []), "qudt:hasUnit"), "@id"
         )
@@ -1132,21 +1159,6 @@ def process_prefixed_composed_units_with_ai(
             prefixed_composed=ComposedUnit(**pcu_dict),
         )
 
-        output_parser = PydanticOutputParser(pydantic_object=BaseComposedUnit)
-
-        format_instructions = output_parser.get_format_instructions()
-
-        prompt = PromptTemplate(
-            template=(
-                "You are an expert assistant for structured data tasks.\n"
-                "Answer the user query.\n{format_instructions}\n{query}\n"
-            ),
-            input_variables=["query"],
-            partial_variables={
-                "format_instructions": output_parser.get_format_instructions()
-            },
-        )
-
         input_message = (
             f"Create a Non-prefixed base composed unit from the following data:\n"
             f"{input_.model_dump_json(indent=2)}\n"
@@ -1171,13 +1183,46 @@ def process_prefixed_composed_units_with_ai(
             f"qudt_hasFactorunit are consistent."
         )
 
-        chain = prompt | llm | output_parser
-        new_composed_base_unit = chain.invoke({"query": input_message})
+        def init_llm():
+            return AzureChatOpenAI(
+                azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+                api_version=os.environ["AZURE_OPENAI_API_VERSION"],
+                model=LLM_MODEL,
+                temperature=0,
+                max_retries=3,
+                timeout=300,
+            )
+        # Initialize the LLM (freshly every N executions)
+        if full_runs % 4 == 0 or full_runs == 0:
+            msg = "Initializing the LLM" if full_runs == 0 \
+                else "Re-initializing the LLM to avoid potential memory issues."
+            _logger.info(msg)
+            llm = init_llm()
+        # 3.3 Invoke the chain to get the new Non-prefixed base unit
+        try:
+            # Defining the chain to be used in the processing loop
+            chain = prompt | llm | output_parser
+            # Invoke the chain
+            new_composed_base_unit = chain.invoke({"query": input_message})
+        except Timeout:
+            # Retry once after a short delay
+            _logger.warning(f"Timeout occurred for unit {pcu_id}, retrying once with "
+                            f"freshly re-initialized LLM after short delay.")
+            time.sleep(10)
+            # Re-initialize the LLM
+            llm = init_llm()
+            # Defining the chain to be used in the processing loop
+            chain = prompt | llm | output_parser
+            # Invoke the chain with freshly initialized LLM
+            new_composed_base_unit = chain.invoke({"query": input_message})
+
         dict_list.append(new_composed_base_unit.model_dump(by_alias=True))
         # After successfully creating a new list element, pickle the current state of
         #  the dict_list
         with open(pickle_fp, "wb") as f:
             pickle.dump(dict_list, f)
+
+        full_runs += 1
 
     return dict_list
 
