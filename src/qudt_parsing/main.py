@@ -1,6 +1,16 @@
-"""Loads the QUDT dump from a URL, processes it, and saves it as JSON-LD.
+"""DISCLAIMER: This is a script for direct execution only! It is not meant to be
+imported.
+It loads the QUDT dump from a URL, processes it, and saves it as JSON-LD.
 This script uses rdflib to parse the Turtle format and pyld to compact the
 JSON-LD. It also provides functions to save and load JSON-LD data from files.
+
+Design choices:
+- The script operates on central data structures (ontologies dict) to keep track of
+  the changes made to be able to derive a processing pipeline for Open Semantic Lab
+  compatible QuantityUnits
+- Function call logging and dependency checking is implemented via a decorator and a
+  FunctionCallHistory class
+-
 """
 
 from __future__ import annotations
@@ -9,7 +19,6 @@ import functools
 import json
 import logging
 import os
-import pickle
 import time
 import uuid as uuid_module
 from collections.abc import Callable
@@ -18,14 +27,18 @@ from typing import Any, TypedDict
 
 from dotenv import load_dotenv
 from langchain.output_parsers import PydanticOutputParser
+
 # from langchain.tools import Tool
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import AzureChatOpenAI
-from osw.model import entity as model
 from openai import Timeout
+from osw.model import entity as model
 from pydantic import BaseModel, Field
 from pyld import jsonld as jsonld_module
 from rdflib import Graph
+
+if __name__ != "__main__":
+    raise RuntimeError("This module is not intended to be imported.")
 
 _logger = logging.getLogger(__name__)
 
@@ -40,6 +53,8 @@ this_file = Path(__file__)
 project_root = this_file.parents[2]
 data_dir = project_root / "data"
 data_dir.mkdir(exist_ok=True)
+
+missing_units_fp = data_dir / "qudt_missing_units.json"
 
 # llm = ChatOpenAI(model=LLM_MODEL, temperature=0, max_retries=3)
 print("OpenAI configuration:")
@@ -158,7 +173,7 @@ ontologies: dict[str, Ontology] = {
             "vaem": "http://www.linkedmodel.org/schema/vaem#",
             "voag": "http://voag.linkedmodel.org/schema/voag#",
         },
-        "dump_fp": data_dir / "qudt_dump.jsonld",
+        "dump_fp": data_dir / "qudt_dump.json",
         "graph": None,
         "jsonld": None,
         "id_dict": None,
@@ -173,7 +188,7 @@ ontologies: dict[str, Ontology] = {
         "context": {
             "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
         },
-        "dump_fp": data_dir / "wikidata_dump.jsonld",
+        "dump_fp": data_dir / "wikidata_dump.json",
         "graph": None,
         "jsonld": None,
         "id_dict": None,
@@ -200,7 +215,7 @@ ontologies: dict[str, Ontology] = {
             "foaf": "http://xmlns.com/foaf/0.1/",
             "ombibo": "http://www.wurvoc.org/bibliography/om-2/",
         },
-        "dump_fp": data_dir / "om2_dump.jsonld",
+        "dump_fp": data_dir / "om2_dump.json",
         "graph": None,
         "jsonld": None,
         "id_dict": None,
@@ -223,7 +238,7 @@ ontologies: dict[str, Ontology] = {
             "skos": "http://www.w3.org/2004/02/skos/core#",
             "xsd": "http://www.w3.org/2001/XMLSchema#",
         },
-        "dump_fp": data_dir / "sdf_prefixes_dump.jsonld",
+        "dump_fp": data_dir / "sdf_prefixes_dump.json",
         "graph": None,
         "jsonld": None,
         "id_dict": None,
@@ -539,6 +554,68 @@ def build_type_index(jsonld: dict[str, list[dict[str, Any]]]) -> dict[str, list[
     return type_index_
 
 
+def enrich_with_scaled_by(
+    unit_id: str, base_unit_name: str, id_to_index: dict[str, int]
+):
+    """Enriches a base unit with information on a (prefixed) unit that scales it.
+
+    Parameters
+    ----------
+    unit_id
+        The unit to be listed as scaledBy
+    base_unit_name
+        The unit to be enriched
+    id_to_index
+        The dictionary serving as address mapping
+
+    Returns
+    -------
+
+    """
+    base_unit_dict_ = ontologies["qudt"]["jsonld"]["@graph"][
+        id_to_index.get(base_unit_name)
+    ]
+    if "custom:scaledBy" not in base_unit_dict_:
+        base_unit_dict_["custom:scaledBy"] = []
+    if unit_id not in get_values(base_unit_dict_["custom:scaledBy"], "@id"):
+        base_unit_dict_["custom:scaledBy"].append({"@id": unit_id})
+        _logger.info(
+            "Updated Non-prefixed base unit %s with scaledBy %s",
+            base_unit_name,
+            unit_id,
+        )
+
+
+def enrich_with_scaling_of(
+    unit_id: str, base_unit_name: str, id_to_index: dict[str, int]
+):
+    """Enriches a (prefixed) unit with information on a base unit that it scales.
+
+    Parameters
+    ----------
+    unit_id
+        The unit to be enriched
+    base_unit_name
+        The unit to be listed as scalingOf
+    id_to_index
+        The dictionary serving as address mapping
+
+    Returns
+    -------
+
+    """
+    unit_dict_ = ontologies["qudt"]["jsonld"]["@graph"][id_to_index.get(unit_id)]
+    if "custom:scalingOf" not in unit_dict_:
+        unit_dict_["custom:scalingOf"] = []
+    if base_unit_name not in get_values(unit_dict_["custom:scalingOf"], "@id"):
+        unit_dict_["custom:scalingOf"].append({"@id": base_unit_name})
+        _logger.info(
+            "Updated Prefixed unit %s with scalingOf %s",
+            unit_id,
+            base_unit_name,
+        )
+
+
 @log_call
 def classify_and_enrich_qudt_units(
     type_dict: dict, id_dict: dict, id_to_index: dict
@@ -590,26 +667,12 @@ def classify_and_enrich_qudt_units(
             factor_units_ = [factor_units_]
         for factor_unit_ in factor_units_:
             factor_unit_id_ = factor_unit_.get(  # unresolved address
-                "qudt:hasUnit", id_dict.get(factor_unit_["@id"]).get("qudt:hasUnit")
+                "qudt:hasUnit"
             ).get("@id")
             factor_unit_dict_ = id_dict.get(factor_unit_id_, {})
             if "qudt:prefix" in factor_unit_dict_:
                 return True
         return False
-
-    def enrich_with_scaled_by(base_unit_name):
-        base_unit_dict_ = ontologies["qudt"]["jsonld"]["@graph"][
-            id_to_index.get(base_unit_name)
-        ]
-        if "custom:scaledBy" not in base_unit_dict_:
-            base_unit_dict_["custom:scaledBy"] = []
-        if unit_id not in get_values(base_unit_dict_["custom:scaledBy"], "@id"):
-            base_unit_dict_["custom:scaledBy"].append({"@id": unit_id})
-            _logger.info(
-                "Updated Non-prefixed base unit %s with scaledBy %s",
-                base_unit_name,
-                unit_id,
-            )
 
     def treat_prefixed_non_composed_unit(unit_dict_: dict):
         unit_type_dict["Prefixed, non-composed unit"].append(unit_dict)
@@ -645,10 +708,9 @@ def classify_and_enrich_qudt_units(
                 # Enrich the jsonld with scalingOf if missing
                 unit_dict_["qudt:scalingOf"] = {"@id": base_unit_name_}
             # Enrich the Non-prefixed base unit with scaledBy
-            enrich_with_scaled_by(base_unit_name_)
+            enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
 
     def treat_prefixed_composed_unit(unit_dict_: dict):
-        # todo: create non existing scalingOf entries?
         unit_type_dict["Prefixed, composed unit"].append(unit_dict_)
         _logger.info(
             " - (also listed as Prefixed, composed unit with missing scalingOf)"
@@ -680,8 +742,9 @@ def classify_and_enrich_qudt_units(
                 )
                 # Enrich the jsonld with scalingOf if missing
                 unit_dict["qudt:scalingOf"] = {"@id": base_unit_name_}
+                # todo: scalingOf is not missing anymore
             # Enrich the Non-prefixed base unit with scaledBy
-            enrich_with_scaled_by(base_unit_name_)
+            enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
         else:  # if not base_unit_found:
             unit_type_dict["Prefixed, composed unit with no non-prefixed base"].append(
                 unit_dict
@@ -733,7 +796,8 @@ def classify_and_enrich_qudt_units(
             and not factor_units_are_prefixed(u),
             "action": lambda u: unit_type_dict["Non-prefixed, composed unit"].append(u),
         },
-        "QUDT does neither state 'prefix' nor 'hasFactorUnit'": {
+        "QUDT does neither state 'prefix' nor 'hasFactorUnit' --> Non-prefixed "
+        "non-composed unit": {
             "function": lambda u: not has_prefix_statement(u)
             and not has_factor_unit_statement(u),
             "action": lambda u: unit_type_dict[
@@ -791,6 +855,23 @@ def classify_and_enrich_qudt_units(
     # unit_type_dict["Composed unit"]
 
     return unit_type_dict
+
+
+@log_call
+def load_qudt_missing_units() -> list[dict[str, Any]]:
+    with open(missing_units_fp, encoding="utf-8") as f:
+        missing_units_list = json.load(f)
+
+    for mu in missing_units_list:
+        scaled_by_list = get_values(mu["custom:scaledBy"], "@id")
+        if not scaled_by_list:
+            _logger.warning("Missing unit without scaledBy found: %s", mu)
+            continue
+        for id_ in scaled_by_list:
+            enrich_with_scaling_of(id_, mu["@id"], ontologies["qudt"]["id_to_index"])
+            _logger.info("Enriched missing unit %s with scaledBy %s", mu["@id"], id_)
+
+    return missing_units_list
 
 
 @log_call
@@ -884,12 +965,12 @@ def process_prefixed_composed_units_with_ai(
             description="A plain text description is used to provide a description with only simple ASCII characters for cases where LaTeX , HTML or other markup would not be appropriate.",
         )
         qudt_conversionMultiplier: dict[str, str | float] | None = Field(
-            default=None,
+            default={"@type": "xsd:decimal", "@value": "0.0"},
             alias="qudt:conversionMultiplier",
             description="conversion multiplier",
         )
         qudt_conversionMultiplierSN: dict[str, str | float] | None = Field(
-            default=None,
+            default={"@type": "xsd:double", "@value": 0.0},
             alias="qudt:conversionMultiplierSN",
             description="conversion multiplier in scientific notation",
         )
@@ -1022,32 +1103,27 @@ def process_prefixed_composed_units_with_ai(
         },
     )
 
-
     # Pickle file to store the results - avoid re-running the LLM for already
     #  processed units
-    pickle_fp = (
-        Path(__file__).parents[2] / "data" / "new_non_prefixed_base_composed_units.pkl"
+    json_fp = (
+        Path(__file__).parents[2] / "data" / "new_non_prefixed_base_composed_units.json"
     )
-
     # List to collect new Non-prefixed composed base units
     dict_list: list[dict[str, Any]] = []
     already_processed = set()
 
-    # Load previously processed units from pickle file if it exists
-    if pickle_fp.exists():
-        _logger.info(f"Loading previously processed units from {pickle_fp}")
-        with open(pickle_fp, "rb") as f:
-            dict_list = pickle.load(f)
+    # Load previously processed units from json file if it exists
+    if json_fp.exists():
+        _logger.info(f"Loading previously processed units from {json_fp}")
+        with open(json_fp, "rb") as f:
+            dict_list = json.load(f)
         already_processed = {d["@id"] for d in dict_list}
     else:
-        _logger.info(f"No pickle file found at {pickle_fp}, starting fresh.")
-
+        _logger.info(f"No json file found at {json_fp}, starting fresh.")
 
     full_runs = 0
     # Process all prefixed composed units without a Non-prefixed base unit
-    for pcu_dict in unit_type_dict[
-        "Prefixed, composed unit with no non-prefixed base"
-    ]:
+    for pcu_dict in unit_type_dict["Prefixed, composed unit with no non-prefixed base"]:
         pcu_id = pcu_dict["@id"]
         _logger.info(f"Processing unit: {pcu_id}")
         pcu_id_wo_onto_prefix = pcu_id.split(":")[-1]
@@ -1058,12 +1134,12 @@ def process_prefixed_composed_units_with_ai(
         # 1. Remove all known prefixes from the unit name
         split_result = remove_prefixes_calc_multiplication(pcu_id_wo_onto_prefix)
         # base_unit_id_wo_onto_prefix = split_result.without_prefixes
-        base_unit_id = f"qudt:{split_result.without_prefixes}"
+        base_unit_id = f"unit:{split_result.without_prefixes}"
 
         if base_unit_id in already_processed:
             _logger.info(
                 f"Skipping already processed unit: {pcu_id}, from which "
-                f"{base_unit_id} has beed created and loaded from pickle "
+                f"{base_unit_id} has beed created and loaded from json "
                 f"file."
             )
             continue
@@ -1072,14 +1148,18 @@ def process_prefixed_composed_units_with_ai(
         # Prefixed composed unit with no Non-prefixed base: guessed base unit does not
         #  exist but another scalingOf can be defined
         irregular = {
-            "unit:KiloCAL-PER-CentiM2": {
-                "guessed base unit": "qudt:CAL-PER-M2",
-                "non existing non-prefixed unit": ["qudt:CAL"],
-                "correct scalingOf": "J-PER-M2",
-            }
+            # "unit:KiloCAL-PER-CentiM2": {  # Should now be handled with added unit:CAL
+            #     "guessed base unit": "unit:CAL-PER-M2",
+            #     "non existing non-prefixed unit": ["unit:CAL"],
+            #     "correct scalingOf": "unit:J-PER-M2",
+            # },
+            # "unit:KiloCAL-PER-CentiM2-SEC": {  # Should now be handled with added unit:CAL
+            #     "guessed base unit": "unit:CAL-PER-M2-SEC",
+            #     "non existing non-prefixed unit": ["unit:CAL"],
+            #     "correct scalingOf": "unit:J-PER-M2-SEC",  # but also missing
+            # },
         }
         if pcu_id in irregular:
-            # todo: later on do the enrichment of the jsonld
             _logger.warning(
                 f"Unit {pcu_id} is known to be irregular, skipping creation of "
                 f"Non-prefixed base unit {base_unit_id} and using predefined "
@@ -1089,8 +1169,8 @@ def process_prefixed_composed_units_with_ai(
 
         # 2. Check if the Non-prefixed base unit already exists
         base_unit_exists = False
-        for unit_dict in ontologies["qudt"]["jsonld"]["@graph"]:
-            if unit_dict.get("@id") == base_unit_id:
+        for base_unit_dict in ontologies["qudt"]["jsonld"]["@graph"]:
+            if base_unit_dict.get("@id") == base_unit_id:
                 base_unit_exists = True
                 break
         if base_unit_exists:
@@ -1100,10 +1180,7 @@ def process_prefixed_composed_units_with_ai(
             # But still add the scalingOf to the prefixed composed unit
             pcu_dict["qudt:scalingOf"] = {"@id": base_unit_id}
             # And add the scaledBy to the Non-prefixed base unit
-            if "custom:scaledBy" not in unit_dict:
-                unit_dict["custom:scaledBy"] = []
-            if pcu_id not in get_values(unit_dict["custom:scaledBy"], "@id"):
-                unit_dict["custom:scaledBy"].append({"@id": pcu_id})
+            enrich_with_scaled_by(pcu_id, base_unit_id, id_to_index)
             continue  # Skip the rest, if already present
 
         _logger.info(
@@ -1170,7 +1247,9 @@ def process_prefixed_composed_units_with_ai(
             f"e.g. if PER-CentiM3 is part of the unit string its removal lead to a "
             f"multiplication_factor of 10**6.\n"
             f"The conversionMultiplier and conversionMultiplierSN have to be adjusted "
-            f"based on the multiplication factor.\n"
+            f"based on the multiplication factor. If the prefixed composed unit had "
+            f"a conversionMultiplier with value 0, the non-prefixed base composed unit "
+            f"will be the same.\n"
             f"The rdf label and the symbl both has to reflect the removal of the "
             f"prefixes.\n"
             f"The factor units have to be adjusted as well by removing the prefixes "
@@ -1192,10 +1271,14 @@ def process_prefixed_composed_units_with_ai(
                 max_retries=3,
                 timeout=300,
             )
+
         # Initialize the LLM (freshly every N executions)
         if full_runs % 4 == 0 or full_runs == 0:
-            msg = "Initializing the LLM" if full_runs == 0 \
+            msg = (
+                "Initializing the LLM"
+                if full_runs == 0
                 else "Re-initializing the LLM to avoid potential memory issues."
+            )
             _logger.info(msg)
             llm = init_llm()
         # 3.3 Invoke the chain to get the new Non-prefixed base unit
@@ -1206,8 +1289,10 @@ def process_prefixed_composed_units_with_ai(
             new_composed_base_unit = chain.invoke({"query": input_message})
         except Timeout:
             # Retry once after a short delay
-            _logger.warning(f"Timeout occurred for unit {pcu_id}, retrying once with "
-                            f"freshly re-initialized LLM after short delay.")
+            _logger.warning(
+                f"Timeout occurred for unit {pcu_id}, retrying once with "
+                f"freshly re-initialized LLM after short delay."
+            )
             time.sleep(10)
             # Re-initialize the LLM
             llm = init_llm()
@@ -1216,13 +1301,26 @@ def process_prefixed_composed_units_with_ai(
             # Invoke the chain with freshly initialized LLM
             new_composed_base_unit = chain.invoke({"query": input_message})
 
+        # After we made sure that the new Non-prefixed base unit will exist, state the
+        #  scalingOf in the prefixed composed unit
+        if "custom:scaledBy" not in new_composed_base_unit.model_dump(by_alias=True):
+            new_composed_base_unit.custom_scaledBy = []
+        if {"@id": pcu_id} not in new_composed_base_unit.custom_scaledBy:
+            new_composed_base_unit.custom_scaledBy.append({"@id": pcu_id})
+        if "qudt:scalingOf" not in pcu_dict:
+            pcu_dict["qudt:scalingOf"] = {"@id": base_unit_id}
+
         dict_list.append(new_composed_base_unit.model_dump(by_alias=True))
-        # After successfully creating a new list element, pickle the current state of
+        # After successfully creating a new list element, dump the current state of
         #  the dict_list
-        with open(pickle_fp, "wb") as f:
-            pickle.dump(dict_list, f)
+        with open(json_fp, "w", encoding="utf-8") as f:
+            json.dump(dict_list, f, indent=2, ensure_ascii=False)
 
         full_runs += 1
+
+    # Save the list at the end as well
+    with open(json_fp, "w", encoding="utf-8") as f:
+        json.dump(dict_list, f, indent=2, ensure_ascii=False)
 
     return dict_list
 
@@ -1256,11 +1354,16 @@ def classify_quantity_kinds(type_dict: dict) -> dict:  # , iri_dict: dict):
 
 
 @log_call
-def report_on_unit_types(
-    type_dict: dict,
-    unit_type_dict: dict,
-):
-    """Erstellt eine Übersicht der gefundenen Einheitentypen."""
+def report_on_unit_types(type_dict: dict, unit_type_dict: dict):
+    """Creates an overview of unit types by printing the categories and there overlaps.
+
+    Parameters
+    ----------
+    type_dict:
+        The type dictionary as created by `build_type_dict`.
+    unit_type_dict:
+        The unit type dictionary as created by `classify_and_enrich_qudt_units`.
+    """
     func_log.has_required_calls([classify_and_enrich_qudt_units])
     _logger.info("Unit types found in the QUDT dump:")
     for type_name, items in unit_type_dict.items():
@@ -1498,7 +1601,6 @@ def create_quantity_unit_entities(unit_type_dict: dict) -> list[model.QuantityUn
         non_prefixed_unit_entities.append(model.QuantityUnit(**npu_data))
 
     # Processing composed units with/without prefix(es)
-    composed_units_with_no_prefix_entities = []
     for npcu_dict in unit_type_dict["Non-prefixed, composed unit"]:
         npcu_id = npcu_dict["@id"]
         npcu_index = ontologies["qudt"]["id_to_index"][npcu_id]
@@ -1643,72 +1745,82 @@ def prepare_all_ontologies(use_cache: bool = True) -> None:
         _logger.info("Ontology %s loaded and prepared.", ontology)
 
 
+def build_indices():
+    qudt_id_dict_, qudt_id_to_index_ = build_iri_dict(ontologies["qudt"]["jsonld"])
+    ontologies["qudt"]["id_dict"] = qudt_id_dict_
+    ontologies["qudt"]["id_to_index"] = qudt_id_to_index_
+    ontologies["qudt"]["type_dict"] = build_type_dict(ontologies["qudt"]["jsonld"])
+    ontologies["qudt"]["type_index"] = build_type_index(ontologies["qudt"]["jsonld"])
+
+
 # ---------------------
 # Main script execution
 # ---------------------
 logging.basicConfig(level=logging.INFO)
 
 prepare_all_ontologies(use_cache=True)
-
-qudt_jsonld = ontologies["qudt"]["jsonld"]
-
-qudt_id_dict = ontologies["qudt"]["id_dict"]
-qudt_id_to_index = ontologies["qudt"]["id_to_index"]
-qudt_type_dict = ontologies["qudt"]["type_dict"]
-qudt_type_index = ontologies["qudt"]["type_index"]
+build_indices()
 
 # Resolve factor unit pointers (something like
 # {"@id": "_:n9239b5585098485ba36e2d5401954d25b4796"})
-resolve_factor_units(qudt_jsonld, qudt_id_dict)
+resolve_factor_units(ontologies["qudt"]["jsonld"], ontologies["qudt"]["id_dict"])
 # Handling of units
 qudt_unit_type_dict = classify_and_enrich_qudt_units(
-    qudt_type_dict, qudt_id_dict, qudt_id_to_index
+    ontologies["qudt"]["type_dict"],
+    ontologies["qudt"]["id_dict"],
+    ontologies["qudt"]["id_to_index"],
 )
+# Until now the QUDT dump should not have been altered but the units should
+#  have been classified and scaledB / scalingOf should be present
+# Create units that are missing in the QUDT
+missing_units = load_qudt_missing_units()
+# Add these to the QUDT jsonld and type dictionary
+ontologies["qudt"]["jsonld"]["@graph"].extend(missing_units)
+# Rebuild the id_dict and type_dict to include the new units
+build_indices()
+
 # Process prefixed, composed units with no Non-prefixed base unit with the help of AI
 ai_generated_composed_base_units = process_prefixed_composed_units_with_ai(
-    qudt_unit_type_dict, qudt_id_to_index
+    qudt_unit_type_dict, ontologies["qudt"]["id_to_index"]
 )
 # Add the AI-generated units to the QUDT jsonld and type dictionary
 ontologies["qudt"]["jsonld"]["@graph"].extend(ai_generated_composed_base_units)
+# Rebuild the id_dict and type_dict to include the new units
+build_indices()
+
 
 # Rerun the classification again to include the new units
 qudt_unit_type_dict = classify_and_enrich_qudt_units(
-    build_type_dict(qudt_jsonld), qudt_id_dict, qudt_id_to_index
+    ontologies["qudt"]["type_dict"],
+    ontologies["qudt"]["id_dict"],
+    ontologies["qudt"]["id_to_index"],
 )
-if len(qudt_type_dict["Prefixed, composed unit with no non-prefixed base"]) != 0:
+if len(qudt_unit_type_dict["Prefixed, composed unit with no non-prefixed base"]) != 0:
     raise ValueError(
         "There are still prefixed, composed units with no Non-prefixed base unit left "
         "after processing with AI."
     )
 save_jsonld_to_file(
     jsonld_data=ontologies["qudt"]["jsonld"],
-    filepath=ontologies["qudt"]["dump_fp"].with_suffix(".enriched.jsonld"),
+    filepath=ontologies["qudt"]["dump_fp"].with_suffix(".enriched.json"),
 )
-
-# Rebuild the id_dict and type_dict to include the new units
-qudt_id_dict, qudt_id_to_index = build_iri_dict(qudt_jsonld)
-qudt_type_dict = build_type_dict(qudt_jsonld)
-qudt_type_index = build_type_index(qudt_jsonld)
-ontologies["qudt"]["id_dict"] = qudt_id_dict
-ontologies["qudt"]["id_to_index"] = qudt_id_to_index
-ontologies["qudt"]["type_dict"] = qudt_type_dict
-ontologies["qudt"]["type_index"] = qudt_type_index
 
 # Report on unit types
 report_on_unit_types(
-    qudt_type_dict,
+    ontologies["qudt"]["type_dict"],
     qudt_unit_type_dict,
 )
-quantity_unit_entities = create_quantity_unit_entities(qudt_unit_type_dict)
-
-
-jsonld_direct = ontologies["qudt"]["jsonld"]["@graph"]
 
 # Handling of quantity kinds
-qudt_quantity_kind_dict = classify_quantity_kinds(qudt_type_dict)
+qudt_quantity_kind_dict = classify_quantity_kinds(ontologies["qudt"]["type_dict"])
 
 
 # Create prefixes
-enrich_prefixes_with_ontology_matches(qudt_type_index)
+enrich_prefixes_with_ontology_matches(ontologies["qudt"]["type_index"])
 unit_prefix_entities = create_unit_prefix_entities()
 # Create units and prefixed units
+quantity_unit_entities = create_quantity_unit_entities(qudt_unit_type_dict)
+
+
+# todo: find why there are still units with missing scalingOf listed (181) and also
+#  as missing scalingOf and base unit available (181)
