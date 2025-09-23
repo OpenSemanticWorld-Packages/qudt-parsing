@@ -1,0 +1,73 @@
+[
+  {
+    "@id": "unit:CAL",
+    "@type": "qudt:Unit",
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "\n  A $\\textit{Calorie}$ is a unit for $\\textit{Energy And Work}$ expressed as $cal$.\n  "
+    },
+    "qudt:applicableSystem": [
+      {
+        "@id": "sou:CGS"
+      },
+      {
+        "@id": "sou:IMPERIAL"
+      },
+      {
+        "@id": "sou:USCS"
+      }
+    ],
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "4.184"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 4.184
+    },
+    "qudt:dbpediaMatch": {
+      "@type": "xsd:anyURI",
+      "@value": "http://dbpedia.org/resource/Calorie"
+    },
+    "qudt:exactMatch": {
+      "@id": "unit:CAL_TH"
+    },
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M1H0T-2D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:Energy"
+      },
+      {
+        "@id": "quantitykind:ThermalEnergy"
+      }
+    ],
+    "qudt:informativeReference": [
+      {
+        "@type": "xsd:anyURI",
+        "@value": "http://en.wikipedia.org/wiki/Calorie?oldid=494307622"
+      }
+    ],
+    "qudt:scalingOf": {
+      "@id": "unit:J"
+    },
+    "qudt:symbol": "cal",
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "cal"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Calorie"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloCAL"
+      }
+    ]
+  }
+]
