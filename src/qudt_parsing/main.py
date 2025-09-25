@@ -605,10 +605,13 @@ def enrich_with_scaling_of(
 
     """
     unit_dict_ = ontologies["qudt"]["jsonld"]["@graph"][id_to_index.get(unit_id)]
-    if "custom:scalingOf" not in unit_dict_:
-        unit_dict_["custom:scalingOf"] = []
-    if base_unit_name not in get_values(unit_dict_["custom:scalingOf"], "@id"):
-        unit_dict_["custom:scalingOf"].append({"@id": base_unit_name})
+    if "qudt:scalingOf" not in unit_dict_:
+        unit_dict_["qudt:scalingOf"] = []
+    if base_unit_name not in get_values(unit_dict_["qudt:scalingOf"], "@id"):
+        if isinstance(unit_dict_["qudt:scalingOf"], dict):
+            unit_dict_["qudt:scalingOf"] = [unit_dict_["qudt:scalingOf"]]
+            _logger.info("Converted scalingOf to list for unit %s", unit_id)
+        unit_dict_["qudt:scalingOf"].append({"@id": base_unit_name})
         _logger.info(
             "Updated Prefixed unit %s with scalingOf %s",
             unit_id,
