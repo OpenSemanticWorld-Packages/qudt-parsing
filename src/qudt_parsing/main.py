@@ -1666,6 +1666,20 @@ def create_quantity_unit_entities(unit_type_dict: dict) -> list[model.QuantityUn
             )
         )
         npcu_osw_id = f"Item:OSW{npcu_uuid.replace('-', '')}"
+        npcu_factor_units = []
+        for fu_dict in npcu_dict.get("qudt:hasFactorUnit", []):
+            fu_id = fu_dict.get("qudt:hasUnit", {}).get("@id")
+            fu_exp = fu_dict.get("qudt:exponent", {}).get("@value", 1)
+            fu_uuid = str(
+                uuid_module.uuid5(
+                    namespace=uuid_module.NAMESPACE_URL,
+                    name=resolve_prefix(fu_id, "qudt"),  # here ok, but not with
+                    # prefixed units!
+                )
+            )
+            fu_osw_id = f"Item:OSW{fu_uuid.replace('-', '')}"
+            npcu_factor_units.append({"unit": fu_osw_id, "exponent": fu_exp})
+
         # Process all prefixed unit that are listed in the custom:scaledBy property
         prefixed_composed_units_ids = get_values(
             npcu_dict.get("custom:scaledBy", []), "@id"
@@ -1728,6 +1742,7 @@ def create_quantity_unit_entities(unit_type_dict: dict) -> list[model.QuantityUn
                 if "qudt:ucumCode" in npcu_data
                 else [],
                 "prefixed_composed_units": prefixed_composed_unit_entities,
+                "factor_units": npcu_factor_units,
             }
         )
         if "main_symbol" not in npcu_data:
