@@ -1086,16 +1086,6 @@ def process_prefixed_composed_units_with_ai(
             "factors.",
         )
 
-    # check_if_id_exists = Tool(
-    #     name="check_if_id_exists",
-    #     func=lambda unit_id: unit_id in id_to_index,
-    #     description=(
-    #         "Use this function to check if a guessed (Non-prefixed factor) unit ID "
-    #         "exists in the QUDT dump. The input is the unit ID as a string, e.g. "
-    #         "'qudt:GM'. The output is a boolean indicating whether the ID exists."
-    #     ),
-    # )
-
     # Components to be used in the chain
 
     output_parser = PydanticOutputParser(pydantic_object=BaseComposedUnit)
@@ -1152,6 +1142,20 @@ def process_prefixed_composed_units_with_ai(
                 f"{base_unit_id} has beed created and loaded from json "
                 f"file."
             )
+            # Find the dict in dict_list
+            for existing_dict in dict_list:
+                if existing_dict["@id"] == base_unit_id:
+                    # Add the scaledBy entry to the prefixed composed unit
+                    if "custom:scaledBy" not in existing_dict:
+                        existing_dict["custom:scaledBy"] = []
+                    if pcu_id not in [
+                        dd["@id"] for dd in existing_dict["custom:scaledBy"]
+                    ]:
+                        existing_dict["custom:scaledBy"].append({"@id": pcu_id})
+                    # Add the scalingOf entry to the prefixed composed unit
+                    if "qudt:scalingOf" not in pcu_dict:
+                        pcu_dict["qudt:scalingOf"] = {"@id": base_unit_id}
+                    break
             continue
 
         # Separately handled cases
@@ -1315,12 +1319,18 @@ def process_prefixed_composed_units_with_ai(
         #  scalingOf in the prefixed composed unit
         if "custom:scaledBy" not in new_composed_base_unit.model_dump(by_alias=True):
             new_composed_base_unit.custom_scaledBy = []
-        if {"@id": pcu_id} not in new_composed_base_unit.custom_scaledBy:
+        if pcu_id not in [dd["@id"] for dd in new_composed_base_unit.custom_scaledBy]:
             new_composed_base_unit.custom_scaledBy.append({"@id": pcu_id})
         if "qudt:scalingOf" not in pcu_dict:
             pcu_dict["qudt:scalingOf"] = {"@id": base_unit_id}
 
         dict_list.append(new_composed_base_unit.model_dump(by_alias=True))
+        already_processed.add(base_unit_id)
+        _logger.info(
+            f"Created new Non-prefixed base composed unit {base_unit_id} from "
+            f"{pcu_id} with multiplication factor "
+            f"{new_composed_base_unit.multiplication_factor}"
+        )
         # After successfully creating a new list element, dump the current state of
         #  the dict_list
         with open(json_fp, "w", encoding="utf-8") as f:
@@ -1763,6 +1773,20 @@ def build_indices():
     ontologies["qudt"]["type_index"] = build_type_index(ontologies["qudt"]["jsonld"])
 
 
+def get_ids(inp: list[dict[str, Any]]) -> set[str]:
+    loi = [d.get("@id") for d in inp if isinstance(d, dict)]
+    if len(set(loi)) != len(loi):
+        _logger.warning(
+            "Duplicate @id values found in list of dicts. Number of unique ids: %d, total number of ids: %d",
+            len(set(loi)),
+            len(loi),
+        )
+    duplicates = [item for item in loi if loi.count(item) > 1]
+    if duplicates:
+        _logger.warning("Duplicate @id values: %s", set(duplicates))
+    return set(loi)
+
+
 # ---------------------
 # Main script execution
 # ---------------------
@@ -1780,6 +1804,12 @@ qudt_unit_type_dict = classify_and_enrich_qudt_units(
     ontologies["qudt"]["id_dict"],
     ontologies["qudt"]["id_to_index"],
     enrich=True,
+)
+qudt_unit_type_dict_pre = qudt_unit_type_dict.copy()
+# Report on unit types
+report_on_unit_types(
+    ontologies["qudt"]["type_dict"],
+    qudt_unit_type_dict,
 )
 # Until now the QUDT dump should not have been altered but the units should
 #  have been classified and scaledB / scalingOf should be present

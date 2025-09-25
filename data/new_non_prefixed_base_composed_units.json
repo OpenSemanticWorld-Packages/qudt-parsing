@@ -223,94 +223,30 @@
     "qudt:hasDimensionVector": {
       "@id": "qkdv:A1E0L-2I0M0H0T-1D0"
     },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:MolarFluxDensity"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
+    "qudt:hasQuantityKind": [
       {
-        "@id": "unit:MilliMOL-PER-M2-HR"
-      }
-    ],
-    "dcterms:description": {
-      "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
-      "@value": "AI-generated: Hourly molar flux expressed as moles per meter squared per hour, typically used to express areal production (e.g., if the plane is a surface of the Earth or ocean)."
-    },
-    "qudt:plainTextDescription": "AI-generated: Hourly molar flux expressed as moles per meter squared per hour, typically used to express areal production (e.g., if the plane is a surface of the Earth or ocean).",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.0002777777777777777777777777777777777778"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.0002777777777777778
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "mol.m-2.h-1"
-    },
-    "qudt:symbol": "mol/(m\u00b2\u00b7h)",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Mole per Square Metre per Hour"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -2
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
+        "@id": "quantitykind:PhotosyntheticPhotonFluxDensity"
       },
       {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:HR"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:MOL"
-        }
+        "@id": "quantitykind:MolarFluxDensity"
       }
     ],
-    "multiplication_factor": 0.001
-  },
-  {
-    "@id": "unit:MOL-PER-M2-HR",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A1E0L-2I0M0H0T-1D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:PhotosyntheticPhotonFluxDensity"
-    },
     "rdfs:isDefinedBy": {
       "@id": "http://qudt.org/3.1.4/vocab/unit"
     },
     "custom:scaledBy": [
       {
         "@id": "unit:MicroMOL-PER-M2-HR"
+      },
+      {
+        "@id": "unit:MilliMOL-PER-M2-HR"
       }
     ],
     "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Non-prefixed composed unit representing amount of substance flow per area and time: mol/(m^2 h). Obtained by removing the 'Micro' prefix from the prefixed unit umol/(m^2 h). Equivalent to mol m^-2 h^-1; in SI base units this equals 2.7777777777777777e-4 mol m^-2 s^-1.",
+    "qudt:plainTextDescription": "AI-generated: N Hourly molar flux expressed as moles per meter squared per hour, typically used to express areal production (e.g., if the plane is a surface of the Earth or ocean).",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
-      "@value": "0.0002777777777777777777777777777777777777778"
+      "@value": "0.0002777777777777777777777777777777777778"
     },
     "qudt:conversionMultiplierSN": {
       "@type": "xsd:double",
@@ -320,16 +256,12 @@
       {
         "@type": "qudt:UCUMcs",
         "@value": "mol.m-2.h-1"
-      },
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "mol/m2/h"
       }
     ],
     "qudt:symbol": "mol/(m\u00b2\u00b7h)",
     "rdfs:label": {
       "@language": "en",
-      "@value": "Moles per Square Metre Hour"
+      "@value": "Mole per Square Metre per Hour"
     },
     "qudt:hasFactorUnit": [
       {
@@ -778,83 +710,6 @@
       }
     ],
     "multiplication_factor": 1000.0
-  },
-  {
-    "@id": "unit:L-PER-GM",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L3I0M-1H0T0D0"
-    },
-    "qudt:hasQuantityKind": [
-      {
-        "@id": "quantitykind:SoilAdsorptionCoefficient"
-      },
-      {
-        "@id": "quantitykind:SpecificVolume"
-      }
-    ],
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:MilliL-PER-GM"
-      }
-    ],
-    "dcterms:description": "AI-generated: Liter per Gram is a unit in the category of Specific Volume, commonly used for properties such as soil adsorption coefficient and specific volume. It is also known as liters per gram, litre per gram, litres per gram, liter/gram, litre/gram. Derived from the corresponding prefixed unit by removing the 'Milli' prefix from the liter in the numerator.",
-    "qudt:plainTextDescription": null,
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "1"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 1.0
-    },
-    "qudt:ucumCode": [
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "L.g-1"
-      },
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "L/g"
-      }
-    ],
-    "qudt:symbol": "L/g",
-    "rdfs:label": [
-      {
-        "@language": "en-us",
-        "@value": "Liter per Gram"
-      },
-      {
-        "@language": "en",
-        "@value": "Litre per Gram"
-      }
-    ],
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:L"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      }
-    ],
-    "multiplication_factor": 0.001
   },
   {
     "@id": "unit:BQ-PER-M2-DAY",
@@ -1323,7 +1178,7 @@
       }
     ],
     "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: A composed SI unit equal to moles per meter watt second, written as mol/(m\u00b7W\u00b7s). It represents the amount of substance per unit length, power, and time. The factor units are mol in the numerator and m, W, and s in the denominator, with corresponding exponents +1, \u22121, \u22121, and \u22121. This is the non-prefixed counterpart of the corresponding prefixed unit.",
+    "qudt:plainTextDescription": "AI-generated: A composed SI unit equal to moles per meter watt second, written as mol/(m\u00b7W\u00b7s). It represents the amount of substance per unit length, power, and time.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
       "@value": "1"
@@ -1820,10 +1675,7 @@
         "@id": "unit:MilliL-PER-GM"
       }
     ],
-    "dcterms:description": {
-      "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
-      "@value": "AI-generated: Liter Per Gram is a unit in the category of Specific Volume. It is also known as liters per gram, litre per gram, litres per gram, liter/gram, litre/gram."
-    },
+    "dcterms:description": "AI-generated: Liter per Gram is a unit in the category of Specific Volume, commonly used for properties such as soil adsorption coefficient and specific volume. It is also known as liters per gram, litre per gram, litres per gram, liter/gram, litre/gram.",
     "qudt:plainTextDescription": null,
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
@@ -1875,84 +1727,6 @@
       }
     ],
     "multiplication_factor": 0.001
-  },
-  {
-    "@id": "unit:MOL-PER-M-W-SEC",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A1E0L-3I0M-1H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:Unknown"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:PicoMOL-PER-M-W-SEC"
-      }
-    ],
-    "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Non-prefixed composed unit equal to mole per meter watt second (mol/(m*W*s)). It is obtained by removing the 'Pico' prefix from the numerator of the original prefixed unit. This unit represents amount of substance normalized by length, power, and time.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "1"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 1.0
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "mol.m-1.W-1.s-1"
-    },
-    "qudt:symbol": "mol/(m\u00b7W\u00b7s)",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Moles per Metre Watt Second"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:MOL"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:SEC"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:W"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      }
-    ],
-    "multiplication_factor": 1e-12
   },
   {
     "@id": "unit:BQ-PER-GM",
@@ -2414,83 +2188,6 @@
     "multiplication_factor": 0.001
   },
   {
-    "@id": "unit:MOL-PER-GM",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A1E0L0I0M-1H0T0D0"
-    },
-    "qudt:hasQuantityKind": [
-      {
-        "@id": "quantitykind:AmountOfSubstancePerMass"
-      },
-      {
-        "@id": "quantitykind:IonicStrength"
-      },
-      {
-        "@id": "quantitykind:MolalityOfSolute"
-      }
-    ],
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:NanoMOL-PER-GM"
-      }
-    ],
-    "dcterms:description": {
-      "@type": "qudt:LatexString",
-      "@value": "AI-generated: Mole Per Gram (\\(mol/g\\)) is a unit of Molality"
-    },
-    "qudt:plainTextDescription": "AI-generated: 1-fold of the SI base unit mole divided by the 0.001-fold of the SI base unit kilogram",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "1000"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 1000.0
-    },
-    "qudt:ucumCode": [
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "mol.g-1"
-      },
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "mol/g"
-      }
-    ],
-    "qudt:symbol": "mol/g",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Moles per Gram"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:MOL"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      }
-    ],
-    "multiplication_factor": 1e-09
-  },
-  {
     "@id": "unit:PER-MOL-L",
     "@type": [
       "qudt:Unit"
@@ -2729,11 +2426,14 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MicroMOL-PER-GM"
+      },
+      {
+        "@id": "unit:NanoMOL-PER-GM"
       }
     ],
     "dcterms:description": {
       "@type": "qudt:LatexString",
-      "@value": "AI-generated: Mole Per Gram ($mol/g$) is a unit of Molality."
+      "@value": "AI-generated: Mole Per Gram is a unit of Molality."
     },
     "qudt:plainTextDescription": "AI-generated: 1-fold of the SI base unit mole divided by the 0.001-fold of the SI base unit kilogram.",
     "qudt:conversionMultiplier": {
@@ -2779,7 +2479,7 @@
         }
       }
     ],
-    "multiplication_factor": 1e-06
+    "multiplication_factor": 1e-09
   },
   {
     "@id": "unit:J-PER-M2-DAY",
@@ -2938,66 +2638,6 @@
       }
     ],
     "multiplication_factor": 1e-09
-  },
-  {
-    "@id": "unit:CAL_TH-PER-HR",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L2I0M1H0T-3D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:HeatFlowRate"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:KiloCAL_TH-PER-HR"
-      }
-    ],
-    "dcterms:description": "AI-generated: The non-legal unit thermochemical calorie divided by the unit hour.",
-    "qudt:plainTextDescription": "AI-generated: The non-legal unit thermochemical calorie divided by the unit hour.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.001162222222222222222222222222222222"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.0011622222222222223
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "cal_th.h-1"
-    },
-    "qudt:symbol": "cal/h",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Calorie (thermochemical) per Hour"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:CAL_TH"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:HR"
-        }
-      }
-    ],
-    "multiplication_factor": 1000.0
   },
   {
     "@id": "unit:L-PER-M2-SEC",
@@ -3524,72 +3164,6 @@
     "multiplication_factor": 0.0001
   },
   {
-    "@id": "unit:CCY_RON-PER-W-HR",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L-2I0M-1H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:CostPerEnergy"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:CCY_RON-PER-KiloW-HR"
-      }
-    ],
-    "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed as Romanian new leu (RON) per watt hour.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.0002777777777777777777777777777777777778"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.0002777777777777778
-    },
-    "qudt:ucumCode": null,
-    "qudt:symbol": "RON/(W\u00b7h)",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Romanian New Leu per Watt Hour"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:W"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:CCY_RON"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:HR"
-        }
-      }
-    ],
-    "multiplication_factor": 0.001
-  },
-  {
     "@id": "unit:EV-PER-SpeedOfLight",
     "@type": [
       "qudt:Unit"
@@ -3749,7 +3323,7 @@
     "qudt:plainTextDescription": "AI-generated: The non-legal unit thermochemical calorie divided by the unit hour.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
-      "@value": "0.001162222222222222222222222222222"
+      "@value": "0.001162222222222222222222222222222222"
     },
     "qudt:conversionMultiplierSN": {
       "@type": "xsd:double",
@@ -3806,7 +3380,7 @@
       }
     ],
     "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed in Romanian leu per watt hour.",
+    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed as Romanian new leu (RON) per watt hour.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
       "@value": "0.0002777777777777777777777777777777777778"
@@ -3816,7 +3390,7 @@
       "@value": 0.0002777777777777778
     },
     "qudt:ucumCode": null,
-    "qudt:symbol": "L/(W\u00b7h)",
+    "qudt:symbol": "RON/(W\u00b7h)",
     "rdfs:label": {
       "@language": "en",
       "@value": "Romanian New Leu per Watt Hour"
@@ -3834,23 +3408,23 @@
       {
         "qudt:exponent": {
           "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:HR"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
           "@value": 1
         },
         "qudt:hasUnit": {
           "@id": "unit:CCY_RON"
         }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:HR"
+        }
       }
     ],
-    "multiplication_factor": 1000.0
+    "multiplication_factor": 0.001
   },
   {
     "@id": "unit:M-PER-N",
@@ -4368,75 +3942,6 @@
     "multiplication_factor": 10000000.0
   },
   {
-    "@id": "unit:M-PER-M-PA",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L1I0M-1H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:StressOpticCoefficient"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:NanoM-PER-MilliM-MegaPA"
-      }
-    ],
-    "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Non-prefixed composed unit equal to meter per meter pascal (m/(m*Pa)), obtained by removing the prefixes Nano, Milli, and Mega from the prefixed unit nm/(mm*MPa). This unit is equivalent to reciprocal pascal (Pa^-1) and is used for the stress-optic coefficient. Dimension vector: L1 M-1 T2. The conversion from the prefixed form to this unit has a multiplication factor of 1e-12.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "1"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 1.0
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "m.m-1.Pa-1"
-    },
-    "qudt:symbol": "m/(m\u00b7Pa)",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Meter per Meter Pascal"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:PA"
-        }
-      }
-    ],
-    "multiplication_factor": 1e-12
-  },
-  {
     "@id": "unit:A-PER-BAR",
     "@type": [
       "qudt:Unit"
@@ -4576,70 +4081,6 @@
       }
     ],
     "multiplication_factor": 1000000.0
-  },
-  {
-    "@id": "unit:GM-PER-BTU_IT",
-    "@type": [
-      "qudt:DerivedUnit",
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L-2I0M0H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:MassPerEnergy"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:KiloGM-PER-MegaBTU_IT"
-      }
-    ],
-    "dcterms:description": {
-      "@type": "qudt:LatexString",
-      "@value": "AI-generated: \\textit{Gram per BTU (IT)} is an Imperial unit for 'Mass Per Energy' expressed as $g/\\text{Btu}$. It is the non-prefixed form obtained from the original 'Kilogram per Mega BTU (IT)'."
-    },
-    "qudt:plainTextDescription": "AI-generated: Gram per BTU (IT) is an Imperial unit for 'Mass Per Energy', expressed as g/Btu. It is the non-prefixed form of the original 'Kilogram per Mega BTU (IT)'.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.0000009478171203133172000127850444756106"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 9.478171203133171e-07
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "g.[Btu_IT]-1"
-    },
-    "qudt:symbol": "g/Btu{IT}",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Gram per Btu (IT)"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:BTU_IT"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      }
-    ],
-    "multiplication_factor": 1000.0
   },
   {
     "@id": "unit:GM-SEC-PER-M3-M3",
@@ -5218,7 +4659,7 @@
       }
     ],
     "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed in Swiss franc per watt-hour.",
+    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed in Swiss Francs per watt-hour.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
       "@value": "0.0002777777777777777777777777777777777778"
@@ -5227,11 +4668,9 @@
       "@type": "xsd:double",
       "@value": 0.0002777777777777778
     },
-    "qudt:ucumCode": [
-      {
-        "@value": "[CHF]/W.h"
-      }
-    ],
+    "qudt:ucumCode": {
+      "@value": "[CHF]/W.h"
+    },
     "qudt:symbol": "CHF/(W\u00b7h)",
     "rdfs:label": {
       "@language": "en",
@@ -5267,155 +4706,6 @@
       }
     ],
     "multiplication_factor": 1000.0
-  },
-  {
-    "@id": "unit:GM-M2",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L2I0M1H0T0D0"
-    },
-    "qudt:hasQuantityKind": [
-      {
-        "@id": "quantitykind:MomentOfInertia"
-      },
-      {
-        "@id": "quantitykind:RotationalMass"
-      }
-    ],
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:KiloGM-MilliM2"
-      }
-    ],
-    "dcterms:description": {
-      "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
-      "@value": "AI-generated: product of the gram and the power of the metre with the exponent 2. Suitable for quantities such as moment of inertia and rotational mass."
-    },
-    "qudt:plainTextDescription": "AI-generated: product of the gram and the power of the metre with the exponent 2. Suitable for quantities such as moment of inertia and rotational mass.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.001"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.001
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "g.m2"
-    },
-    "qudt:symbol": "g\u00b7m\u00b2",
-    "rdfs:label": [
-      {
-        "@language": "en-us",
-        "@value": "Gram Square Meter"
-      },
-      {
-        "@language": "en",
-        "@value": "Gram Square Metre"
-      }
-    ],
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 2
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      }
-    ],
-    "multiplication_factor": 0.001
-  },
-  {
-    "@id": "unit:MOL-PER-GM-SEC",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A1E0L0I0M-1H0T-1D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:Unknown"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:MicroMOL-PER-GM-SEC"
-      }
-    ],
-    "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Unit of amount-of-substance flow per mass, expressed as moles per gram per second. This unit quantifies the rate of substance amount per unit mass and time, with non-prefixed mole in the numerator and gram-second in the denominator.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "1000"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 1000.0
-    },
-    "qudt:ucumCode": [
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "mol.g-1.s-1"
-      },
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "mol/g/s"
-      }
-    ],
-    "qudt:symbol": "mol/(g\u00b7s)",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Moles per Gram Second"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:MOL"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:SEC"
-        }
-      }
-    ],
-    "multiplication_factor": 1e-06
   },
   {
     "@id": "unit:LB_F-FT-PER-A",
@@ -5508,7 +4798,7 @@
         "@id": "unit:MilliA-IN2-PER-LB_F"
       }
     ],
-    "dcterms:description": "AI-generated: Product of the SI base unit ampere and the inch with exponent 2, divided by the pound-force (A\u00b7in^2 per lbf). This unit represents electric current multiplied by area in square inches per unit of force in pound-force.",
+    "dcterms:description": "AI-generated: Product of the SI base unit ampere and the inch with exponent 2, divided by the pound-force. This unit represents electric current multiplied by area in square inches per unit of force in pound-force.",
     "qudt:plainTextDescription": null,
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
@@ -5575,7 +4865,7 @@
       }
     ],
     "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed in Swedish kronor per watt hour (kr/(W*h)).",
+    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed per watt-hour (W\u00b7h) using non-prefixed factor units.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
       "@value": "0.0002777777777777777777777777777777777778"
@@ -5584,7 +4874,10 @@
       "@type": "xsd:double",
       "@value": 0.0002777777777777778
     },
-    "qudt:ucumCode": null,
+    "qudt:ucumCode": {
+      "@type": "xsd:string",
+      "@value": "[SEK]/W.h"
+    },
     "qudt:symbol": "kr/(W\u00b7h)",
     "rdfs:label": {
       "@language": "en",
@@ -5619,73 +4912,7 @@
         }
       }
     ],
-    "multiplication_factor": 0.001
-  },
-  {
-    "@id": "unit:MOL-PER-MOL-DAY",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L0I0M0H0T-1D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:Unknown"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:NanoMOL-PER-MicroMOL-DAY"
-      }
-    ],
-    "dcterms:description": "AI-generated: Unit of dimensionless rate per day, expressed as moles per mole per day. The mole terms cancel, making it equivalent to inverse day (d^-1).",
-    "qudt:plainTextDescription": null,
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.00001157407407407407407407407407407407407"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 1.1574074074074073e-05
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "mol.mol-1.d-1"
-    },
-    "qudt:symbol": "mol/(mol\u00b7d)",
-    "rdfs:label": "Moles per Mole Day",
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:DAY"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:MOL"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:MOL"
-        }
-      }
-    ],
-    "multiplication_factor": 0.001
+    "multiplication_factor": 1000.0
   },
   {
     "@id": "unit:GM-M2",
@@ -5709,13 +4936,16 @@
     "custom:scaledBy": [
       {
         "@id": "unit:KiloGM-CentiM2"
+      },
+      {
+        "@id": "unit:KiloGM-MilliM2"
       }
     ],
     "dcterms:description": {
       "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
-      "@value": "AI-generated: product of the gram and the power of the metre with the exponent 2."
+      "@value": "AI-generated: product of the gram and the power of the metre with the exponent 2. Suitable for quantities such as moment of inertia and rotational mass."
     },
-    "qudt:plainTextDescription": "AI-generated: product of the gram and the power of the metre with the exponent 2.",
+    "qudt:plainTextDescription": "AI-generated: product of the gram and the power of the metre with the exponent 2. Suitable for quantities such as moment of inertia and rotational mass.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
       "@value": "0.001"
@@ -5743,23 +4973,23 @@
       {
         "qudt:exponent": {
           "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
           "@value": 2
         },
         "qudt:hasUnit": {
           "@id": "unit:M"
         }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
       }
     ],
-    "multiplication_factor": 0.1
+    "multiplication_factor": 0.001
   },
   {
     "@id": "unit:CCY_GBP-PER-W-HR",
@@ -5967,143 +5197,6 @@
     "multiplication_factor": 1000000000000.0
   },
   {
-    "@id": "unit:GM-M-PER-SEC",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L1I0M1H0T-1D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:Impulse"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:GM-CentiM-PER-SEC"
-      }
-    ],
-    "dcterms:description": "AI-generated: product of the 0.001-fold of the SI base unit kilogram and the SI base unit metre divided by the SI base unit second.",
-    "qudt:plainTextDescription": null,
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.001"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.001
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "g.m.s-1"
-    },
-    "qudt:symbol": "g\u00b7m/s",
-    "rdfs:label": "Gram Metre per Second",
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:SEC"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      }
-    ],
-    "multiplication_factor": 0.01
-  },
-  {
-    "@id": "unit:GM_F-PER-M2",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L-1I0M1H0T-2D0"
-    },
-    "qudt:hasQuantityKind": [
-      {
-        "@id": "quantitykind:ForcePerArea"
-      },
-      {
-        "@id": "quantitykind:VaporPressure"
-      }
-    ],
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:GM_F-PER-CentiM2"
-      }
-    ],
-    "dcterms:description": "AI-generated: A non-SI-conforming unit of pressure expressed as gram-force per square meter.",
-    "qudt:plainTextDescription": "AI-generated: A non-SI-conforming unit of pressure expressed as gram-force per square meter.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.00980665"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.00980665
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "gf.m-2"
-    },
-    "qudt:symbol": "gf/m\u00b2",
-    "rdfs:label": [
-      {
-        "@language": "en-us",
-        "@value": "Gram Force per Square Meter"
-      },
-      {
-        "@language": "en",
-        "@value": "Gram Force per Square Metre"
-      }
-    ],
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -2
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM_F"
-        }
-      }
-    ],
-    "multiplication_factor": 10000.0
-  },
-  {
     "@id": "unit:A_Ab-M2",
     "@type": [
       "qudt:Unit"
@@ -6178,80 +5271,6 @@
     "multiplication_factor": 0.0001
   },
   {
-    "@id": "unit:GM_F-M",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L2I0M1H0T-2D0"
-    },
-    "qudt:hasQuantityKind": [
-      {
-        "@id": "quantitykind:MomentOfForce"
-      },
-      {
-        "@id": "quantitykind:Torque"
-      }
-    ],
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:KiloGM_F-M"
-      }
-    ],
-    "dcterms:description": {
-      "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
-      "@value": "AI-generated: product of the unit gram-force and the SI base unit metre"
-    },
-    "qudt:plainTextDescription": "AI-generated: product of the unit gram-force and the SI base unit metre",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.00980665"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.00980665
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "gf.m"
-    },
-    "qudt:symbol": "gf\u00b7m",
-    "rdfs:label": [
-      {
-        "@language": "en-us",
-        "@value": "Gram_force Meter"
-      },
-      {
-        "@language": "en",
-        "@value": "Gram_force Metre"
-      }
-    ],
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM_F"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      }
-    ],
-    "multiplication_factor": 1000.0
-  },
-  {
     "@id": "unit:M-PER-M-PA",
     "@type": [
       "qudt:Unit"
@@ -6268,10 +5287,13 @@
     "custom:scaledBy": [
       {
         "@id": "unit:NanoM-PER-CentiM-MegaPA"
+      },
+      {
+        "@id": "unit:NanoM-PER-MilliM-MegaPA"
       }
     ],
     "dcterms:description": null,
-    "qudt:plainTextDescription": null,
+    "qudt:plainTextDescription": "AI-generated: Unit of the stress-optic coefficient.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
       "@value": "1"
@@ -6282,20 +5304,14 @@
     },
     "qudt:ucumCode": {
       "@type": "qudt:UCUMcs",
-      "@value": "Pa-1"
+      "@value": "m.m-1.Pa-1"
     },
     "qudt:symbol": "m/(m\u00b7Pa)",
-    "rdfs:label": "Meter per Meter Pascal",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Meter per Meter Pascal"
+    },
     "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:PA"
-        }
-      },
       {
         "qudt:exponent": {
           "@type": "xsd:integer",
@@ -6313,9 +5329,18 @@
         "qudt:hasUnit": {
           "@id": "unit:M"
         }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:PA"
+        }
       }
     ],
-    "multiplication_factor": 1e-13
+    "multiplication_factor": 1e-12
   },
   {
     "@id": "unit:ERG-M2",
@@ -6439,80 +5464,6 @@
       }
     ],
     "multiplication_factor": 1000000000.0
-  },
-  {
-    "@id": "unit:GM_F-PER-M2",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L-1I0M1H0T-2D0"
-    },
-    "qudt:hasQuantityKind": [
-      {
-        "@id": "quantitykind:ForcePerArea"
-      },
-      {
-        "@id": "quantitykind:VaporPressure"
-      }
-    ],
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:KiloGM_F-PER-CentiM2"
-      }
-    ],
-    "dcterms:description": {
-      "@type": "qudt:LatexString",
-      "@value": "AI-generated: \"Gram Force per Square Meter\" is a unit for 'Force Per Area' expressed as $gf/m^{2}$."
-    },
-    "qudt:plainTextDescription": "AI-generated: Gram Force per Square Meter is a unit for 'Force Per Area' expressed as gf/m^2.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.00980665"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.00980665
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "gf.m-2"
-    },
-    "qudt:symbol": "gf/m\u00b2",
-    "rdfs:label": [
-      {
-        "@language": "en-us",
-        "@value": "Gram Force per Square Meter"
-      },
-      {
-        "@language": "en",
-        "@value": "Gram Force per Square Metre"
-      }
-    ],
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM_F"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -2
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      }
-    ],
-    "multiplication_factor": 10000000.0
   },
   {
     "@id": "unit:IU-PER-GM",
@@ -6662,77 +5613,6 @@
         },
         "qudt:hasUnit": {
           "@id": "unit:K"
-        }
-      }
-    ],
-    "multiplication_factor": 100.0
-  },
-  {
-    "@id": "unit:GM-PER-M-SEC",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L-1I0M1H0T-1D0"
-    },
-    "qudt:hasQuantityKind": [
-      {
-        "@id": "quantitykind:DynamicViscosity"
-      },
-      {
-        "@id": "quantitykind:Viscosity"
-      }
-    ],
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:GM-PER-CentiM-SEC"
-      }
-    ],
-    "dcterms:description": "AI-generated: Unit of dynamic viscosity expressed as gram per metre second, i.e., the 0.001-fold of the SI base unit kilogram divided by the SI base unit metre and the SI base unit second. This results from removing the 'Centi' prefix from the length factor of the original unit.",
-    "qudt:plainTextDescription": null,
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.001"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.001
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "g.m-1.s-1"
-    },
-    "qudt:symbol": "g/(m\u00b7s)",
-    "rdfs:label": "Gram per Metre Second",
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:SEC"
         }
       }
     ],
@@ -7073,32 +5953,29 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MicroMOL-PER-MicroMOL-DAY"
+      },
+      {
+        "@id": "unit:NanoMOL-PER-MicroMOL-DAY"
       }
     ],
     "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Mole per mole per day, obtained by removing micro- prefixes from both the numerator and denominator of the prefixed unit. The mole terms cancel, so the resulting unit is equivalent to reciprocal day (d^-1).",
+    "qudt:plainTextDescription": "AI-generated: Unit of dimensionless rate per day, expressed as moles per mole per day.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
-      "@value": "0.00001157407407407407407407407407407407"
+      "@value": "0.00001157407407407407407407407407407407407"
     },
     "qudt:conversionMultiplierSN": {
       "@type": "xsd:double",
       "@value": 1.1574074074074073e-05
     },
-    "qudt:ucumCode": [
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "mol.mol-1.d-1"
-      },
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "mol/mol/d"
-      }
-    ],
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "mol.mol-1.d-1"
+    },
     "qudt:symbol": "mol/(mol\u00b7d)",
     "rdfs:label": {
       "@language": "en",
-      "@value": "Mole per Mole of Biomass Day"
+      "@value": "Mole per Mole Day"
     },
     "qudt:hasFactorUnit": [
       {
@@ -7495,13 +6372,16 @@
     "custom:scaledBy": [
       {
         "@id": "unit:KiloGM_F-PER-M2"
+      },
+      {
+        "@id": "unit:KiloGM_F-PER-CentiM2"
+      },
+      {
+        "@id": "unit:GM_F-PER-CentiM2"
       }
     ],
-    "dcterms:description": {
-      "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
-      "@value": "AI-generated: A non-SI-conforming unit of pressure equal to one gram-force per square meter (gf/m\u00b2). This unit is obtained by removing the \u201cKilo\u201d prefix from kilogram-force per square meter."
-    },
-    "qudt:plainTextDescription": "AI-generated: A non-SI-conforming unit of pressure equal to one gram-force per square meter (gf/m2). This unit results from removing the 'Kilo' prefix from kilogram-force per square meter.",
+    "dcterms:description": "AI-generated: A non-SI-conforming unit of pressure expressed as gram-force per square meter.",
+    "qudt:plainTextDescription": "AI-generated: A non-SI-conforming unit of pressure expressed as gram-force per square meter.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
       "@value": "0.00980665"
@@ -7701,10 +6581,13 @@
     "custom:scaledBy": [
       {
         "@id": "unit:NanoMOL-PER-GM-SEC"
+      },
+      {
+        "@id": "unit:MicroMOL-PER-GM-SEC"
       }
     ],
     "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Moles per gram-second expresses the rate of amount of substance per unit mass per unit time, using non-prefixed factor units (mol, g, s). This unit is the non-prefixed form obtained from an original prefixed unit by removing the Nano prefix from the numerator; it measures moles per gram per second. In UCUM notation it is written as mol.g-1.s-1.",
+    "qudt:plainTextDescription": "AI-generated: Moles per gram-second expresses the rate of amount of substance per unit mass per unit time.",
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
       "@value": "1000"
@@ -7718,7 +6601,10 @@
       "@value": "mol.g-1.s-1"
     },
     "qudt:symbol": "mol/(g\u00b7s)",
-    "rdfs:label": "Moles per Gram Second",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Moles per Gram Second"
+    },
     "qudt:hasFactorUnit": [
       {
         "qudt:exponent": {
@@ -8296,6 +7182,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:KiloGM-CentiM-PER-SEC"
+      },
+      {
+        "@id": "unit:GM-CentiM-PER-SEC"
       }
     ],
     "dcterms:description": "AI-generated: Product of the SI derived unit gram and the SI base unit metre divided by the SI base unit second; a unit of impulse equal to g\u00b7m/s.",
@@ -8940,17 +7829,11 @@
       "@value": "g.[Btu_IT]-1"
     },
     "qudt:symbol": "g/Btu{IT}",
-    "rdfs:label": "Gram per Btu (IT)",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Gram per Btu (IT)"
+    },
     "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      },
       {
         "qudt:exponent": {
           "@type": "xsd:integer",
@@ -8959,203 +7842,6 @@
         "qudt:hasUnit": {
           "@id": "unit:BTU_IT"
         }
-      }
-    ],
-    "multiplication_factor": 0.001
-  },
-  {
-    "@id": "unit:CCY_CHF-PER-W-HR",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L-2I0M-1H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:CostPerEnergy"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:CCY_CHF-PER-KiloW-HR"
-      }
-    ],
-    "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed in Swiss Francs per watt-hour.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.0002777777777777777777777777777777777778"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.0002777777777777778
-    },
-    "qudt:ucumCode": {
-      "@value": "[CHF]/W.h"
-    },
-    "qudt:symbol": "CHF/(W\u00b7h)",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Swiss Franc per Watt Hour"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "@id": "_:f1",
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:W"
-        }
-      },
-      {
-        "@id": "_:f2",
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:HR"
-        }
-      },
-      {
-        "@id": "_:f3",
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:CCY_CHF"
-        }
-      }
-    ],
-    "multiplication_factor": 1000.0
-  },
-  {
-    "@id": "unit:A-IN2-PER-LB_F",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E1L1I0M-1H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:Unknown"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:MilliA-IN2-PER-LB_F"
-      }
-    ],
-    "dcterms:description": "AI-generated: product of the SI base unit ampere and the unit inch (Imperial/US customary) with exponent 2, divided by the unit pound-force (Imperial/US customary).",
-    "qudt:plainTextDescription": null,
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.0001450377312227268702148557236386593"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.00014503773122272686
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "A.[in_i]2.[lbf_av]-1"
-    },
-    "qudt:symbol": "A\u00b7in\u00b2/lbf",
-    "rdfs:label": "Ampere Square Inch per Pound-force",
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:A"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 2
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:IN"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:LB_F"
-        }
-      }
-    ],
-    "multiplication_factor": 1000.0
-  },
-  {
-    "@id": "unit:CCY_SEK-PER-W-HR",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L-2I0M-1H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:CostPerEnergy"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:CCY_SEK-PER-KiloW-HR"
-      }
-    ],
-    "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed per watt-hour.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.0002777777777777777777777777777777777778"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.0002777777777777778
-    },
-    "qudt:ucumCode": {
-      "@type": "xsd:string",
-      "@value": "[SEK]/W.h"
-    },
-    "qudt:symbol": "kr/(W\u00b7h)",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Swedish Krona per Watt Hour"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:W"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:HR"
-        }
       },
       {
         "qudt:exponent": {
@@ -9163,7 +7849,7 @@
           "@value": 1
         },
         "qudt:hasUnit": {
-          "@id": "unit:CCY_SEK"
+          "@id": "unit:GM"
         }
       }
     ],
@@ -9267,7 +7953,7 @@
         "@id": "unit:GM-PER-CentiM-SEC"
       }
     ],
-    "dcterms:description": "AI-generated: unit of the dynamic viscosity as a quotient of the 0.001-fold of the SI base unit kilogram divided by the SI base unit metre and SI base unit second",
+    "dcterms:description": "AI-generated: Unit of dynamic viscosity expressed as gram per metre second, i.e., the 0.001-fold of the SI base unit kilogram divided by the SI base unit metre and the SI base unit second.",
     "qudt:plainTextDescription": null,
     "qudt:conversionMultiplier": {
       "@type": "xsd:decimal",
@@ -9313,138 +7999,6 @@
       }
     ],
     "multiplication_factor": 100.0
-  },
-  {
-    "@id": "unit:A-IN2-PER-LB_F",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E1L1I0M-1H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:Unknown"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:MilliA-IN2-PER-LB_F"
-      }
-    ],
-    "dcterms:description": "AI-generated: product of the SI base unit ampere and the unit inch with exponent 2, divided by the pound-force according to the Anglo-American system of units.",
-    "qudt:plainTextDescription": null,
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.0001450377312227268702148557236386593"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.00014503773122272686
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "A.[in_i]2.[lbf_av]-1"
-    },
-    "qudt:symbol": "A\u00b7in\u00b2/lbf",
-    "rdfs:label": "Ampere Square Inch per Pound-force",
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:A"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 2
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:IN"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:LB_F"
-        }
-      }
-    ],
-    "multiplication_factor": 1000.0
-  },
-  {
-    "@id": "unit:CCY_SEK-PER-W-HR",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L-2I0M-1H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:CostPerEnergy"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:CCY_SEK-PER-KiloW-HR"
-      }
-    ],
-    "dcterms:description": null,
-    "qudt:plainTextDescription": "AI-generated: Unit for measuring the cost of electricity, expressed per watt-hour (W\u00b7h) using non-prefixed factor units.",
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.0002777777777777777777777777777777777778"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 0.0002777777777777778
-    },
-    "qudt:ucumCode": null,
-    "qudt:symbol": "kr/(W\u00b7h)",
-    "rdfs:label": {
-      "@language": "en",
-      "@value": "Swedish Krona per Watt Hour"
-    },
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:W"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:HR"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:CCY_SEK"
-        }
-      }
-    ],
-    "multiplication_factor": 0.001
   },
   {
     "@id": "unit:M2-MIN",
@@ -10199,81 +8753,6 @@
     "multiplication_factor": 0.0001
   },
   {
-    "@id": "unit:GM-PER-M-BAR",
-    "@type": [
-      "qudt:Unit"
-    ],
-    "qudt:hasDimensionVector": {
-      "@id": "qkdv:A0E0L0I0M0H0T2D0"
-    },
-    "qudt:hasQuantityKind": {
-      "@id": "quantitykind:SquareTime"
-    },
-    "rdfs:isDefinedBy": {
-      "@id": "http://qudt.org/3.1.4/vocab/unit"
-    },
-    "custom:scaledBy": [
-      {
-        "@id": "unit:GM-PER-MilliM-BAR"
-      }
-    ],
-    "dcterms:description": "AI-generated: 0.001-fold of the SI base unit kilogram divided by the product out of the unit meter and the unit bar.",
-    "qudt:plainTextDescription": null,
-    "qudt:conversionMultiplier": {
-      "@type": "xsd:decimal",
-      "@value": "0.00000001"
-    },
-    "qudt:conversionMultiplierSN": {
-      "@type": "xsd:double",
-      "@value": 1e-08
-    },
-    "qudt:ucumCode": {
-      "@type": "qudt:UCUMcs",
-      "@value": "g.m-1.bar-1"
-    },
-    "qudt:symbol": "g/(m\u00b7bar)",
-    "rdfs:label": [
-      {
-        "@language": "en-us",
-        "@value": "Gram per Meter Bar"
-      },
-      {
-        "@language": "en",
-        "@value": "Gram per Metre Bar"
-      }
-    ],
-    "qudt:hasFactorUnit": [
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:M"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": 1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:GM"
-        }
-      },
-      {
-        "qudt:exponent": {
-          "@type": "xsd:integer",
-          "@value": -1
-        },
-        "qudt:hasUnit": {
-          "@id": "unit:BAR"
-        }
-      }
-    ],
-    "multiplication_factor": 1000.0
-  },
-  {
     "@id": "unit:MOL2-PER-M4-SEC2",
     "@type": [
       "qudt:DerivedUnit",
@@ -10501,6 +8980,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:GM-PER-CentiM-BAR"
+      },
+      {
+        "@id": "unit:GM-PER-MilliM-BAR"
       }
     ],
     "dcterms:description": "AI-generated: 0.001-fold of the SI base unit kilogram divided by the product of the SI base unit metre and the unit bar.",
@@ -10518,7 +9000,16 @@
       "@value": "g.m-1.bar-1"
     },
     "qudt:symbol": "g/(m\u00b7bar)",
-    "rdfs:label": "Gram per Metre Bar",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Gram per Meter Bar"
+      },
+      {
+        "@language": "en",
+        "@value": "Gram per Metre Bar"
+      }
+    ],
     "qudt:hasFactorUnit": [
       {
         "qudt:exponent": {
