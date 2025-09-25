@@ -987,7 +987,12 @@ def process_prefixed_composed_units_with_ai(
         qudt_ucumCode: dict[str, str] | list[dict[str, str]] | None = Field(
             default=None,
             alias="qudt:ucumCode",
-            description="The UCUM code is a string that represents the unit in the Unified Code for Units of Measure (UCUM) system. ucumCode associates a QUDT unit with its UCUM code (case-sensitive).",
+            description="The UCUM code is a string that represents the unit in the "
+            "Unified Code for Units of Measure (UCUM) system. ucumCode "
+            "associates a QUDT unit with its UCUM code (case-sensitive). "
+            "Make sure to follow the UCUM rules when generating or "
+            "modifying the ucumCode. Don't use multiple slashes (/) in the "
+            "ucumCode.",
         )
         qudt_symbol: dict[str, str] | str | None = Field(
             default=None,

@@ -252,12 +252,10 @@
       "@type": "xsd:double",
       "@value": 0.0002777777777777778
     },
-    "qudt:ucumCode": [
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "mol.m-2.h-1"
-      }
-    ],
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "mol.m-2.h-1"
+    },
     "qudt:symbol": "mol/(m\u00b2\u00b7h)",
     "rdfs:label": {
       "@language": "en",
@@ -816,12 +814,10 @@
       "@type": "xsd:double",
       "@value": 1.0
     },
-    "qudt:ucumCode": [
-      {
-        "@type": "qudt:UCUMcs",
-        "@value": "m.s.Cel"
-      }
-    ],
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "m.s.Cel"
+    },
     "qudt:symbol": "m\u00b7s\u00b7\u00b0C",
     "rdfs:label": [
       {
@@ -3535,7 +3531,7 @@
       },
       {
         "@type": "qudt:UCUMcs",
-        "@value": "mol/L/h"
+        "@value": "mol/(L.h)"
       }
     ],
     "qudt:symbol": "mol/(L\u00b7h)",
@@ -3682,7 +3678,7 @@
       },
       {
         "@type": "qudt:UCUMcs",
-        "@value": "g/g/d"
+        "@value": "g/(g.d)"
       },
       {
         "@type": "qudt:UCUMcs",
