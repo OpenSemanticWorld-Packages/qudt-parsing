@@ -1,0 +1,12 @@
+{
+  "unit:KiloCAL": {
+    "qudt:prefix": {
+      "@id": "prefix:Kilo"
+    }
+  },
+  "unit:KiloGM": {
+    "qudt:prefix": {
+      "@id": "prefix:Kilo"
+    }
+  }
+}

@@ -69,5 +69,53 @@
         "@id": "unit:KiloCAL"
       }
     ]
+  },
+  {
+    "@id": "unit:CHF",
+    "@type": "qudt:Unit",
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "The \\textit{Swiss Franc} (CHF) is the official currency and legal tender of Switzerland and Liechtenstein."
+    },
+    "qudt:applicableSystem": [
+      {
+        "@id": "sou:SI"
+      }
+    ],
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1.0
+    },
+    "qudt:dbpediaMatch": {
+      "@type": "xsd:anyURI",
+      "@value": "http://dbpedia.org/resource/Swiss_franc"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:Money"
+      }
+    ],
+    "qudt:informativeReference": [
+      {
+        "@type": "xsd:anyURI",
+        "@value": "https://en.wikipedia.org/wiki/Swiss_franc"
+      }
+    ],
+    "qudt:symbol": "CHF",
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "CHF"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Swiss Franc"
+    }
   }
 ]

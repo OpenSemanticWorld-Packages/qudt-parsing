@@ -16,6 +16,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:GM-HR-PER-M3-CentiM3"
+      },
+      {
+        "@id": "unit:MilliGM-HR-PER-M3-CentiM3"
       }
     ],
     "dcterms:description": "AI-generated: Non-prefixed composed unit equal to gram hour per cubic metre cubic metre (g\u00b7h/m\u2076). It is the quotient of the 0.001-fold of the SI base unit kilogram times the unit of time hour by the product of two powers of the SI base unit metre with exponent 3. Derived by removing the 'Centi' prefix from the second cubic length factor of the original unit.",
@@ -1316,6 +1319,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MicroGM-PER-GM-HR"
+      },
+      {
+        "@id": "unit:MilliGM-PER-GM-HR"
       }
     ],
     "dcterms:description": {
@@ -1388,6 +1394,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:GM-MIN-PER-M3-CentiM3"
+      },
+      {
+        "@id": "unit:MilliGM-MIN-PER-M3-CentiM3"
       }
     ],
     "dcterms:description": "AI-generated: quotient of the 0.001-fold of the SI base unit kilogram times the unit of time minute by the power of the SI base unit metre with the exponent 3 and the power of the SI base unit metre with the exponent 3 (i.e., gram\u00b7minute per metre to the sixth power).",
@@ -1526,6 +1535,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:GM-MilliM"
+      },
+      {
+        "@id": "unit:KiloGM-M"
       }
     ],
     "dcterms:description": "AI-generated: unit of the imbalance as product of the 0.001-fold of the SI base unit kilogram and the SI base unit metre.",
@@ -1592,6 +1604,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:PicoMOL-PER-L-DAY"
+      },
+      {
+        "@id": "unit:NanoMOL-PER-L-DAY"
       }
     ],
     "dcterms:description": {
@@ -1669,6 +1684,15 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MilliL-PER-GM"
+      },
+      {
+        "@id": "unit:MilliL-PER-KiloGM"
+      },
+      {
+        "@id": "unit:DeciL-PER-GM"
+      },
+      {
+        "@id": "unit:L-PER-KiloGM"
       }
     ],
     "dcterms:description": "AI-generated: Liter per Gram is a unit in the category of Specific Volume, commonly used for properties such as soil adsorption coefficient and specific volume. It is also known as liters per gram, litre per gram, litres per gram, liter/gram, litre/gram.",
@@ -1741,6 +1765,21 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MilliBQ-PER-GM"
+      },
+      {
+        "@id": "unit:KiloBQ-PER-KiloGM"
+      },
+      {
+        "@id": "unit:MegaBQ-PER-KiloGM"
+      },
+      {
+        "@id": "unit:MilliBQ-PER-KiloGM"
+      },
+      {
+        "@id": "unit:MicroBQ-PER-KiloGM"
+      },
+      {
+        "@id": "unit:BQ-PER-KiloGM"
       }
     ],
     "dcterms:description": "AI-generated: One radioactive disintegration per second per 1000th SI unit of sample mass.",
@@ -1801,6 +1840,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MicroM-PER-M"
+      },
+      {
+        "@id": "unit:MilliM-PER-M"
       }
     ],
     "dcterms:description": "AI-generated: SI base unit metre divided by the SI base unit metre, expressing a dimensionless ratio of equal lengths (equivalent to unity). Derived by removing the 'Micro' prefix from the original prefixed unit.",
@@ -2425,6 +2467,33 @@
       },
       {
         "@id": "unit:NanoMOL-PER-GM"
+      },
+      {
+        "@id": "unit:MilliMOL-PER-KiloGM"
+      },
+      {
+        "@id": "unit:NanoMOL-PER-KiloGM"
+      },
+      {
+        "@id": "unit:MilliMOL-PER-GM"
+      },
+      {
+        "@id": "unit:PicoMOL-PER-KiloGM"
+      },
+      {
+        "@id": "unit:KiloMOL-PER-KiloGM"
+      },
+      {
+        "@id": "unit:FemtoMOL-PER-KiloGM"
+      },
+      {
+        "@id": "unit:CentiMOL-PER-KiloGM"
+      },
+      {
+        "@id": "unit:MicroMOL-PER-KiloGM"
+      },
+      {
+        "@id": "unit:MOL-PER-KiloGM"
       }
     ],
     "dcterms:description": {
@@ -2494,6 +2563,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MegaJ-PER-M2-DAY"
+      },
+      {
+        "@id": "unit:J-PER-CentiM2-DAY"
       }
     ],
     "dcterms:description": {
@@ -2577,6 +2649,18 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MilliM3-PER-GM"
+      },
+      {
+        "@id": "unit:DeciM3-PER-KiloGM"
+      },
+      {
+        "@id": "unit:CentiM3-PER-GM"
+      },
+      {
+        "@id": "unit:MilliM3-PER-KiloGM"
+      },
+      {
+        "@id": "unit:M3-PER-KiloGM"
       }
     ],
     "dcterms:description": {
@@ -2804,6 +2888,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:KiloPA-M2-PER-GM"
+      },
+      {
+        "@id": "unit:PA-M2-PER-KiloGM"
       }
     ],
     "dcterms:description": "AI-generated: Sector-specific unit of the burst index expressed as pascal times square metre per gram (Pa\u00b7m\u00b2/g), represented as a quotient of the SI derived unit pascal multiplied by metre squared and divided by gram. It is equivalent to newton per gram and has the dimensions of acceleration.",
@@ -3244,6 +3331,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MilliGM-PER-M3-HR"
+      },
+      {
+        "@id": "unit:MicroGM-PER-M3-HR"
       }
     ],
     "dcterms:description": null,
@@ -3512,6 +3602,12 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MicroMOL-PER-L-HR"
+      },
+      {
+        "@id": "unit:NanoMOL-PER-L-HR"
+      },
+      {
+        "@id": "unit:PicoMOL-PER-L-HR"
       }
     ],
     "dcterms:description": "AI-generated: Unit of catalytic activity concentration expressed as moles per liter per hour. This unit quantifies catalytic reaction rate normalized by volume and time. It is written as mol/(L\u00b7h) and converts to SI base units as 1 mol/(L\u00b7h) = 1/3.6 mol/(m^3\u00b7s).",
@@ -3656,6 +3752,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MilliGM-PER-KiloGM-DAY"
+      },
+      {
+        "@id": "unit:MicroGM-PER-GM-DAY"
       }
     ],
     "dcterms:description": {
@@ -4095,6 +4194,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:GM-SEC-PER-M3-CentiM3"
+      },
+      {
+        "@id": "unit:MilliGM-SEC-PER-M3-CentiM3"
       }
     ],
     "dcterms:description": "AI-generated: quotient of the 0.001-fold of the SI base unit kilogram times the SI base unit second per power of the SI base unit metre with the exponent 6.",
@@ -4583,6 +4685,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MilliGM-PER-M2-SEC"
+      },
+      {
+        "@id": "unit:KiloGM-PER-M2-SEC"
       }
     ],
     "dcterms:description": null,
@@ -4935,6 +5040,9 @@
       },
       {
         "@id": "unit:KiloGM-MilliM2"
+      },
+      {
+        "@id": "unit:KiloGM-M2"
       }
     ],
     "dcterms:description": {
@@ -6219,6 +6327,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:NanoGM-PER-M2-PA-SEC"
+      },
+      {
+        "@id": "unit:KiloGM-PER-M2-PA-SEC"
       }
     ],
     "dcterms:description": null,
@@ -6374,6 +6485,9 @@
       },
       {
         "@id": "unit:GM_F-PER-CentiM2"
+      },
+      {
+        "@id": "unit:KiloGM_F-PER-MilliM2"
       }
     ],
     "dcterms:description": "AI-generated: A non-SI-conforming unit of pressure expressed as gram-force per square meter.",
@@ -6508,6 +6622,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MilliGM-PER-M3-SEC"
+      },
+      {
+        "@id": "unit:KiloGM-PER-M3-SEC"
       }
     ],
     "dcterms:description": null,
@@ -7181,6 +7298,9 @@
       },
       {
         "@id": "unit:GM-CentiM-PER-SEC"
+      },
+      {
+        "@id": "unit:KiloGM-M-PER-SEC"
       }
     ],
     "dcterms:description": "AI-generated: Product of the SI derived unit gram and the SI base unit metre divided by the SI base unit second; a unit of impulse equal to g\u00b7m/s.",
@@ -7313,6 +7433,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MegaGM-PER-HA-YR"
+      },
+      {
+        "@id": "unit:KiloGM-PER-HA-YR"
       }
     ],
     "dcterms:description": {
@@ -7947,6 +8070,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:GM-PER-CentiM-SEC"
+      },
+      {
+        "@id": "unit:KiloGM-PER-M-SEC"
       }
     ],
     "dcterms:description": "AI-generated: Unit of dynamic viscosity expressed as gram per metre second, i.e., the 0.001-fold of the SI base unit kilogram divided by the SI base unit metre and the SI base unit second.",
@@ -8639,6 +8765,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MilliC-PER-KiloGM"
+      },
+      {
+        "@id": "unit:C-PER-KiloGM"
       }
     ],
     "dcterms:description": {
@@ -9653,6 +9782,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:KiloGM-PER-GigaJ"
+      },
+      {
+        "@id": "unit:KiloGM-PER-J"
       }
     ],
     "dcterms:description": "AI-generated: Gram per joule, representing mass per energy as the ratio of mass to energy using the units gram and joule.",
@@ -9852,6 +9984,9 @@
     "custom:scaledBy": [
       {
         "@id": "unit:MilliA-HR-PER-GM"
+      },
+      {
+        "@id": "unit:A-HR-PER-KiloGM"
       }
     ],
     "dcterms:description": {
@@ -10117,5 +10252,3559 @@
       }
     ],
     "multiplication_factor": 10000000.0
+  },
+  {
+    "@id": "unit:CHF-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M-1H0T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:CostPerMass"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:CHF-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: Unit for measuring the hardware cost of substance or material per gram. This unit is derived from the prefixed unit \"CHF per KiloGram\" by removing the 'Kilo' prefix from the mass unit in the denominator, resulting in cost per gram.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": null,
+    "qudt:symbol": "CHF/g",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Swiss Francs per Gram"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:CHF"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:GM-PER-YR",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M1H0T-1D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:MassFlowRate"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-YR"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
+      "@value": "AI-generated: gram divided by the unit year (365 days). Removed prefix: Kilo."
+    },
+    "qudt:plainTextDescription": "AI-generated: gram divided by the unit year with 365 days. Removed prefix: Kilo.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.00000000003168808781402895023702689684893655"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 3.168808781402895e-11
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.a-1"
+    },
+    "qudt:symbol": "g/a",
+    "rdfs:label": [
+      {
+        "@language": "nl",
+        "@value": "Gram per Jaar"
+      },
+      {
+        "@language": "en",
+        "@value": "Gram per Year"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:YR"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM-PER-M-HR",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-1I0M1H0T-1D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:DynamicViscosity"
+      },
+      {
+        "@id": "quantitykind:Viscosity"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-M-HR"
+      }
+    ],
+    "dcterms:description": {
+      "@language": "en",
+      "@value": "AI-generated: Mass per length per time using the gram (g), metre (m), and hour (h); equal to g\u00b7m^-1\u00b7h^-1. In SI base terms, 1 g/(m\u00b7h) = 2.7777777777777778e-7 kg/(m\u00b7s)."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.0000002777777777777777777777777777778"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 2.777777777777778e-07
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.m-1.h-1"
+    },
+    "qudt:symbol": "g/(m\u00b7h)",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Grams per Metre Hour"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:HR"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:CAL-PER-MOL-DEG_C",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A-1E0L2I0M1H-1T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:MolarHeatCapacity"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloCAL-PER-MOL-DEG_C"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "AI-generated: A \\textit{Calorie per Mole Degree Celsius} is a unit for 'Molar Heat Capacity', expressed as cal/(mol-degC)."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "4.184"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 4.184
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "cal.mol-1.Cel-1"
+    },
+    "qudt:symbol": "cal/(mol\u00b7\u00b0C)",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Calorie per Mole Degree Celsius"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:CAL"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:MOL"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:DEG_C"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:RAD-M2-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M-1H0T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:SpecificOpticalRotatoryPower"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:RAD-M2-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: Unit of specific optical rotatory power expressed as rad*m^2 per gram (rad*m^2/g). This non-prefixed variant uses gram as the mass unit, consistent with the dimension L^2*M^-1. Numerically, values in rad*m^2/kg scale by 1e-3 to rad*m^2/g.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "rad.m2.g-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "rad.m2/g"
+      }
+    ],
+    "qudt:symbol": "rad\u00b7m\u00b2/g",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Radian Square Meter per Gram"
+      },
+      {
+        "@language": "en",
+        "@value": "Radian Square Metre per Gram"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:RAD"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:DEG_C-GM-PER-M2",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-2I0M1H1T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:DEG_C-KiloGM-PER-M2"
+      }
+    ],
+    "dcterms:description": "AI-generated: Derived unit for the product of the temperature in degrees Celsius and the mass density of a medium, integrated over vertical depth or height in metres.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "Cel.g.m-2"
+    },
+    "qudt:symbol": "\u00b0C\u00b7g/m\u00b2",
+    "rdfs:label": "Degrees Celsius Gram per Square Metre",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:DEG_C"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:N-M2-PER-GM2",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L3I0M-1H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:N-M2-PER-KiloGM2"
+      }
+    ],
+    "dcterms:description": "AI-generated: Unit equal to the product of the derived SI unit newton and the square of the metre, divided by the square of the gram. It represents the gravitational constant expressed using gram as the mass unit (N\u00b7m\u00b2/g\u00b2).",
+    "qudt:plainTextDescription": "AI-generated: Unit equal to the product of the derived SI unit newton and the square of the metre, divided by the square of the gram (N\u00b7m\u00b2/g\u00b2).",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "N.m2.g-2"
+    },
+    "qudt:symbol": "N\u00b7m\u00b2/g\u00b2",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Newton Square Meter per Square Gram"
+      },
+      {
+        "@language": "en",
+        "@value": "Newton Square Metre per Square Gram"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:N"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000000.0
+  },
+  {
+    "@id": "unit:SEC-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M-1H0T1D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:EinsteinCoefficients"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:SEC-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": "AI-generated: Unit of the Einstein transition probability for spontaneous or induced emissions and absorption according to ISO 80000-7:2008, expressed as the SI base unit second divided by the gram. Derived from the prefixed unit by removing the 'Kilo' prefix from the mass unit.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "s.g-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "s/g"
+      }
+    ],
+    "qudt:symbol": "s/g",
+    "rdfs:label": "Second per Gram",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:GM-PER-SEC2",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M1H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:EnergyPerArea"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-SEC2"
+      }
+    ],
+    "dcterms:description": "AI-generated: Gram per square second (g/s\u00b2) is a derived unit representing mass per time squared, associated with the quantity kind Energy per Area. It is formed from the factor units gram (g) and second (s) with an exponent of \u22122. This unit results from removing the 'Kilo' prefix from a related prefixed unit, yielding a scale that measures mass acceleration per area in non-prefixed terms.",
+    "qudt:plainTextDescription": "AI-generated: Gram per square second (g/s^2) measures mass per time squared and corresponds to the quantity kind Energy per Area. It is composed of the non-prefixed factor units gram (exponent +1) and second (exponent \u22122). This unit is obtained by removing the 'Kilo' prefix from a related prefixed unit.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "g.s-2"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "g/s2"
+      }
+    ],
+    "qudt:symbol": "g/s\u00b2",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Gram per Square Second"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:N-PER-GM",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L1I0M0H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:ThrustToMassRatio"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:N-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": "AI-generated: Gravitational field strength at a point is the gravitational force per unit mass at that point. It is a vector and here is expressed as N g^-1.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "N.g-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "N/g"
+      }
+    ],
+    "qudt:symbol": "N/g",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Newton per Gram"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "@id": "_:nfac1",
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:N"
+        }
+      },
+      {
+        "@id": "_:nfac2",
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:J-PER-GM-K-M3",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-1I0M0H-1T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:SpecificHeatVolume"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:J-PER-KiloGM-K-M3"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: Joule per gram per kelvin per cubic meter is a composed unit with factor units J^1 \u00b7 g^-1 \u00b7 K^-1 \u00b7 m^-3. It measures specific heat per unit volume using gram as the mass unit. This unit results from the original prefixed unit by removing the 'Kilo' prefix from the mass factor. Numerically, 1 J/(g\u00b7K\u00b7m\u00b3) = 1000 J/(kg\u00b7K\u00b7m\u00b3).",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "J.g-1.K.m-3"
+    },
+    "qudt:symbol": "J/(g\u00b7K\u00b7m\u00b3)",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Joule per Gram Kelvin Cubic Meter"
+      },
+      {
+        "@language": "en",
+        "@value": "Joule per Gram Kelvin Cubic Metre"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -3
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:J"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:K"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:EV-M2-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L4I0M0H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:TotalMassStoppingPower"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:EV-M2-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": "AI-generated: product of the unit electronvolt and the power of the SI base unit metre with the exponent 2 divided by the unit gram.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.0000000000000001602176634"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1.602176634e-16
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "eV.m2.g-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "eV.m2/g"
+      }
+    ],
+    "qudt:symbol": "eV\u00b7m\u00b2/g",
+    "rdfs:label": "Electronvolt Square Metre per Gram",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:EV"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:M-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L1I0M1H0T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:LengthMass"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:M-KiloGM"
+      }
+    ],
+    "dcterms:description": "AI-generated: product of SI units metre and gram given as dimensional product dim Q = L**$a} M**$b} T**$g} I**$d} $TH**$e} N**$z} J**$i}",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "m.g"
+    },
+    "qudt:symbol": "m\u00b7g",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Meter Gram"
+      },
+      {
+        "@language": "en",
+        "@value": "Metre Gram"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:W-HR-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M0H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:SpecificEnergy"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:W-HR-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": "AI-generated: Product of the SI derived unit watt and the unit hour divided by the unit gram. Derived from the prefixed unit \"watt hour per kilogram\" by removing the Kilo- prefix from kilogram; represents specific energy in watt-hours per gram.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "3600000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 3600000.0
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "W.h.g-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "W.h/g"
+      }
+    ],
+    "qudt:symbol": "W\u00b7h/g",
+    "rdfs:label": "Watt Hour per Gram",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:HR"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:W"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:CI-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M-1H0T-1D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:MassicActivity"
+      },
+      {
+        "@id": "quantitykind:SpecificActivity"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:CI-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": "AI-generated: A composed unit equal to the curie divided by the gram (Ci/g), representing massic/specific activity per unit mass. Derived from the original prefixed unit (curie per kilogram) by using the non-prefixed mass unit gram. In SI terms, 1 Ci/g corresponds to 3.7\u00d710^13 Bq/kg.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "37000000000000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 37000000000000.0
+    },
+    "qudt:ucumCode": {
+      "@value": "Ci/g"
+    },
+    "qudt:symbol": "Ci/g",
+    "rdfs:label": "Curie per Gram",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:CI"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM-PER-M-DAY",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-1I0M1H0T-1D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:DynamicViscosity"
+      },
+      {
+        "@id": "quantitykind:Viscosity"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-M-DAY"
+      }
+    ],
+    "dcterms:description": "AI-generated: unit of dynamic viscosity expressed as gram per metre per day, i.e., the quotient of gram divided by metre and by day.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.00000001157407407407407407407407407407"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1.1574074074074072e-08
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.m-1.d-1"
+    },
+    "qudt:symbol": "g/(m\u00b7d)",
+    "rdfs:label": "Gram per Metre Day",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:DAY"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM-PER-M2-SEC2",
+    "@type": [
+      "qudt:Unit",
+      "qudt:DerivedUnit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-2I0M1H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:PressureLossPerLength"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-M2-SEC2"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.m-2.s-2"
+    },
+    "qudt:symbol": "g/(m\u00b2\u00b7s\u00b2)",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Gram per Square Meter Square Second"
+      },
+      {
+        "@language": "en",
+        "@value": "Gram per Square Metre Square Second"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:CAL-PER-GM",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M0H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:SpecificEnergy"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloCAL-PER-GM"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "AI-generated: \"Calorie per Gram\" is a unit for 'Specific Energy' expressed as $cal/gm$."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "4184.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 4184.0
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "cal.g-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "cal/g"
+      }
+    ],
+    "qudt:symbol": "cal/g",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Calorie per Gram"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:CAL"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:MOL-PER-GM-PA",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A1E0L1I0M-2H0T2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:AmountOfSubstancePerMassPressure"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:MOL-PER-KiloGM-PA"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "AI-generated: Mole per Gram Pascal ($\\mathrm{mol}/(\\mathrm{g}\\cdot\\mathrm{Pa})$) is a unit describing the variation of molar amount per unit mass and pressure. It is obtained by removing the 'Kilo' prefix from the mass term of the original unit, resulting in grams in the denominator."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "mol.g-1.Pa-1"
+    },
+    "qudt:symbol": "mol/(g\u00b7Pa)",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Mole per Gram Pascal"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:PA"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:MOL"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:GM-PER-FT2",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-2I0M1H0T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:MassPerArea"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-FT2"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
+      "@value": "AI-generated: SI unit gram divided by the square of the imperial foot."
+    },
+    "qudt:plainTextDescription": "AI-generated: SI unit gram divided by the square of the imperial foot.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.0107639104167097223083335055559"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.010763910416709722
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.ft-2"
+    },
+    "qudt:symbol": "g/ft\u00b2",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Gram per Square Foot"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:FT"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM-PER-SEC3-K",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M1H-1T-3D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:CoefficientOfHeatTransfer"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-SEC3-K"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: Unit commonly used for the coefficient of heat transfer, expressed with gram (g) instead of kilogram (kg), i.e., g/(s^3\u00b7K).",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.s-3.K-1"
+    },
+    "qudt:symbol": "g/(s\u00b3\u00b7K)",
+    "rdfs:label": [
+      {
+        "@language": "it",
+        "@value": "Grammo Al Secondo Cubo per Kelvin"
+      },
+      {
+        "@language": "cs",
+        "@value": "Gram Na Krychlov\u00fdsekunda Kelvin"
+      },
+      {
+        "@language": "sl",
+        "@value": "Gram Na Kubi\u010dni Sekunda Kelvin"
+      },
+      {
+        "@language": "pl",
+        "@value": "Gram Na Sekunda Sze\u015bciennyokelwin"
+      },
+      {
+        "@language": "ro",
+        "@value": "Gram Pe Secund\u0103 Cub-kelvin"
+      },
+      {
+        "@language": "en",
+        "@value": "Gram per Cubic Second Kelvin"
+      },
+      {
+        "@language": "ms",
+        "@value": "Gram per Saat Kubik Kelvin"
+      },
+      {
+        "@language": "tr",
+        "@value": "Gram per Saniyek\u00fcp Kelvin"
+      },
+      {
+        "@language": "de",
+        "@value": "Gramm Je Kubiksekunde Kelvin"
+      },
+      {
+        "@language": "fr",
+        "@value": "Gramme Par Seconde Cube-kelvin"
+      },
+      {
+        "@language": "es",
+        "@value": "Gramo Porsegundo C\u00fabico Kelvin"
+      },
+      {
+        "@language": "pt",
+        "@value": "Grama Por Segundo C\u00fabico Kelvin"
+      },
+      {
+        "@language": "ru",
+        "@value": "\u0413\u0440\u0430\u043c\u043c \u041d\u0430 \u041a\u0443\u0431\u0438\u0447\u0435\u0441\u043a\u0438\u0439 \u0421\u0435\u043a\u0443\u043d\u0434\u0430-\u043a\u0435\u043b\u044c\u0432\u0438\u043d"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:K"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -3
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:PER-GM2",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M-2H0T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:InverseSquareMass"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:PER-KiloGM2"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "AI-generated: Per Square Gram is a denominator unit with dimensions $/g^2$."
+    },
+    "qudt:plainTextDescription": "AI-generated: Per square gram is a denominator unit with dimensions /g^2.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g-2"
+    },
+    "qudt:symbol": "/g\u00b2",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Reciprocal Square Gram"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000000.0
+  },
+  {
+    "@id": "unit:CAL-PER-GM-DEG_C",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M0H-1T-2D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:SpecificEntropy"
+      },
+      {
+        "@id": "quantitykind:SpecificHeatCapacity"
+      },
+      {
+        "@id": "quantitykind:SpecificHeatCapacityAtConstantPressure"
+      },
+      {
+        "@id": "quantitykind:SpecificHeatCapacityAtConstantVolume"
+      },
+      {
+        "@id": "quantitykind:SpecificHeatCapacityAtSaturation"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloCAL-PER-GM-DEG_C"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "AI-generated: \\textit{Calorie per Gram Degree Celsius} is a unit for 'Specific Heat Capacity' expressed as $cal/(g\\cdot\\degC)$. It measures energy required to raise the temperature of a unit mass by one degree Celsius, with energy in calories, mass in grams, and temperature in degrees Celsius."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "4184.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 4184.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "cal.g-1.Cel-1"
+    },
+    "qudt:symbol": "cal/(g\u00b7\u00b0C)",
+    "rdfs:label": "Calorie per Gram Degree Celsius",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:CAL"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:DEG_C"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM2-PER-SEC2",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M2H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM2-PER-SEC2"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: This unit represents grams squared per second squared (g\u00b2/s\u00b2), a mass-squared per time-squared measure. It is derived by removing the 'Kilo' prefix from the numerator mass term of the original unit, yielding a base composed unit in non-prefixed factor units.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g2.s-2"
+    },
+    "qudt:symbol": "g\u00b2/s\u00b2",
+    "rdfs:label": "Square Grams per Square Second",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      }
+    ],
+    "multiplication_factor": 1000000.0
+  },
+  {
+    "@id": "unit:GM-K",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M1H1T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:MassTemperature"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-K"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "AI-generated: $\\textit{Gram Kelvin}$ is a unit for 'Mass Temperature' expressed as $g-K$. It represents the product of gram and kelvin."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.K"
+    },
+    "qudt:symbol": "g\u00b7K",
+    "rdfs:label": "Gram Kelvin",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:K"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM-PER-M-MIN",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-1I0M1H0T-1D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:DynamicViscosity"
+      },
+      {
+        "@id": "quantitykind:Viscosity"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-M-MIN"
+      }
+    ],
+    "dcterms:description": "AI-generated: unit of dynamic viscosity expressed as gram divided by metre and by minute.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.00001666666666666666666666666666666667"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1.6666666666666667e-05
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.m-1.min-1"
+    },
+    "qudt:symbol": "g/(m\u00b7min)",
+    "rdfs:label": "Gram per Metre Minute",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:MIN"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:M3-PER-GM-SEC2",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L3I0M-1H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:M3-PER-KiloGM-SEC2"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: Unit equal to m^3\u00b7g^-1\u00b7s^-2 (cubic meters per gram second squared). This non-prefixed derived unit measures volume per unit mass and time squared and retains the same dimension vector and quantity kind as the original prefixed form.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "m3.(g.s2)-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "m3.g-1.s-2"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "m3/(g.s2)"
+      }
+    ],
+    "qudt:symbol": "m\u00b3/(g\u00b7s\u00b2)",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Cubic Meter per Gram Square Second"
+      },
+      {
+        "@language": "en",
+        "@value": "Cubic Metre per Gram Square Second"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 3
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:GM-SEC2",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M1H0T2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-SEC2"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: Gram second squared (g\u00b7s\u00b2) is a composed unit equal to the product of gram and second squared, representing mass\u00b7time\u00b2 with dimension vector M^1 T^2. It results from removing the 'Kilo' prefix from the mass factor of the original prefixed unit, focusing on the resulting non-prefixed unit.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.s2"
+    },
+    "qudt:symbol": "g\u00b7s\u00b2",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Gram Square Second"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:C-PER-GM-SEC",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E1L0I0M-1H0T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:ExposureRate"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:C-PER-KiloGM-SEC"
+      }
+    ],
+    "dcterms:description": "AI-generated: Exposure rate expressed as coulomb per gram per second. This unit measures electric exposure rate using gram as the mass unit, corresponding to C\u00b7g^-1\u00b7s^-1.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "C.g-1.s-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "C/(g.s)"
+      }
+    ],
+    "qudt:symbol": "C/(g\u00b7s)",
+    "rdfs:label": "Coulomb per Gram Second",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:C"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:GM-M2-PER-SEC",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M1H0T-1D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:AngularImpulse"
+      },
+      {
+        "@id": "quantitykind:AngularMomentum"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-M2-PER-SEC"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "AI-generated: \"Gram Square Meter Per Second\" is a unit for 'Angular Momentum' expressed as $g\\cdot m^2\\,s^{-1}$."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.m2.s-1"
+    },
+    "qudt:symbol": "g\u00b7m\u00b2/s",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Gram Square Meter per Second"
+      },
+      {
+        "@language": "en",
+        "@value": "Gram Square Metre per Second"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:J-PER-GM-K-PA",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L3I0M-1H-1T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:SpecificHeatPressure"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:J-PER-KiloGM-K-PA"
+      }
+    ],
+    "dcterms:description": "AI-generated: A derived unit representing energy per unit mass, per unit temperature, and per unit pressure, expressed using non-prefixed gram, kelvin, and pascal. This unit corresponds to J\u00b7g^-1\u00b7K^-1\u00b7Pa^-1 and measures specific heat per pressure.",
+    "qudt:plainTextDescription": "AI-generated: Joule per gram per kelvin per pascal, representing energy per mass per temperature per pressure without prefixes: J\u00b7g^-1\u00b7K^-1\u00b7Pa^-1.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "J.g-1.K-1.Pa-1"
+    },
+    "qudt:symbol": "J/(g\u00b7K\u00b7Pa)",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Joule per Gram Kelvin Pascal"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:J"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:K"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:PA"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:GM-PER-PA",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L1I0M0H0T2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-PA"
+      }
+    ],
+    "dcterms:description": "AI-generated: Gram divided by the SI derived unit pascal. This unit results from removing the Kilo prefix from the mass factor of the original prefixed composed unit.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.Pa-1"
+    },
+    "qudt:symbol": "g/Pa",
+    "rdfs:label": "Gram per Pascal",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:PA"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:C-M2-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E1L2I0M-1H0T1D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:C-M2-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": "AI-generated: product of the SI derived unit coulomb and the power of the metre with exponent 2 divided by the gram.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "C.m2.g-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "C.m2/g"
+      }
+    ],
+    "qudt:symbol": "C\u00b7m\u00b2/g",
+    "rdfs:label": "Coulomb Square Metre per Gram",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:C"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:CAL-PER-SEC",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M1H0T-3D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:HeatFlowRate"
+      },
+      {
+        "@id": "quantitykind:Power"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloCAL-PER-SEC"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "AI-generated: A \\textit{Calorie per Second} is a unit for \\textit{Heat Flow Rate} and \\textit{Power}, expressed as cal/s."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "4.184"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 4.184
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "cal.s-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "cal/s"
+      }
+    ],
+    "qudt:symbol": "cal/s",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Calorie per Second"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:CAL"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:CCY_CHF-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M-1H0T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:CostPerMass"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:CCY_CHF-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": "AI-generated: The Swiss Francs per gram (CHF/g) is a unit for measuring the hardware cost of a substance or material.",
+    "qudt:plainTextDescription": "AI-generated: Unit for measuring the hardware cost per gram of a substance or material.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": {
+      "@type": "ucum:UCUMcs",
+      "@value": "[CHF]/g"
+    },
+    "qudt:symbol": "CHF/g",
+    "rdfs:label": "Swiss Francs per Gram",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:CCY_CHF"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:GM-PER-M-SEC2",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-1I0M1H0T-2D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:ForcePerArea"
+      },
+      {
+        "@id": "quantitykind:VaporPressure"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-M-SEC2"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
+      "@value": "AI-generated: A pressure unit expressed as gram per metre per second squared (g\u00b7m^-1\u00b7s^-2). It represents force per area using gram, metre, and second base units and is applicable to quantity kinds such as ForcePerArea and VaporPressure. Numerically, it equals one-thousandth of the pascal (kg\u00b7m^-1\u00b7s^-2)."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.m-1.s-2"
+    },
+    "qudt:symbol": "g/(m\u00b7s\u00b2)",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Grams per Metre Second Squared"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM-PER-SEC-PA",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L1I0M0H0T1D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-SEC-PA"
+      }
+    ],
+    "dcterms:description": "AI-generated: Gram divided by the product of the second and the pascal; the resulting unit has the dimensions of length multiplied by time (m\u00b7s). Derived by removing the 'Kilo' prefix from the mass factor of the original unit.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.s-1.Pa-1"
+    },
+    "qudt:symbol": "g/(s\u00b7Pa)",
+    "rdfs:label": "Gram per Second Pascal",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:PA"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:MOL-PER-GM-K",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A1E0L0I0M-1H-1T0D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:MOL-PER-KiloGM-K"
+      }
+    ],
+    "dcterms:description": "AI-generated: Mole divided by the product of gram and kelvin. This unit results from removing the 'Kilo' prefix from the mass factor in the original unit mol/(kg\u00b7K), yielding mol/(g\u00b7K). The resulting unit is scaled by a factor of 10^3 relative to the prefixed form.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "mol.K-1.g-1"
+    },
+    "qudt:symbol": "mol/(g\u00b7K)",
+    "rdfs:label": "Mole per Gram Kelvin",
+    "qudt:hasFactorUnit": [
+      {
+        "@id": "_:factor1",
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:MOL"
+        }
+      },
+      {
+        "@id": "_:factor2",
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:K"
+        }
+      },
+      {
+        "@id": "_:factor3",
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM-PER-PA-SEC-M",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M0H0T1D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:VapourPermeability"
+      },
+      {
+        "@id": "quantitykind:WaterVaporDiffusionCoefficient"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-PA-SEC-M"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: Common unit for the water vapour diffusion coefficient expressed as gram per pascal-second-metre.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.Pa-1.s-1.m-1"
+    },
+    "qudt:symbol": "g/(Pa\u00b7s\u00b7m)",
+    "rdfs:label": [
+      {
+        "@language": "it",
+        "@value": "Grammo Al Pascal Secondo Metro"
+      },
+      {
+        "@language": "sl",
+        "@value": "Gram Na Pascal Sekunda Meter"
+      },
+      {
+        "@language": "cs",
+        "@value": "Gram Na Pascal Sekunda Metr"
+      },
+      {
+        "@language": "pl",
+        "@value": "Gram Na Paskalosekundaometr"
+      },
+      {
+        "@language": "ro",
+        "@value": "Gram Pe Pascal-secund\u0103-metru"
+      },
+      {
+        "@language": "ms",
+        "@value": "Gram per Pascal Saat Meter"
+      },
+      {
+        "@language": "tr",
+        "@value": "Gram per Pascal Saniye Metre"
+      },
+      {
+        "@language": "en",
+        "@value": "Gram per Pascal Second Metre"
+      },
+      {
+        "@language": "de",
+        "@value": "Gramm Je Pascal Sekunde Meter"
+      },
+      {
+        "@language": "fr",
+        "@value": "Gramme Par Pascal-seconde-m\u00e8tre"
+      },
+      {
+        "@language": "es",
+        "@value": "Gramo Por Pascal Segundo Metro"
+      },
+      {
+        "@language": "pt",
+        "@value": "Grama Por Pascal Segundo Metro"
+      },
+      {
+        "@language": "ru",
+        "@value": "\u0413\u0440\u0430\u043c\u043c \u041d\u0430 \u041f\u0430\u0441\u043a\u0430\u043b\u044c-\u0441\u0435\u043a\u0443\u043d\u0434\u0430-\u043c\u0435\u0442\u0440"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:PA"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM-M-PER-SEC2",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L1I0M1H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Force"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-M-PER-SEC2"
+      }
+    ],
+    "dcterms:description": "AI-generated: product of the SI base unit gram and the SI base unit metre divided by the power of the SI base unit second by exponent 2.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.m.s-2"
+    },
+    "qudt:symbol": "g\u00b7m/s\u00b2",
+    "rdfs:label": "Gram Metre per Second Squared",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:J-M2-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L4I0M0H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:TotalMassStoppingPower"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:J-M2-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: Non-prefixed composed unit for total mass stopping power, expressed as joule square meter per gram (J\u00b7m\u00b2/g). This unit has the same dimension (L^4 T^-2) as its kilogram-based counterpart but uses grams as the mass factor, resulting in a direct scaling relative to the per-kilogram form.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.001
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "J.m2.g-1"
+    },
+    "qudt:symbol": "J\u00b7m\u00b2/g",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Joule Square Meter per Gram"
+      },
+      {
+        "@language": "en",
+        "@value": "Joule Square Metre per Gram"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:J"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:PER-GM-SEC",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L0I0M-1H0T-1D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:PER-KiloGM-SEC"
+      }
+    ],
+    "dcterms:description": "AI-generated: Product of units gram to the power of minus one and second to the power of minus one, representing a reciprocal gram-second. Dimensional product: M^-1 T^-1.",
+    "qudt:plainTextDescription": "AI-generated: Product of units gram to the power of minus one and second to the power of minus one, representing a reciprocal gram-second. Dimensional product: M^-1 T^-1.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g-1.s-1"
+    },
+    "qudt:symbol": "/(g\u00b7s)",
+    "rdfs:label": "Reciprocal Gram Second",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:CAL-PER-MOL",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A-1E0L2I0M1H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:MolarEnergy"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloCAL-PER-MOL"
+      }
+    ],
+    "dcterms:description": "AI-generated: The calorie per mole is a derived unit of energy per amount of substance. It is the quotient of a thermochemical gram calorie and a mole, mainly used in the United States. In SI units, it equals 4.184 J/mol. Physical quantities measured in cal\u00b7mol^-1 are typically thermodynamic quantities, especially free energies such as heats of vaporization and fusion.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "4.184"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 4.184
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "cal.mol-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "cal/mol"
+      }
+    ],
+    "qudt:symbol": "cal/mol",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Calorie per Mole"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:CAL"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:MOL"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:N-M-PER-GM",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M0H0T-2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:SpecificEnergy"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:N-M-PER-KiloGM"
+      }
+    ],
+    "dcterms:description": "AI-generated: product of the derived SI unit newton and the SI base unit metre divided by the SI base unit gram",
+    "qudt:plainTextDescription": "AI-generated: product of the derived SI unit newton and the SI base unit metre divided by the SI base unit gram",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "N.m.g-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "N.m/g"
+      }
+    ],
+    "qudt:symbol": "N\u00b7m/g",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Newton Meter per Gram"
+      },
+      {
+        "@language": "en",
+        "@value": "Newton Metre per Gram"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:N"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:GM-PER-M3-PA",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-2I0M0H0T2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:MassPerEnergy"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-M3-PA"
+      }
+    ],
+    "dcterms:description": "AI-generated: SI unit gram divided by the product of the SI base unit metre raised to the third power and the SI derived unit pascal.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "g.m-3.Pa-1"
+    },
+    "qudt:symbol": "g/(m\u00b3\u00b7Pa)",
+    "rdfs:label": "Gram per Cubic Metre Pascal",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -3
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:PA"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:CAL-PER-MIN",
+    "@type": [
+      "qudt:DerivedUnit",
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M1H0T-3D0"
+    },
+    "qudt:hasQuantityKind": [
+      {
+        "@id": "quantitykind:HeatFlowRate"
+      },
+      {
+        "@id": "quantitykind:Power"
+      }
+    ],
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloCAL-PER-MIN"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "qudt:LatexString",
+      "@value": "AI-generated: A \\textit{Calorie per Minute} is a unit for \\textit{Heat Flow Rate} and \\textit{Power}, expressed as cal/min."
+    },
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.06973333333333333333333333333333335"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 0.06973333333333333
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "cal.min-1"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "cal/min"
+      }
+    ],
+    "qudt:symbol": "cal/min",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Calorie per Minute"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:CAL"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:MIN"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:MOL-PER-GM-BAR",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A1E0L1I0M-2H0T2D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:AmountOfSubstancePerMassPressure"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:MOL-PER-KiloGM-BAR"
+      }
+    ],
+    "dcterms:description": "AI-generated: SI base unit mole divided by the product of the gram and the unit bar.",
+    "qudt:plainTextDescription": null,
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "0.00000001"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1e-08
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "mol.g-1.bar-1"
+    },
+    "qudt:symbol": "mol/(g\u00b7bar)",
+    "rdfs:label": "Mole per Gram Bar",
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:MOL"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:BAR"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      }
+    ],
+    "multiplication_factor": 0.001
+  },
+  {
+    "@id": "unit:GM-PER-SEC-M2",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L-2I0M1H0T-1D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:MassPerAreaTime"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:KiloGM-PER-SEC-M2"
+      }
+    ],
+    "dcterms:description": {
+      "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML",
+      "@value": "AI-generated: SI base unit gram divided by the product of the power of the SI base unit metre with the exponent 2 and the SI base unit second."
+    },
+    "qudt:plainTextDescription": "AI-generated: SI base unit gram divided by the product of the power of the SI base unit metre with the exponent 2 and the SI base unit second.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": [
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "g.s-1.m-2"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "g/(s.m2)"
+      },
+      {
+        "@type": "qudt:UCUMcs",
+        "@value": "g.(s.m2)-1"
+      }
+    ],
+    "qudt:symbol": "g/(s\u00b7m\u00b2)",
+    "rdfs:label": [
+      {
+        "@language": "en-us",
+        "@value": "Gram per Second Square Meter"
+      },
+      {
+        "@language": "en",
+        "@value": "Gram per Second Square Metre"
+      }
+    ],
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
+  },
+  {
+    "@id": "unit:K-M2-PER-GM-SEC",
+    "@type": [
+      "qudt:Unit"
+    ],
+    "qudt:hasDimensionVector": {
+      "@id": "qkdv:A0E0L2I0M-1H1T-1D0"
+    },
+    "qudt:hasQuantityKind": {
+      "@id": "quantitykind:Unknown"
+    },
+    "rdfs:isDefinedBy": {
+      "@id": "http://qudt.org/3.1.4/vocab/unit"
+    },
+    "custom:scaledBy": [
+      {
+        "@id": "unit:K-M2-PER-KiloGM-SEC"
+      }
+    ],
+    "dcterms:description": null,
+    "qudt:plainTextDescription": "AI-generated: A non-prefixed composed unit K\u00b7m\u00b2/(g\u00b7s) formed from Kelvin, square metre, gram to the power \u22121, and second to the power \u22121. It has the same dimensionality (L\u00b2 M\u207b\u00b9 T\u207b\u00b9 \u0398\u00b9) as the original prefixed unit. Relative to K\u00b7m\u00b2/(kg\u00b7s), this unit is larger by a factor of 1000 due to using gram instead of kilogram in the denominator.",
+    "qudt:conversionMultiplier": {
+      "@type": "xsd:decimal",
+      "@value": "1000.0"
+    },
+    "qudt:conversionMultiplierSN": {
+      "@type": "xsd:double",
+      "@value": 1000.0
+    },
+    "qudt:ucumCode": {
+      "@type": "qudt:UCUMcs",
+      "@value": "K.m2.g-1.s-1"
+    },
+    "qudt:symbol": "K\u00b7m\u00b2/(g\u00b7s)",
+    "rdfs:label": {
+      "@language": "en",
+      "@value": "Kelvin Square Metres per Gram Second"
+    },
+    "qudt:hasFactorUnit": [
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:K"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": 2
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:M"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:GM"
+        }
+      },
+      {
+        "qudt:exponent": {
+          "@type": "xsd:integer",
+          "@value": -1
+        },
+        "qudt:hasUnit": {
+          "@id": "unit:SEC"
+        }
+      }
+    ],
+    "multiplication_factor": 1000.0
   }
 ]

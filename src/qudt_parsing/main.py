@@ -55,6 +55,7 @@ data_dir = project_root / "data"
 data_dir.mkdir(exist_ok=True)
 
 missing_units_fp = data_dir / "qudt_missing_units.json"
+fixed_units_fp = data_dir / "qudt_fixed_units.json"
 
 # llm = ChatOpenAI(model=LLM_MODEL, temperature=0, max_retries=3)
 print("OpenAI configuration:")
@@ -525,6 +526,8 @@ def build_type_dict[T](jsonld: dict[str, list[T]]) -> dict[str, list[T]]:
             for type_name in item["@type"]:
                 type_dict_.setdefault(type_name, []).append(item)
         else:
+            if item.get("@id", "No ID").startswith(("_:n", "_:N")):  # Blank node
+                continue  # Ignore blank nodes
             _logger.warning("Item: %s - No type found", item.get("@id", "No ID"))
 
     _logger.info("Types found in the QUDT dump:")
@@ -868,11 +871,31 @@ def classify_and_enrich_qudt_units(
 
 
 @log_call
+def fix_inconsistent_units(id_to_index: dict[str, int]):
+    """Fixes known inconsistencies in the QUDT dump."""
+    func_log.has_required_calls([build_indices])
+
+    with open(fixed_units_fp, encoding="utf-8") as f:
+        fixed_units: dict[str, dict[str, Any]] = json.load(f)
+    for unit_id in fixed_units:
+        unit_index = id_to_index.get(unit_id)
+        for key in fixed_units[unit_id]:
+            ontologies["qudt"]["jsonld"]["@graph"][unit_index][key] = fixed_units[
+                unit_id
+            ][key]
+            _logger.info(
+                "Fixed unit %s: set %s to %s", unit_id, key, fixed_units[unit_id][key]
+            )
+
+
+@log_call
 def load_qudt_missing_units() -> list[dict[str, Any]]:
     with open(missing_units_fp, encoding="utf-8") as f:
         missing_units_list = json.load(f)
 
     for mu in missing_units_list:
+        if "custom:scaledBy" not in mu:
+            continue
         scaled_by_list = get_values(mu["custom:scaledBy"], "@id")
         if not scaled_by_list:
             _logger.warning("Missing unit without scaledBy found: %s", mu)
@@ -1774,6 +1797,7 @@ def prepare_all_ontologies(use_cache: bool = True) -> None:
         _logger.info("Ontology %s loaded and prepared.", ontology)
 
 
+@log_call
 def build_indices():
     qudt_id_dict_, qudt_id_to_index_ = build_iri_dict(ontologies["qudt"]["jsonld"])
     ontologies["qudt"]["id_dict"] = qudt_id_dict_
@@ -1796,6 +1820,50 @@ def get_ids(inp: list[dict[str, Any]]) -> set[str]:
     return set(loi)
 
 
+def prefix_in(string: str) -> bool:
+    """Check if a string contains any known prefix."""
+    return any(prefix in string for prefix in PREFIXES)
+
+
+def consistency_check(unit_type_dict: dict) -> dict:
+    """Perform a consistency check on the QUDT units."""
+    result = {
+        "Unit (non-composed) with prefix in @id but no qudt:prefix property": [],
+        "Unit with qudt:prefix property but no prefix in @id": [],
+        "Unit with prefix but no scalingOf property": [],
+        "Unit without prefix but with scalingOf property": [],
+    }
+    for unit_dict_ in unit_type_dict["All"]:
+        unit_id = unit_dict_["@id"]
+        unit_index = ontologies["qudt"]["id_to_index"][unit_id]
+        prefixed = prefix_in(unit_id)
+        unit_dict = ontologies["qudt"]["jsonld"]["@graph"][unit_index]
+        has_prefix_property = "qudt:prefix" in unit_dict
+        has_scaling_of = "qudt:scalingOf" in unit_dict
+        has_factor_units = "qudt:hasFactorUnit" in unit_dict
+        if prefixed and not has_prefix_property and not has_factor_units:
+            result[
+                "Unit (non-composed) with prefix in @id but no qudt:prefix property"
+            ].append(unit_id)
+        if not prefixed and has_prefix_property:
+            result["Unit with qudt:prefix property but no prefix in @id"].append(
+                unit_id
+            )
+        if prefixed and not has_scaling_of:
+            result["Unit with prefix but no scalingOf property"].append(unit_id)
+        if not prefixed and has_scaling_of:
+            result["Unit without prefix but with scalingOf property"].append(unit_id)
+    for key, items in result.items():
+        if items:
+            _logger.warning("%s: %d items", key, len(items))
+            for item in items:
+                _logger.warning(" - %s", item)
+        else:
+            _logger.info("%s: 0 items", key)
+
+    return result
+
+
 # ---------------------
 # Main script execution
 # ---------------------
@@ -1815,6 +1883,10 @@ qudt_unit_type_dict = classify_and_enrich_qudt_units(
     enrich=True,
 )
 qudt_unit_type_dict_pre = qudt_unit_type_dict.copy()
+
+# Consistency check on the original QUDT dump
+consistency_check(qudt_unit_type_dict)
+
 # Report on unit types
 report_on_unit_types(
     ontologies["qudt"]["type_dict"],
@@ -1822,14 +1894,22 @@ report_on_unit_types(
 )
 # Until now the QUDT dump should not have been altered but the units should
 #  have been classified and scaledB / scalingOf should be present
+# Fix units that are inconsistent in the QUDT
+fix_inconsistent_units(ontologies["qudt"]["id_to_index"])
 # Create units that are missing in the QUDT
 missing_units = load_qudt_missing_units()
 # Add these to the QUDT jsonld and type dictionary
 ontologies["qudt"]["jsonld"]["@graph"].extend(missing_units)
 # Rebuild the id_dict and type_dict to include the new units
 build_indices()
-
-# Process prefixed, composed units with no Non-prefixed base unit with the help of AI
+# Build the unit type dict again to include the changes made by the fixes and additions
+qudt_unit_type_dict = classify_and_enrich_qudt_units(
+    ontologies["qudt"]["type_dict"],
+    ontologies["qudt"]["id_dict"],
+    ontologies["qudt"]["id_to_index"],
+    enrich=True,
+)
+# Process prefixed, composed units with no non-prefixed base unit with the help of AI
 ai_generated_composed_base_units = process_prefixed_composed_units_with_ai(
     qudt_unit_type_dict, ontologies["qudt"]["id_to_index"]
 )
