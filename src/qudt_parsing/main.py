@@ -621,7 +621,7 @@ def enrich_with_scaling_of(
 
 @log_call
 def classify_and_enrich_qudt_units(
-    type_dict: dict, id_dict: dict, id_to_index: dict
+    type_dict: dict, id_dict: dict, id_to_index: dict, enrich: bool = True
 ) -> dict:
     """Classifies units according to various criteria."""
     func_log.has_required_calls([resolve_factor_units])
@@ -678,7 +678,7 @@ def classify_and_enrich_qudt_units(
         return False
 
     def treat_prefixed_non_composed_unit(unit_dict_: dict):
-        unit_type_dict["Prefixed, non-composed unit"].append(unit_dict)
+        unit_type_dict["Prefixed, non-composed unit"].append(unit_dict_)
         _logger.info(" - (also listed as Prefixed, non-composed unit)")
         # See if the unit can be reduced to a Non-prefixed base unit
         base_unit_name_ = remove_prefixes(unit_dict_["@id"])
@@ -688,10 +688,16 @@ def classify_and_enrich_qudt_units(
                 base_unit_found_ = True
                 _logger.info(" - Non-prefixed base unit found: %s", base_unit_name_)
                 break
+        # Enrich the jsonld with scalingOf if missing and scaledBy
+        if base_unit_found_ and enrich:
+            enrich_with_scaling_of(unit_dict_["@id"], base_unit_name_, id_to_index)
+            # Enrich the Non-prefixed base unit with scaledBy
+            enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
+        # Add to Prefixed unit with missing scalingOf if applicable
         if base_unit_found_ and "qudt:scalingOf" not in unit_dict_:
             unit_type_dict["Prefixed unit with missing scalingOf"].append(unit_dict_)
             _logger.info(" - (also listed as Prefixed unit with missing scalingOf)")
-        # Prefixed unit with missing scalingOf
+        # Prefixed unit with missing scalingOf and no Non-prefixed base
         if not base_unit_found_ and "qudt:scalingOf" not in unit_dict_:
             # This case should not happen, as all prefixed units should be reducible to
             # a Non-prefixed base unit, and if not then they should have a scalingOf
@@ -705,13 +711,6 @@ def classify_and_enrich_qudt_units(
                 " - (also listed as Prefixed, non-composed Unit with no Non-prefixed "
                 "base)"
             )
-        # Enrich the jsonld with scalingOf if missing and scaledBy
-        if base_unit_found_:
-            if "qudt:scalingOf" not in unit_dict_:
-                # Enrich the jsonld with scalingOf if missing
-                unit_dict_["qudt:scalingOf"] = {"@id": base_unit_name_}
-            # Enrich the Non-prefixed base unit with scaledBy
-            enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
 
     def treat_prefixed_composed_unit(unit_dict_: dict):
         unit_type_dict["Prefixed, composed unit"].append(unit_dict_)
@@ -719,41 +718,42 @@ def classify_and_enrich_qudt_units(
             " - (also listed as Prefixed, composed unit with missing scalingOf)"
         )
         # Check if the unit can be reduced to a Non-prefixed base unit
-        base_unit_name_ = remove_prefixes(unit_dict["@id"])
+        base_unit_name_ = remove_prefixes(unit_dict_["@id"])
         base_unit_found_ = False
         for candidate_ in type_dict.get("qudt:Unit", []):
             if base_unit_name_ == candidate_.get("@id", ""):
                 base_unit_found_ = True
                 _logger.info(" - Non-prefixed base unit found: %s", base_unit_name_)
                 break
-        if "qudt:scalingOf" not in unit_dict:
-            unit_type_dict["Prefixed, composed unit with missing scalingOf"].append(
-                unit_dict
-            )
-            _logger.info(
-                " - (also listed as Prefixed, composed unit with missing scalingOf)"
-            )
         if base_unit_found_:
-            if "qudt:scalingOf" not in unit_dict:
+            if enrich:
+                # Enrich the jsonld with scalingOf if missing
+                enrich_with_scaling_of(unit_dict_["@id"], base_unit_name_, id_to_index)
+                # Enrich the Non-prefixed base unit with scaledBy
+                enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
+            if "qudt:scalingOf" not in unit_dict_:
                 unit_type_dict[
                     "Prefixed, composed unit with missing scalingOf but base unit "
                     "available"
-                ].append(unit_dict)
+                ].append(unit_dict_)
                 _logger.info(
                     " - (also listed as Prefixed, composed unit with missing "
                     "scalingOf but base unit available)"
                 )
-                # Enrich the jsonld with scalingOf if missing
-                unit_dict["qudt:scalingOf"] = {"@id": base_unit_name_}
-                # todo: scalingOf is not missing anymore
-            # Enrich the Non-prefixed base unit with scaledBy
-            enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
         else:  # if not base_unit_found:
             unit_type_dict["Prefixed, composed unit with no non-prefixed base"].append(
-                unit_dict
+                unit_dict_
             )
             _logger.info(
                 " - (also listed as Prefixed, composed Unit with no Non-prefixed base)"
+            )
+
+        if "qudt:scalingOf" not in unit_dict_:
+            unit_type_dict["Prefixed, composed unit with missing scalingOf"].append(
+                unit_dict_
+            )
+            _logger.info(
+                " - (also listed as Prefixed, composed unit with missing scalingOf)"
             )
 
     class FilterAction(TypedDict):
@@ -856,6 +856,13 @@ def classify_and_enrich_qudt_units(
     # - Composed unit (combination of multiple prefixed and Non-prefixed units)
     #   - Units with property hasFactorUnit
     # unit_type_dict["Composed unit"]
+    # - Non-composed unit
+    #   - Units without property hasFactorUnit and without property prefix
+    #   - Units with property prefix but without property hasFactorUnit
+    unit_type_dict["Non-composed unit"] = (
+        unit_type_dict["Non-prefixed, non-composed unit"]
+        + unit_type_dict["Prefixed, non-composed unit"]
+    )
 
     return unit_type_dict
 
@@ -1106,7 +1113,7 @@ def process_prefixed_composed_units_with_ai(
         },
     )
 
-    # Pickle file to store the results - avoid re-running the LLM for already
+    # Save JSON file to store the results - avoid re-running the LLM for already
     #  processed units
     json_fp = (
         Path(__file__).parents[2] / "data" / "new_non_prefixed_base_composed_units.json"
@@ -1118,7 +1125,7 @@ def process_prefixed_composed_units_with_ai(
     # Load previously processed units from json file if it exists
     if json_fp.exists():
         _logger.info(f"Loading previously processed units from {json_fp}")
-        with open(json_fp, "rb") as f:
+        with open(json_fp, encoding="utf-8") as f:
             dict_list = json.load(f)
         already_processed = {d["@id"] for d in dict_list}
     else:
@@ -1772,6 +1779,7 @@ qudt_unit_type_dict = classify_and_enrich_qudt_units(
     ontologies["qudt"]["type_dict"],
     ontologies["qudt"]["id_dict"],
     ontologies["qudt"]["id_to_index"],
+    enrich=True,
 )
 # Until now the QUDT dump should not have been altered but the units should
 #  have been classified and scaledB / scalingOf should be present
@@ -1797,6 +1805,7 @@ qudt_unit_type_dict = classify_and_enrich_qudt_units(
     ontologies["qudt"]["type_dict"],
     ontologies["qudt"]["id_dict"],
     ontologies["qudt"]["id_to_index"],
+    enrich=True,
 )
 if len(qudt_unit_type_dict["Prefixed, composed unit with no non-prefixed base"]) != 0:
     raise ValueError(
@@ -1823,7 +1832,3 @@ enrich_prefixes_with_ontology_matches(ontologies["qudt"]["type_index"])
 unit_prefix_entities = create_unit_prefix_entities()
 # Create units and prefixed units
 quantity_unit_entities = create_quantity_unit_entities(qudt_unit_type_dict)
-
-
-# todo: find why there are still units with missing scalingOf listed (181) and also
-#  as missing scalingOf and base unit available (181)

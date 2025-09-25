@@ -130,6 +130,10 @@ ignore = [
     "E501",
     # DoNotAssignLambda
     "E731",
+    # Too long messages outside exception class
+    "TRY003",
+    # Too complex function
+    "C901",
 ]
 
 [tool.ruff.lint.per-file-ignores]
