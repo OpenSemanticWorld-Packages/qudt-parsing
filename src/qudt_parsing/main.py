@@ -580,7 +580,7 @@ def enrich_with_scaled_by(
     if unit_id not in get_values(base_unit_dict_["custom:scaledBy"], "@id"):
         base_unit_dict_["custom:scaledBy"].append({"@id": unit_id})
         _logger.info(
-            "Updated Non-prefixed base unit %s with scaledBy %s",
+            "Updated non-prefixed base unit %s with scaledBy %s",
             base_unit_name,
             unit_id,
         )
@@ -643,7 +643,7 @@ def classify_and_enrich_qudt_units(
         "Prefixed, composed unit with no non-prefixed base": [],
         "Prefixed, composed unit with missing scalingOf": [],
         "Prefixed, composed unit with missing scalingOf but base unit available": [],
-        "Prefixed, non-composed unit with no Non-prefixed base": [],
+        "Prefixed, non-composed unit with no non-prefixed base": [],
         "Prefixed unit with missing scalingOf": [],
     }
 
@@ -680,32 +680,32 @@ def classify_and_enrich_qudt_units(
     def treat_prefixed_non_composed_unit(unit_dict_: dict):
         unit_type_dict["Prefixed, non-composed unit"].append(unit_dict_)
         _logger.info(" - (also listed as Prefixed, non-composed unit)")
-        # See if the unit can be reduced to a Non-prefixed base unit
+        # See if the unit can be reduced to a non-prefixed base unit
         base_unit_name_ = remove_prefixes(unit_dict_["@id"])
         base_unit_found_ = False
         for candidate_ in type_dict.get("qudt:Unit", []):
             if base_unit_name_ == candidate_.get("@id", ""):
                 base_unit_found_ = True
-                _logger.info(" - Non-prefixed base unit found: %s", base_unit_name_)
+                _logger.info(" - non-prefixed base unit found: %s", base_unit_name_)
                 break
         # Enrich the jsonld with scalingOf if missing and scaledBy
         if base_unit_found_ and enrich:
             enrich_with_scaling_of(unit_dict_["@id"], base_unit_name_, id_to_index)
-            # Enrich the Non-prefixed base unit with scaledBy
+            # Enrich the non-prefixed base unit with scaledBy
             enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
         # Add to Prefixed unit with missing scalingOf if applicable
         if base_unit_found_ and "qudt:scalingOf" not in unit_dict_:
             unit_type_dict["Prefixed unit with missing scalingOf"].append(unit_dict_)
             _logger.info(" - (also listed as Prefixed unit with missing scalingOf)")
-        # Prefixed unit with missing scalingOf and no Non-prefixed base
+        # Prefixed unit with missing scalingOf and no non-prefixed base
         if not base_unit_found_ and "qudt:scalingOf" not in unit_dict_:
             # This case should not happen, as all prefixed units should be reducible to
-            # a Non-prefixed base unit, and if not then they should have a scalingOf
+            # a non-prefixed base unit, and if not then they should have a scalingOf
             # property. There is one case:
             # https://qudt.org/vocab/unit/FT3
             # https://qudt.org/vocab/unit/KiloCubicFT
             unit_type_dict[
-                "Prefixed, non-composed unit with no Non-prefixed base"
+                "Prefixed, non-composed unit with no non-prefixed base"
             ].append(unit_dict_)
             _logger.info(
                 " - (also listed as Prefixed, non-composed Unit with no Non-prefixed "
@@ -717,19 +717,19 @@ def classify_and_enrich_qudt_units(
         _logger.info(
             " - (also listed as Prefixed, composed unit with missing scalingOf)"
         )
-        # Check if the unit can be reduced to a Non-prefixed base unit
+        # Check if the unit can be reduced to a non-prefixed base unit
         base_unit_name_ = remove_prefixes(unit_dict_["@id"])
         base_unit_found_ = False
         for candidate_ in type_dict.get("qudt:Unit", []):
             if base_unit_name_ == candidate_.get("@id", ""):
                 base_unit_found_ = True
-                _logger.info(" - Non-prefixed base unit found: %s", base_unit_name_)
+                _logger.info(" - non-prefixed base unit found: %s", base_unit_name_)
                 break
         if base_unit_found_:
             if enrich:
                 # Enrich the jsonld with scalingOf if missing
                 enrich_with_scaling_of(unit_dict_["@id"], base_unit_name_, id_to_index)
-                # Enrich the Non-prefixed base unit with scaledBy
+                # Enrich the non-prefixed base unit with scaledBy
                 enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
             if "qudt:scalingOf" not in unit_dict_:
                 unit_type_dict[
@@ -745,7 +745,7 @@ def classify_and_enrich_qudt_units(
                 unit_dict_
             )
             _logger.info(
-                " - (also listed as Prefixed, composed Unit with no Non-prefixed base)"
+                " - (also listed as Prefixed, composed Unit with no non-prefixed base)"
             )
 
         if "qudt:scalingOf" not in unit_dict_:
@@ -890,7 +890,7 @@ def process_prefixed_composed_units_with_ai(
 ) -> list[dict[str, Any]]:
     """
     Basic idea:
-    - Get all prefixed composed units without a Non-prefixed base unit
+    - Get all prefixed composed units without a non-prefixed base unit
     - For each unit, strip all known prefixes from the unit name
     Now construct an entry within the QUDT ontology that serves as non-prefixed
      base unit, with the following keys:
@@ -923,10 +923,10 @@ def process_prefixed_composed_units_with_ai(
     - rdfs:label: copy from the prefixed composed unit, but remove the prefixes from the
        label as well
     - custom:scaledBy: add the @id of the prefixed composed unit in a dict with key @id
-       to the list of custom:scaledBy entries of the Non-prefixed base unit
+       to the list of custom:scaledBy entries of the non-prefixed base unit
     - within the dict of the prefixed composed unit, add the key
        qudt:scalingOf with the value being a dict with key @id and value the @id of the
-       Non-prefixed base unit
+       non-prefixed base unit
     """
     func_log.has_required_calls([classify_and_enrich_qudt_units])
 
@@ -960,7 +960,8 @@ def process_prefixed_composed_units_with_ai(
         custom_scaledBy: list[dict[str, str]] | None = Field(
             default=None,
             alias="custom:scaledBy",
-            description="List of prefixed units that scale this Non-prefixed base unit.",
+            description="List of prefixed units that scale this non-prefixed base "
+            "unit.",
         )
 
     class ComposedUnit(PartiallyKnownComposedUnit):
@@ -1015,15 +1016,17 @@ def process_prefixed_composed_units_with_ai(
     class PartiallyKnowWithAdditionalInfo(PartiallyKnownComposedUnit):
         removed_prefixes: list[str] = Field(
             default=...,
-            description="List of prefixes that were removed from the original unit string to create the Non-prefixed base unit.",
+            description="List of prefixes that were removed from the original unit "
+            "string to create the non-prefixed base unit.",
         )
         removed_prefixes_left: list[str] = Field(
             default=...,
-            description="List of prefixes that were removed from the left side of the original unit string (before 'PER') to create the Non-prefixed base unit.",
+            description="List of prefixes that were removed from the left side of the original unit string (before 'PER') to create the non-prefixed base unit.",
         )
         removed_prefixes_right: list[str] = Field(
             default=...,
-            description="List of prefixes that were removed from the right side of the original unit string (after 'PER') to create the Non-prefixed base unit.",
+            description="List of prefixes that were removed from the right side of "
+            "the original unit string (after 'PER') to create the non-prefixed base unit.",
         )
         without_prefixes: str = Field(
             default=...,
@@ -1051,7 +1054,7 @@ def process_prefixed_composed_units_with_ai(
         prefixes from the original prefixed composed unit's qudt:symbol and
         qudt:ucumCode. If the resulting symbol or ucumCode is not valid or does not
         make sense, try to improve it based on the factor units of the new
-        Non-prefixed base unit. The qudt:symbol should be as short as possible,
+        non-prefixed base unit. The qudt:symbol should be as short as possible,
         while still being unique and recognizable. The qudt:ucumCode should follow
         the UCUM rules as closely as possible.
         """
@@ -1060,7 +1063,7 @@ def process_prefixed_composed_units_with_ai(
             ...,
             alias="custom:scaledBy",
             description="List of prefixed composed units that scale this "
-            "Non-prefixed base unit. Formatted as list of dicts with key '@id'.",
+            "non-prefixed base unit. Formatted as list of dicts with key '@id'.",
         )
         multiplication_factor: float = Field(
             ...,
@@ -1127,7 +1130,7 @@ def process_prefixed_composed_units_with_ai(
         _logger.info(f"No json file found at {json_fp}, starting fresh.")
 
     full_runs = 0
-    # Process all prefixed composed units without a Non-prefixed base unit
+    # Process all prefixed composed units without a non-prefixed base unit
     for pcu_dict in unit_type_dict["Prefixed, composed unit with no non-prefixed base"]:
         pcu_id = pcu_dict["@id"]
         _logger.info(f"Processing unit: {pcu_id}")
@@ -1164,7 +1167,7 @@ def process_prefixed_composed_units_with_ai(
             continue
 
         # Separately handled cases
-        # Prefixed composed unit with no Non-prefixed base: guessed base unit does not
+        # Prefixed composed unit with no non-prefixed base: guessed base unit does not
         #  exist but another scalingOf can be defined
         irregular = {
             # "unit:KiloCAL-PER-CentiM2": {  # Should now be handled with added unit:CAL
@@ -1181,12 +1184,12 @@ def process_prefixed_composed_units_with_ai(
         if pcu_id in irregular:
             _logger.warning(
                 f"Unit {pcu_id} is known to be irregular, skipping creation of "
-                f"Non-prefixed base unit {base_unit_id} and using predefined "
+                f"non-prefixed base unit {base_unit_id} and using predefined "
                 f"scalingOf {irregular[pcu_id]['correct scalingOf']}"
             )
             continue
 
-        # 2. Check if the Non-prefixed base unit already exists
+        # 2. Check if the non-prefixed base unit already exists
         base_unit_exists = False
         for base_unit_dict in ontologies["qudt"]["jsonld"]["@graph"]:
             if base_unit_dict.get("@id") == base_unit_id:
@@ -1194,11 +1197,12 @@ def process_prefixed_composed_units_with_ai(
                 break
         if base_unit_exists:
             _logger.info(
-                f"Non-prefixed base unit {base_unit_id} already exists, skipping creation"
+                f"Non-prefixed base unit {base_unit_id} already exists, skipping "
+                f"creation"
             )
             # But still add the scalingOf to the prefixed composed unit
             pcu_dict["qudt:scalingOf"] = {"@id": base_unit_id}
-            # And add the scaledBy to the Non-prefixed base unit
+            # And add the scaledBy to the non-prefixed base unit
             enrich_with_scaled_by(pcu_id, base_unit_id, id_to_index)
             continue  # Skip the rest, if already present
 
@@ -1207,7 +1211,7 @@ def process_prefixed_composed_units_with_ai(
             f"with the help of AI"
         )
 
-        # 3.1 Provide data for the new Non-prefixed base unit
+        # 3.1 Provide data for the new non-prefixed base unit
         base_unit_dict = {
             "@id": base_unit_id,
             "@type": ["qudt:Unit"],
@@ -1256,9 +1260,9 @@ def process_prefixed_composed_units_with_ai(
         )
 
         input_message = (
-            f"Create a Non-prefixed base composed unit from the following data:\n"
+            f"Create a non-prefixed base composed unit from the following data:\n"
             f"{input_.model_dump_json(indent=2)}\n"
-            f"The new Non-prefixed base composed unit should reflect the removal of "
+            f"The new non-prefixed base composed unit should reflect the removal of "
             f"the prefixes from the original prefixed composed unit. This includes "
             f"mentioning the removed prefixes and adjusting the descriptions "
             f"accordingly. The multiplication factor should be calculated based on "
@@ -1275,7 +1279,7 @@ def process_prefixed_composed_units_with_ai(
             f"from the @id of the factor units. Make sure that the "
             f"Non-prefixed factor units exist in the QUDT dump, otherwise warn and "
             f"raise an error.\n"
-            f"Provide the complete data for the new Non-prefixed base composed unit "
+            f"Provide the complete data for the new non-prefixed base composed unit "
             f"and make sure that at_id, dcterms_description or "
             f"qudt_plainTextDescription, qudt_ucumCode, qudt_symbol, rdfs_label and "
             f"qudt_hasFactorunit are consistent."
@@ -1300,7 +1304,7 @@ def process_prefixed_composed_units_with_ai(
             )
             _logger.info(msg)
             llm = init_llm()
-        # 3.3 Invoke the chain to get the new Non-prefixed base unit
+        # 3.3 Invoke the chain to get the new non-prefixed base unit
         try:
             # Defining the chain to be used in the processing loop
             chain = prompt | llm | output_parser
@@ -1320,7 +1324,7 @@ def process_prefixed_composed_units_with_ai(
             # Invoke the chain with freshly initialized LLM
             new_composed_base_unit = chain.invoke({"query": input_message})
 
-        # After we made sure that the new Non-prefixed base unit will exist, state the
+        # After we made sure that the new non-prefixed base unit will exist, state the
         #  scalingOf in the prefixed composed unit
         if "custom:scaledBy" not in new_composed_base_unit.model_dump(by_alias=True):
             new_composed_base_unit.custom_scaledBy = []
@@ -1332,7 +1336,7 @@ def process_prefixed_composed_units_with_ai(
         dict_list.append(new_composed_base_unit.model_dump(by_alias=True))
         already_processed.add(base_unit_id)
         _logger.info(
-            f"Created new Non-prefixed base composed unit {base_unit_id} from "
+            f"Created new non-prefixed base composed unit {base_unit_id} from "
             f"{pcu_id} with multiplication factor "
             f"{new_composed_base_unit.multiplication_factor}"
         )
@@ -1844,7 +1848,7 @@ qudt_unit_type_dict = classify_and_enrich_qudt_units(
 )
 if len(qudt_unit_type_dict["Prefixed, composed unit with no non-prefixed base"]) != 0:
     raise ValueError(
-        "There are still prefixed, composed units with no Non-prefixed base unit left "
+        "There are still prefixed, composed units with no non-prefixed base unit left "
         "after processing with AI."
     )
 save_jsonld_to_file(
