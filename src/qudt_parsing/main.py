@@ -310,10 +310,11 @@ def get_values[T](
         # Key not found
         return []
     elif isinstance(inp, list):
+        result = []
         for item in inp:
             if isinstance(item, dict) and key in item:
-                return [item[key]]
-        return []
+                result.append(item[key])
+        return result
     else:
         return []
 
