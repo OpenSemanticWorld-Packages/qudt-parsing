@@ -23,8 +23,7 @@ import time
 import uuid as uuid_module
 from collections.abc import Callable
 from pathlib import Path
-from typing import Any, TypedDict
-from typing import TypeVar
+from typing import Any, TypedDict, TypeVar
 
 from dotenv import load_dotenv
 from langchain.output_parsers import PydanticOutputParser
@@ -38,7 +37,7 @@ from pydantic import BaseModel, Field
 from pyld import jsonld as jsonld_module
 from rdflib import Graph
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 if __name__ != "__main__":
     raise RuntimeError("This module is not intended to be imported.")
@@ -295,9 +294,7 @@ PREFIXES = {
 }
 
 
-def get_values(
-    inp: dict[str, dict[str, T]] | list[dict[str, T]], key: str
-) -> list[T]:
+def get_values(inp: dict[str, dict[str, T]] | list[dict[str, T]], key: str) -> list[T]:
     """Returns values for a key on the first or second level. Stops if the key is not found."""
     if isinstance(inp, dict):
         if key in inp:
@@ -1494,12 +1491,7 @@ def create_unit_prefix_entities() -> list[model.UnitPrefix]:
     unit_prefix_entities_ = []
     for prefix_dict in prefixes:
         data = replace_keys(prefix_dict, {"qudt:symbol": "symbol"})
-        uuid = str(
-            uuid_module.uuid5(
-                namespace=uuid_module.NAMESPACE_URL,
-                name=data["@id"],  # todo: check correct field name
-            )
-        )
+        uuid = create_uuid_str(data["@id"])
         label = get_label_from_dict(data)
         exact_ontology_match = [
             sameas_dict["@id"] for sameas_dict in data.get("owl:sameAs", [])
@@ -1523,7 +1515,7 @@ def create_unit_prefix_entities() -> list[model.UnitPrefix]:
         data.update(
             {
                 "uuid": uuid,
-                "osw_id": f"Item:OSW{uuid.replace('-', '')}",
+                "osw_id": f"Item:{create_osw_id(data['@id'])}",
                 "name": label[0]["text"] if label else data["@id"].split(":")[-1],
                 "exact_ontology_match": list(set(exact_ontology_match)),
                 "label": label,
@@ -1608,8 +1600,35 @@ def create_osw_id_for_unit_auto(at_id: str, ontology_acronym: str = "qudt") -> s
     return create_osw_id(at_id, ontology_acronym)
 
 
-def update_osw_model():
-    """loads categories UnitPrefix"""
+@log_call
+def create_system_of_quantities_and_units_entities() -> list[
+    model.SystemOfQuantitiesAndUnits
+]:
+    func_log.has_required_calls(
+        [
+            build_type_dict,
+        ]
+    )
+    soqau_entities = []
+    for soqau_dict_ in ontologies["qudt"]["type_dict"].get(
+        "qudt:SystemOfQuantityKinds", []
+    ):
+        soqau_id = soqau_dict_["@id"]
+        soqau_index = ontologies["qudt"]["id_to_index"][soqau_id]
+        soqau_dict = ontologies["qudt"]["jsonld"]["@graph"][soqau_index]
+        soqau_uuid = create_uuid_str(soqau_id)
+        # soqau_osw_id = f"Item:OSW{soqau_uuid.replace('-', '')}"
+        label = get_label_from_dict(soqau_dict)
+        soqau_entities.append(
+            model.SystemOfQuantitiesAndUnits(
+                uuid=soqau_uuid,
+                name=label[0]["text"] if label else soqau_id.split(":")[-1],
+                label=label,
+                description=get_desc_from_dict(soqau_dict),
+            )
+        )
+    return soqau_entities
+
 
 @log_call
 def create_quantity_unit_entities(
@@ -1626,40 +1645,49 @@ def create_quantity_unit_entities(
         npu_dict = ontologies["qudt"]["jsonld"]["@graph"][npu_index]
         npu_uuid = create_uuid_str(npu_id)
         npu_osw_id = f"Item:{create_osw_id(npu_id)}"
+        npu_applicable_systems = [
+            f"Item:{create_osw_id(val)}"
+            for val in get_values(npu_dict.get("qudt:applicableSystem", []), "@id")
+        ]
         # Process all prefixed unit that are listed in the custom:scaledBy property
         prefixed_non_composed_units_ids = get_values(
             npu_dict.get("custom:scaledBy", []), "@id"
         )
         prefixed_unit_entities = []
         for pu_id in prefixed_non_composed_units_ids:
-            pcu_index = ontologies["qudt"]["id_to_index"][pu_id]
-            pcu_dict = ontologies["qudt"]["jsonld"]["@graph"][pcu_index]
-            pcu_data = replace_keys(
-                pcu_dict,
+            pu_index = ontologies["qudt"]["id_to_index"][pu_id]
+            pu_dict = ontologies["qudt"]["jsonld"]["@graph"][pu_index]
+            pu_data = replace_keys(
+                pu_dict,
                 {
                     "qudt:symbol": "main_symbol"
                     # todo: check if correct or should here only be a ref to the npu?
                 },
             )
-            prefix_id = pcu_data["qudt:prefix"]["@id"]
+            prefix_id = pu_data["qudt:prefix"]["@id"]
             prefix_index = ontologies["qudt"]["id_to_index"][prefix_id]
             pu_uuid = create_uuid_str(pu_id)
-            pcu_data.update(
+            pu_applicable_systems = [
+                f"Item:{create_osw_id(val)}"
+                for val in get_values(pu_dict.get("qudt:applicableSystem", []), "@id")
+            ]
+            pu_data.update(
                 {
                     "uuid": pu_uuid,
                     "osw_id": f"Item:{create_osw_id_for_subobject(npu_id, pu_id)}",
-                    "label": get_label_from_dict(pcu_data),
-                    "description": get_desc_from_dict(pcu_data),
+                    "label": get_label_from_dict(pu_data),
+                    "description": get_desc_from_dict(pu_data),
                     "prefix": f"Item:{create_osw_id(prefix_id)}",
                     "prefix_symbol": ontologies["qudt"]["jsonld"]["@graph"][
                         prefix_index
                     ]["qudt:symbol"],
-                    "ucum_codes": get_values(pcu_data["qudt:ucumCode"], "@value")
-                    if "qudt:ucumCode" in pcu_data
+                    "ucum_codes": get_values(pu_data["qudt:ucumCode"], "@value")
+                    if "qudt:ucumCode" in pu_data
                     else [],
-                    "conversion_factor_from_si": pcu_data[
+                    "conversion_factor_from_si": pu_data[
                         "qudt:conversionMultiplier"
                     ].get("@value"),
+                    "system_of_quantities_and_units": pu_applicable_systems,
                 }
             )
             # todo: OntologyRelated properties
@@ -1672,10 +1700,10 @@ def create_quantity_unit_entities(
             #  - [x] qudt:symbol
             #  - [ ] qudt:iec61360Code
             #  - [ ] qudt:uneceCommonCode
-            #  - [ ] qudt:applicableSystem
+            #  - [x] qudt:applicableSystem
             #  - [ ] qudt:hasQuantityKind
             #  - [x] qudt:scalingOf / custom:scaledBy
-            prefixed_unit_entities.append(model.PrefixUnit(**pcu_data))
+            prefixed_unit_entities.append(model.PrefixUnit(**pu_data))
         # Creating the non-prefixed unit entity
         npu_data = replace_keys(
             npu_dict,
@@ -1697,6 +1725,7 @@ def create_quantity_unit_entities(
                 if "qudt:ucumCode" in npu_data
                 else [],
                 "prefix_units": prefixed_unit_entities,
+                "system_of_quantities_and_units": npu_applicable_systems,
             }
         )
         if "main_symbol" not in npu_data:
@@ -1712,7 +1741,7 @@ def create_quantity_unit_entities(
         #  - [x] symbol
         #  - [ ] qudt:iec61360Code
         #  - [ ] qudt:uneceCommonCode
-        #  - [ ] qudt:applicableSystem
+        #  - [x] qudt:applicableSystem
         #  - [ ] qudt:hasQuantityKind
         #  - [x] qudt:scalingOf / custom:scaledBy
         # todo: check usage of conversionMultiplier
@@ -1721,6 +1750,7 @@ def create_quantity_unit_entities(
     # Processing composed units with/without prefix(es)
     for npcu_dict in unit_type_dict["Non-prefixed, composed unit"]:
         npcu_id = npcu_dict["@id"]
+        _logger.info("Processing non-prefixed composed unit %s", npcu_id)
         npcu_index = ontologies["qudt"]["id_to_index"][npcu_id]
         # Get the enriched version of the non-prefixed composed unit from the jsonld
         npcu_dict = ontologies["qudt"]["jsonld"]["@graph"][npcu_index]
@@ -1733,13 +1763,17 @@ def create_quantity_unit_entities(
             fu_exp = fu_dict.get("qudt:exponent", {}).get("@value", 1)
             fu_osw_id = f"Item:{create_osw_id_for_unit_auto(fu_id)}"
             npcu_factor_units.append({"unit": fu_osw_id, "exponent": fu_exp})
-
+        npcu_applicable_systems = [
+            f"Item:{create_osw_id(val)}"
+            for val in get_values(npcu_dict.get("qudt:applicableSystem", []), "@id")
+        ]
         # Process all prefixed unit that are listed in the custom:scaledBy property
         prefixed_composed_units_ids = get_values(
             npcu_dict.get("custom:scaledBy", []), "@id"
         )
         prefixed_composed_unit_entities = []
         for pcu_id in prefixed_composed_units_ids:
+            _logger.info("Processing prefixed composed unit %s", pcu_id)
             pcu_index = ontologies["qudt"]["id_to_index"][pcu_id]
             pcu_dict = ontologies["qudt"]["jsonld"]["@graph"][pcu_index]
             pcu_uuid = create_uuid_str(pcu_id)
@@ -1749,7 +1783,10 @@ def create_quantity_unit_entities(
                 fu_exp = fu_dict.get("qudt:exponent", {}).get("@value", 1)
                 fu_osw_id = f"Item:{create_osw_id_for_unit_auto(fu_id)}"
                 pcu_factor_units.append({"unit": fu_osw_id, "exponent": fu_exp})
-
+            pcu_applicable_systems = [
+                f"Item:{create_osw_id(val)}"
+                for val in get_values(pcu_dict.get("qudt:applicableSystem", []), "@id")
+            ]
             pcu_data = replace_keys(pcu_dict, {"qudt:symbol": "main_symbol"})
             pcu_data.update(
                 {
@@ -1765,6 +1802,7 @@ def create_quantity_unit_entities(
                     "conversion_factor_from_si": pcu_data[
                         "qudt:conversionMultiplier"
                     ].get("@value"),
+                    "system_of_quantities_and_units": pcu_applicable_systems,
                 }
             )
             # todo: OntologyRelated properties
@@ -1778,12 +1816,12 @@ def create_quantity_unit_entities(
             #  - [x] symbol
             #  - [ ] qudt:iec61360Code
             #  - [ ] qudt:uneceCommonCode
-            #  - [ ] qudt:applicableSystem
+            #  - [x] qudt:applicableSystem
             #  - [ ] qudt:hasQuantityKind
             #  - [x] qudt:scalingOf / custom:scaledBy
-            prefixed_composed_unit_entities.append(
-                model.ComposedQuantityUnitWithUnitPrefix(**pcu_data)
-            )
+            #  - [ ] qudt:hasFactorUnit
+            #  - [ ] qudt:hasFactorUnitScalar, see https://qudt.org/vocab/unit/OZ
+            prefixed_composed_unit_entities.append(model.ComposedUnit1(**pcu_data))
         # Creating the non-prefixed composed unit entity
         npcu_data.update(
             {
@@ -1799,6 +1837,7 @@ def create_quantity_unit_entities(
                 else [],
                 "composed_units": prefixed_composed_unit_entities,
                 "factor_units": npcu_factor_units,
+                "system_of_quantities_and_units": npcu_applicable_systems,
             }
         )
         if "main_symbol" not in npcu_data:
@@ -2021,6 +2060,9 @@ qudt_quantity_kind_dict = classify_quantity_kinds(ontologies["qudt"]["type_dict"
 enrich_prefixes_with_ontology_matches(ontologies["qudt"]["type_index"])
 unit_prefix_entities = create_unit_prefix_entities()
 _logger.info("Created %d unit prefix entities", len(unit_prefix_entities))
+# Creating systems of quantities and units
+soqau_entities = create_system_of_quantities_and_units_entities()
+_logger.info("Created %d systems of quantities and units entities", len(soqau_entities))
 # Create units and prefixed units
 quantity_unit_entities = create_quantity_unit_entities(qudt_unit_type_dict)
 _logger.info("Created %d quantity unit entities", len(quantity_unit_entities))
