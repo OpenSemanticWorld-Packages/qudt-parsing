@@ -24,6 +24,7 @@ import uuid as uuid_module
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any, TypedDict
+from typing import TypeVar
 
 from dotenv import load_dotenv
 from langchain.output_parsers import PydanticOutputParser
@@ -36,6 +37,8 @@ from osw.model import entity as model
 from pydantic import BaseModel, Field
 from pyld import jsonld as jsonld_module
 from rdflib import Graph
+
+T = TypeVar('T')
 
 if __name__ != "__main__":
     raise RuntimeError("This module is not intended to be imported.")
@@ -292,7 +295,7 @@ PREFIXES = {
 }
 
 
-def get_values[T](
+def get_values(
     inp: dict[str, dict[str, T]] | list[dict[str, T]], key: str
 ) -> list[T]:
     """Returns values for a key on the first or second level. Stops if the key is not found."""
@@ -319,7 +322,7 @@ def get_values[T](
         return []
 
 
-def replace_keys[T](
+def replace_keys(
     inp: dict[str, T], replacements: dict[str, str], keep_original_keys: bool = False
 ) -> dict[str, T]:
     """Replace keys in a dictionary according to a replacements mapping."""
@@ -512,7 +515,7 @@ def build_iri_dict(jsonld: dict) -> tuple[dict, dict[str, int]]:
 
 
 @log_call
-def build_type_dict[T](jsonld: dict[str, list[T]]) -> dict[str, list[T]]:
+def build_type_dict(jsonld: dict[str, list[T]]) -> dict[str, list[T]]:
     """Creates a dictionary with types as keys and lists of items as values."""
     func_log.has_required_calls([load_ontology])
     type_dict_: dict[str, list[T]] = {}
@@ -1604,6 +1607,9 @@ def create_osw_id_for_unit_auto(at_id: str, ontology_acronym: str = "qudt") -> s
         )
     return create_osw_id(at_id, ontology_acronym)
 
+
+def update_osw_model():
+    """loads categories UnitPrefix"""
 
 @log_call
 def create_quantity_unit_entities(
