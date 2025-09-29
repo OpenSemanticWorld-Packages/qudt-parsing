@@ -2,7 +2,7 @@
 name = "qudt-parsing"
 version = "0.1.0"
 description = "Add your description here"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
     "dotenv>=0.9.9",
     "langchain>=0.3.27",
@@ -134,6 +134,8 @@ ignore = [
     "TRY003",
     # Too complex function
     "C901",
+    # Generic function `...` should use type parameters
+    "UP047",
 ]
 
 [tool.ruff.lint.per-file-ignores]
