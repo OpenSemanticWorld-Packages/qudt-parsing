@@ -28,7 +28,6 @@ DEPENDENCIES = {
     "FundamentalQuantityValueType": "Category:OSWc7f9aec4f71f4346b6031f96d7e46bd7",
     "CharacteristicType": "Category:OSWffe74f291d354037b318c422591c5023",
     "QuantityValueType": "Category:OSWac07a46c2cf14f3daec503136861f5ab",
-    "ComposedUnit": "Category:OSW6c2aea028a8647cd97f5d7c65c09cd44",
     "MainQuantityProperty": "Category:OSW1b15ddcf042c4599bd9d431cbfdf3430",
     "SubQuantityProperty": "Category:OSW69f251a900944602a08d1cca830249b5",
     "SystemOfQuantitiesAndUnits": "Category:OSW27782669526d4d9a8de83659c03c64d5",

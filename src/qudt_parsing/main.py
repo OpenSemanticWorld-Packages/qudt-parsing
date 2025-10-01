@@ -1822,6 +1822,7 @@ def create_quantity_unit_entities(
             #  - [ ] qudt:hasFactorUnit
             #  - [ ] qudt:hasFactorUnitScalar, see https://qudt.org/vocab/unit/OZ
             prefixed_composed_unit_entities.append(model.ComposedUnit1(**pcu_data))
+            prefixed_composed_unit_entities.append(model.ComposedUnit(**pcu_data))
         # Creating the non-prefixed composed unit entity
         npcu_data.update(
             {
@@ -1842,8 +1843,7 @@ def create_quantity_unit_entities(
         )
         if "main_symbol" not in npcu_data:
             npcu_data["main_symbol"] = npcu_id.split(":")[-1]
-        # todo: check if correct model is used here:
-        non_prefixed_unit_entities[npcu_id] = model.ComposedUnit(**npcu_data)
+        non_prefixed_unit_entities[npcu_id] = model.QuantityUnit(**npcu_data)
 
     return non_prefixed_unit_entities
 
