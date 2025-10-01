@@ -344,16 +344,14 @@ def resolve_prefix(inp: str, ontology: str) -> str:
 def get_label_like_attr_from_dict(
     inp: dict[str, str | list[str | dict[str, str]] | dict[str, str]], attr_name: str
 ) -> list[dict[str, str]]:
-    # todo: rework and check
     if attr_name not in inp:
         raise KeyError(f"Attribute {attr_name} not found in input dictionary.")
-    attr = inp.get(attr_name)
+    attr: str | list[str | dict[str, str]] | dict[str, str] = inp.get(attr_name)
     if not attr:
         return []
     if isinstance(attr, str):
         return [{"text": attr, "lang": "en"}]
     elif isinstance(attr, list):
-        # todo: treat cases where not a list of dicts but a list of strings
         for ii, item in enumerate(attr):
             if isinstance(item, dict) and "@language" not in item:
                 item["@language"] = "en"
@@ -368,6 +366,8 @@ def get_label_like_attr_from_dict(
         if "@language" not in attr:
             attr["@language"] = "en"
         return [replace_keys(attr, {"@value": "text", "@language": "lang"})]
+    else:
+        return []
 
 
 def get_label_from_dict(
