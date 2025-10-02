@@ -19,6 +19,7 @@ import functools
 import json
 import logging
 import os
+import re
 import time
 import uuid as uuid_module
 from collections.abc import Callable
@@ -331,19 +332,23 @@ def replace_keys(
     return all_new
 
 
-def resolve_prefix(inp: str, ontology: str) -> str:
+def resolve_prefix(inp: str, ontology_acronym: str) -> str:
     """Resolve a prefixed IRI to a full IRI using the ontology context."""
     if ":" not in inp:
         raise ValueError(f"Input {inp} does not contain a prefix.")
     prefix, suffix = inp.split(":", 1)
-    if prefix in ontologies[ontology]["context"]:
-        return ontologies[ontology]["context"][prefix] + suffix
-    raise ValueError(f"Prefix {prefix} not found in context of ontology {ontology}.")
+    if prefix in ontologies[ontology_acronym]["context"]:
+        return ontologies[ontology_acronym]["context"][prefix] + suffix
+    raise ValueError(
+        f"Prefix {prefix} not found in context of ontology {ontology_acronym}."
+    )
 
 
 def get_label_like_attr_from_dict(
     inp: dict[str, str | list[str | dict[str, str]] | dict[str, str]], attr_name: str
 ) -> list[dict[str, str]]:
+    # todo: write docstring
+    # todo: move to helper file
     if attr_name not in inp:
         raise KeyError(f"Attribute {attr_name} not found in input dictionary.")
     attr: str | list[str | dict[str, str]] | dict[str, str] = inp.get(attr_name)
@@ -373,10 +378,14 @@ def get_label_like_attr_from_dict(
 def get_label_from_dict(
     inp: dict[str, str | list[dict[str, str]] | dict[str, str]],
 ) -> list[dict[str, str]]:
+    # todo: write docstring
+    # todo: move to helper file
     return get_label_like_attr_from_dict(inp, "rdfs:label")
 
 
 def get_desc_from_dict(inp: dict):
+    # todo: write docstring
+    # todo: move to helper file
     if "qudt:plainTextDescription" in inp:
         return get_label_like_attr_from_dict(inp, "qudt:plainTextDescription")
     # The following might cause issues since this is a Latex string with special
@@ -389,6 +398,8 @@ def get_desc_from_dict(inp: dict):
 def get_applicable_systems(
     unit_dict: dict[str, Any],
 ) -> list[str]:
+    # todo: write docstring
+    # todo: move to helper file
     return [
         f"Item:{create_osw_id(val)}"
         for val in get_values(unit_dict.get("qudt:applicableSystem", []), "@id")
@@ -397,6 +408,7 @@ def get_applicable_systems(
 
 def get_factor_units(unit_dict: dict) -> list[str]:
     """Get the factor unit IDs from a unit dictionary."""
+    # todo: move to helper file
     factor_units = []
     for fu_dict in unit_dict.get("qudt:hasFactorUnit", []):
         fu_id = fu_dict.get("qudt:hasUnit", {}).get("@id")
@@ -409,6 +421,7 @@ def get_factor_units(unit_dict: dict) -> list[str]:
 @log_call
 def load_ontology_dump(ontology_acronym: str) -> dict:
     """Load QUDT dump from a URL into an rdflib Graph."""
+    # todo: make this a class method of the Ontology class
     g = Graph()
     url = ontologies[ontology_acronym]["url"]
     g.parse(url, format=ontologies[ontology_acronym]["format"])
@@ -422,6 +435,7 @@ def load_ontology_dump(ontology_acronym: str) -> dict:
 
 def save_jsonld_to_file(jsonld_data: dict, filepath: Path):
     """Save JSON-LD data to a file."""
+    # todo: move to helper file
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(jsonld_data, f, indent=2)
     _logger.info("JSON-LD data saved to %s", filepath)
@@ -429,6 +443,7 @@ def save_jsonld_to_file(jsonld_data: dict, filepath: Path):
 
 def load_jsonld_from_file(filepath: Path) -> dict:
     """Load JSON-LD data from a file."""
+    # todo: move to helper file
     with open(filepath, encoding="utf-8") as f:
         jsonld_data = json.load(f)
     _logger.info("JSON-LD data loaded from %s", filepath)
@@ -437,6 +452,7 @@ def load_jsonld_from_file(filepath: Path) -> dict:
 
 def remove_prefixes(name: str, starts_with: bool = False) -> str:
     """Remove known prefixes from a unit name."""
+    # todo: move to helper file
     if starts_with:
         for prefix in PREFIXES:
             if name.startswith(prefix):
@@ -451,7 +467,7 @@ def remove_prefixes(name: str, starts_with: bool = False) -> str:
 class UnitStringSplit(BaseModel):
     original: str
     without_prefixes: str
-    # multiplication_factor: float
+    multiplication_factor: float
     removed_prefixes: list[str]
     removed_prefixes_left: list[str]
     removed_prefixes_right: list[str]
@@ -459,30 +475,51 @@ class UnitStringSplit(BaseModel):
 
 def remove_prefixes_calc_multiplication(string: str) -> UnitStringSplit:
     """Remove known prefixes from a unit name and calculate the multiplication factor."""
+    # todo: move to helper file
+    if string.count("PER") > 1:
+        raise ValueError("Only one PER is supported in unit strings.")
     # Split at PER
-    parts = string.split("PER")
+    parts1 = string.split("PER")
     removed_prefixes_left = []
     removed_prefixes_right = []
-    # Remove prefixes from parts and list them
+    # Remove prefixes from parts1 and list them
     for prefix in PREFIXES:
-        if prefix in parts[0]:
-            parts[0] = parts[0].replace(prefix, "")
+        if prefix in parts1[0]:
+            parts1[0] = parts1[0].replace(prefix, "")
             removed_prefixes_left.append(prefix)
-        if len(parts) > 1 and prefix in parts[1]:
-            parts[1] = parts[1].replace(prefix, "")
+        if len(parts1) > 1 and prefix in parts1[1]:
+            parts1[1] = parts1[1].replace(prefix, "")
             removed_prefixes_right.append(prefix)
-    result = "PER".join(parts)
+    result = "PER".join(parts1)
     multiplication_factor = 1
-    # todo: rework, this is to simple. We need to take the power into account
-    #  - use regex to find prefixes and their powers
-    for prefix in removed_prefixes_left:
-        multiplication_factor *= PREFIXES[prefix]
-    for prefix in removed_prefixes_right:
-        multiplication_factor /= PREFIXES[prefix]
+    pattern = r"(" + "|".join(PREFIXES.keys()) + r")*([^\-][A-Z]*([0-9]*))"
+    parts2 = string.split("PER")
+    left_matches = re.finditer(pattern, parts2[0])
+    for match in left_matches:
+        prefix = match.group(1)
+        # unit = match.group(2)
+        exponent = float(match.group(3)) if match.group(3) else 1
+        if prefix is None:
+            continue
+        elif prefix not in PREFIXES:
+            raise ValueError(f"Prefix {prefix} not recognized.")
+        multiplication_factor *= PREFIXES[prefix] ** exponent
+    if len(parts2) > 1:
+        right_matches = re.finditer(pattern, parts2[1])
+        for match in right_matches:
+            prefix = match.group(1)
+            # unit = match.group(2)
+            exponent = float(match.group(3)) if match.group(3) else 1
+            if prefix is None:
+                continue
+            elif prefix not in PREFIXES:
+                raise ValueError(f"Prefix {prefix} not recognized.")
+            multiplication_factor /= PREFIXES[prefix] ** exponent
+
     return UnitStringSplit(
         original=string,
         without_prefixes=result,
-        # multiplication_factor=multiplication_factor,
+        multiplication_factor=multiplication_factor,
         removed_prefixes=removed_prefixes_left + removed_prefixes_right,
         removed_prefixes_left=removed_prefixes_left,
         removed_prefixes_right=removed_prefixes_right,
@@ -492,6 +529,7 @@ def remove_prefixes_calc_multiplication(string: str) -> UnitStringSplit:
 @log_call
 def resolve_factor_units(jsonld: dict, id_dict: dict):
     """Replaces hasFactorUnit references with the actual entries."""
+    # todo: make this a method of the Ontology class
     func_log.has_required_calls([prepare_all_ontologies, build_iri_dict])
     for item in jsonld.get("@graph", []):
         if "qudt:Unit" not in item.get("@type", []):
@@ -515,6 +553,7 @@ def resolve_factor_units(jsonld: dict, id_dict: dict):
 @log_call
 def build_iri_dict(jsonld: dict) -> tuple[dict, dict[str, int]]:
     """Creates a dictionary with IRIs as keys and items as values."""
+    # todo: move to helper file
     func_log.has_required_calls([load_ontology])
     iri_dict = {}
     iri_to_index = {}
@@ -534,6 +573,7 @@ def build_iri_dict(jsonld: dict) -> tuple[dict, dict[str, int]]:
 @log_call
 def build_type_dict(jsonld: dict[str, list[T]]) -> dict[str, list[T]]:
     """Creates a dictionary with types as keys and lists of items as values."""
+    # todo: move to helper file
     func_log.has_required_calls([load_ontology])
     type_dict_: dict[str, list[T]] = {}
     # Iterate over the @graph and filter for @type
@@ -561,6 +601,7 @@ def build_type_dict(jsonld: dict[str, list[T]]) -> dict[str, list[T]]:
 def build_type_index(jsonld: dict[str, list[dict[str, Any]]]) -> dict[str, list[int]]:
     """Creates a dictionary with types as keys and lists of indices as values. Can be
     used to access all entries of a certain type within the jsonld."""
+    # todo: move to helper file or make method of the ontology class
     func_log.has_required_calls([load_ontology])
     type_index_: dict[str, list[int]] = {}
     for ii, item in enumerate(jsonld.get("@graph", [])):
@@ -578,16 +619,14 @@ def build_type_index(jsonld: dict[str, list[dict[str, Any]]]) -> dict[str, list[
     return type_index_
 
 
-def enrich_with_scaled_by(
-    unit_id: str, base_unit_name: str, id_to_index: dict[str, int]
-):
+def enrich_with_scaled_by(unit_id: str, base_unit_id: str, id_to_index: dict[str, int]):
     """Enriches a base unit with information on a (prefixed) unit that scales it.
 
     Parameters
     ----------
     unit_id
         The unit to be listed as scaledBy
-    base_unit_name
+    base_unit_id
         The unit to be enriched
     id_to_index
         The dictionary serving as address mapping
@@ -596,8 +635,9 @@ def enrich_with_scaled_by(
     -------
 
     """
+    # todo: make a method of the Ontology class
     base_unit_dict_ = ontologies["qudt"]["jsonld"]["@graph"][
-        id_to_index.get(base_unit_name)
+        id_to_index.get(base_unit_id)
     ]
     if "custom:scaledBy" not in base_unit_dict_:
         base_unit_dict_["custom:scaledBy"] = []
@@ -605,13 +645,13 @@ def enrich_with_scaled_by(
         base_unit_dict_["custom:scaledBy"].append({"@id": unit_id})
         _logger.info(
             "Updated non-prefixed base unit %s with scaledBy %s",
-            base_unit_name,
+            base_unit_id,
             unit_id,
         )
 
 
 def enrich_with_scaling_of(
-    unit_id: str, base_unit_name: str, id_to_index: dict[str, int]
+    unit_id: str, base_unit_id: str, id_to_index: dict[str, int]
 ):
     """Enriches a (prefixed) unit with information on a base unit that it scales.
 
@@ -619,7 +659,7 @@ def enrich_with_scaling_of(
     ----------
     unit_id
         The unit to be enriched
-    base_unit_name
+    base_unit_id
         The unit to be listed as scalingOf
     id_to_index
         The dictionary serving as address mapping
@@ -628,19 +668,32 @@ def enrich_with_scaling_of(
     -------
 
     """
+    # todo: make a method of the Ontology class
     unit_dict_ = ontologies["qudt"]["jsonld"]["@graph"][id_to_index.get(unit_id)]
     if "qudt:scalingOf" not in unit_dict_:
         unit_dict_["qudt:scalingOf"] = []
-    if base_unit_name not in get_values(unit_dict_["qudt:scalingOf"], "@id"):
+    if base_unit_id not in get_values(unit_dict_["qudt:scalingOf"], "@id"):
         if isinstance(unit_dict_["qudt:scalingOf"], dict):
             unit_dict_["qudt:scalingOf"] = [unit_dict_["qudt:scalingOf"]]
             _logger.info("Converted scalingOf to list for unit %s", unit_id)
-        unit_dict_["qudt:scalingOf"].append({"@id": base_unit_name})
+        unit_dict_["qudt:scalingOf"].append({"@id": base_unit_id})
         _logger.info(
             "Updated Prefixed unit %s with scalingOf %s",
             unit_id,
-            base_unit_name,
+            base_unit_id,
         )
+
+
+def enrich_with_conversion_multiplier_to_base(unit_id: str, base_unit_id: str):
+    """Enriches a (prefixed) unit with information on the conversion multiplier to
+    the base unit that it scales."""
+    # todo: make a method of the Ontology class
+    unit_index = ontologies["qudt"]["id_to_index"][unit_id]
+    unit_dict = ontologies["qudt"]["jsonld"]["@graph"][unit_index]
+    unit_dict["custom:conversionMultiplierBaseUnit"] = {
+        "@type": "xsd:double",
+        "@value": calculate_conversion_multiplier_main_unit(unit_id, base_unit_id),
+    }
 
 
 @log_call
@@ -648,6 +701,7 @@ def classify_and_enrich_qudt_units(
     type_dict: dict, id_dict: dict, id_to_index: dict, enrich: bool = True
 ) -> dict:
     """Classifies units according to various criteria."""
+    # todo: make a method of the Ontology class
     func_log.has_required_calls([resolve_factor_units])
     unit_type_dict: dict[str, list[dict]] = {
         "All": [],
@@ -705,18 +759,20 @@ def classify_and_enrich_qudt_units(
         unit_type_dict["Prefixed, non-composed unit"].append(unit_dict_)
         _logger.info(" - (also listed as Prefixed, non-composed unit)")
         # See if the unit can be reduced to a non-prefixed base unit
-        base_unit_name_ = remove_prefixes(unit_dict_["@id"])
+        base_unit_id_ = remove_prefixes(unit_dict_["@id"])
         base_unit_found_ = False
         for candidate_ in type_dict.get("qudt:Unit", []):
-            if base_unit_name_ == candidate_.get("@id", ""):
+            if base_unit_id_ == candidate_.get("@id", ""):
                 base_unit_found_ = True
-                _logger.info(" - non-prefixed base unit found: %s", base_unit_name_)
+                _logger.info(" - non-prefixed base unit found: %s", base_unit_id_)
                 break
         # Enrich the jsonld with scalingOf if missing and scaledBy
         if base_unit_found_ and enrich:
-            enrich_with_scaling_of(unit_dict_["@id"], base_unit_name_, id_to_index)
+            enrich_with_scaling_of(unit_dict_["@id"], base_unit_id_, id_to_index)
             # Enrich the non-prefixed base unit with scaledBy
-            enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
+            enrich_with_scaled_by(unit_dict_["@id"], base_unit_id_, id_to_index)
+            # Enrich with conversion multiplier to base unit
+            enrich_with_conversion_multiplier_to_base(unit_dict_["@id"], base_unit_id_)
         # Add to Prefixed unit with missing scalingOf if applicable
         if base_unit_found_ and "qudt:scalingOf" not in unit_dict_:
             unit_type_dict["Prefixed unit with missing scalingOf"].append(unit_dict_)
@@ -755,6 +811,10 @@ def classify_and_enrich_qudt_units(
                 enrich_with_scaling_of(unit_dict_["@id"], base_unit_name_, id_to_index)
                 # Enrich the non-prefixed base unit with scaledBy
                 enrich_with_scaled_by(unit_dict_["@id"], base_unit_name_, id_to_index)
+                # Enrich with conversion multiplier to base unit
+                enrich_with_conversion_multiplier_to_base(
+                    unit_dict_["@id"], base_unit_name_
+                )
             if "qudt:scalingOf" not in unit_dict_:
                 unit_type_dict[
                     "Prefixed, composed unit with missing scalingOf but base unit "
@@ -894,6 +954,7 @@ def classify_and_enrich_qudt_units(
 @log_call
 def fix_inconsistent_units(id_to_index: dict[str, int]):
     """Fixes known inconsistencies in the QUDT dump."""
+    # todo: make a method of the Ontology class
     func_log.has_required_calls([build_indices])
 
     with open(fixed_units_fp, encoding="utf-8") as f:
@@ -911,6 +972,8 @@ def fix_inconsistent_units(id_to_index: dict[str, int]):
 
 @log_call
 def load_qudt_missing_units() -> list[dict[str, Any]]:
+    # todo: write docstring
+    # todo: make a method of the Ontology class
     with open(missing_units_fp, encoding="utf-8") as f:
         missing_units_list = json.load(f)
 
@@ -972,6 +1035,7 @@ def process_prefixed_composed_units_with_ai(
        qudt:scalingOf with the value being a dict with key @id and value the @id of the
        non-prefixed base unit
     """
+    # todo: make a method of the Ontology class
     func_log.has_required_calls([classify_and_enrich_qudt_units])
 
     # Define the LLM and prompt components
@@ -1184,9 +1248,9 @@ def process_prefixed_composed_units_with_ai(
         pcu_dict = ontologies["qudt"]["jsonld"]["@graph"][pcu_index]
 
         # 1. Remove all known prefixes from the unit name
-        split_result = remove_prefixes_calc_multiplication(pcu_id_wo_onto_prefix)
-        # base_unit_id_wo_onto_prefix = split_result.without_prefixes
-        base_unit_id = f"unit:{split_result.without_prefixes}"
+        strip_result = remove_prefixes_calc_multiplication(pcu_id_wo_onto_prefix)
+        # base_unit_id_wo_onto_prefix = strip_result.without_prefixes
+        base_unit_id = f"unit:{strip_result.without_prefixes}"
 
         if base_unit_id in already_processed:
             _logger.info(
@@ -1290,10 +1354,10 @@ def process_prefixed_composed_units_with_ai(
         with_extra_info = {
             **base_unit_dict,
             **{
-                "removed_prefixes": split_result.removed_prefixes,
-                "removed_prefixes_left": split_result.removed_prefixes_left,
-                "removed_prefixes_right": split_result.removed_prefixes_right,
-                "without_prefixes": split_result.without_prefixes,
+                "removed_prefixes": strip_result.removed_prefixes,
+                "removed_prefixes_left": strip_result.removed_prefixes_left,
+                "removed_prefixes_right": strip_result.removed_prefixes_right,
+                "without_prefixes": strip_result.without_prefixes,
                 "guessed_factor_unit_ids": guessed_factor_unit_ids,
             },
         }
@@ -1399,8 +1463,9 @@ def process_prefixed_composed_units_with_ai(
 
 
 @log_call
-def classify_quantity_kinds(type_dict: dict) -> dict:  # , iri_dict: dict):
+def classify_and_enrich_quantity_kinds(type_dict: dict, enrich: bool = True) -> dict:
     """Classify quantity kinds into fundamental and non-fundamental."""
+    # todo: make a method of the Ontology class
     func_log.has_required_calls([build_type_dict])
     quantity_kinds_: list[dict[str, Any]] = type_dict["qudt:QuantityKind"]
     quantity_kind_dict_ = {
@@ -1409,11 +1474,27 @@ def classify_quantity_kinds(type_dict: dict) -> dict:  # , iri_dict: dict):
         # Possesses property skos:broader
         "Non-fundamental": [],
     }
-    for qk in quantity_kinds_:
-        if "skos:broader" in qk:
-            quantity_kind_dict_["Non-fundamental"].append(qk)
+    for qk_dict_ in quantity_kinds_:
+        qk_id = qk_dict_["@id"]
+        qk_index = ontologies["qudt"]["id_to_index"][qk_id]
+        qk_dict = ontologies["qudt"]["jsonld"]["@graph"][qk_index]
+        if "skos:broader" in qk_dict:
+            quantity_kind_dict_["Non-fundamental"].append(qk_dict)
+            # Enrich the broader quantity kinds with a custom:broadenedBy property
+            #  that points back to the non-fundamental quantity kind
+            if enrich:
+                fund_qk_ids = get_values(qk_dict["skos:broader"], "@id")
+                for id_ in fund_qk_ids:
+                    fund_qk_index = ontologies["qudt"]["id_to_index"][id_]
+                    fund_qk_dict = ontologies["qudt"]["jsonld"]["@graph"][fund_qk_index]
+                    if "custom:broadenedBy" not in fund_qk_dict:
+                        fund_qk_dict["custom:broadenedBy"] = []
+                    if qk_id not in get_values(
+                        fund_qk_dict["custom:broadenedBy"], "@id"
+                    ):
+                        fund_qk_dict["custom:broadenedBy"].append({"@id": qk_id})
         else:
-            quantity_kind_dict_["Fundamental"].append(qk)
+            quantity_kind_dict_["Fundamental"].append(qk_dict)
 
     _logger.info(
         "%d fundamental quantity kinds found", len(quantity_kind_dict_["Fundamental"])
@@ -1437,6 +1518,7 @@ def report_on_unit_types(type_dict: dict, unit_type_dict: dict):
     unit_type_dict:
         The unit type dictionary as created by `classify_and_enrich_qudt_units`.
     """
+    # todo: make a method of the Ontology class
     func_log.has_required_calls([classify_and_enrich_qudt_units])
     _logger.info("Unit types found in the QUDT dump:")
     for type_name, items in unit_type_dict.items():
@@ -1466,6 +1548,7 @@ def report_on_unit_types(type_dict: dict, unit_type_dict: dict):
 @log_call
 def enrich_prefixes_with_ontology_matches(type_index: dict[str, list[int]]) -> None:
     """Enrich the prefixes in the QUDT with exact ontology matches."""
+    # todo: make a method of the QUDT Ontology class
     func_log.has_required_calls([build_type_index])
     for ii in type_index["qudt:Prefix"]:
         prefix_dict = ontologies["qudt"]["jsonld"]["@graph"][ii]
@@ -1568,6 +1651,7 @@ def create_uuid_str(at_id: str, ontology_acronym: str = "qudt") -> str:
     ontology_acronym:
         The ontology acronym, default is "qudt".
     """
+    # todo: make a method of the Ontology class
     return str(
         uuid_module.uuid5(
             namespace=uuid_module.NAMESPACE_URL,
@@ -1586,6 +1670,7 @@ def create_osw_id(at_id: str, ontology_acronym: str = "qudt") -> str:
     ontology_acronym:
         The ontology acronym, default is "qudt".
     """
+    # todo: make a method of the Ontology class
     uuid = create_uuid_str(at_id, ontology_acronym)
     osw_id = f"OSW{uuid.replace('-', '')}"
     return osw_id
@@ -1605,6 +1690,7 @@ def create_osw_id_for_subobject(
     ontology_acronym:
         The ontology acronym, default is "qudt".
     """
+    # todo: make a method of the Ontology class
     main_osw_id = create_osw_id(at_id, ontology_acronym)
     sub_osw_id = create_osw_id(sub_id, ontology_acronym)
     return f"{main_osw_id}#{sub_osw_id}"
@@ -1621,6 +1707,7 @@ def create_osw_id_for_unit_auto(at_id: str, ontology_acronym: str = "qudt") -> s
     ontology_acronym:
         The ontology acronym, default is "qudt".
     """
+    # todo: make a method of the Ontology class
     if prefix_in(at_id):
         return create_osw_id_for_subobject(
             remove_prefixes(at_id), at_id, ontology_acronym
@@ -1632,6 +1719,8 @@ def create_osw_id_for_unit_auto(at_id: str, ontology_acronym: str = "qudt") -> s
 def create_system_of_quantities_and_units_entities() -> list[
     model.SystemOfQuantitiesAndUnits
 ]:
+    # todo: write docstring
+    # todo: make method of the QUDT Ontology class
     func_log.has_required_calls(
         [
             build_type_dict,
@@ -1657,10 +1746,52 @@ def create_system_of_quantities_and_units_entities() -> list[
     return soqau_entities_
 
 
+def calculate_conversion_multiplier_main_unit(pu_id: str, npu_id: str) -> float:
+    """Calculates the conversion multiplier from a prefixed unit to its non-prefixed
+    base unit. To yield the prefixed unit value, multiply the non-prefixed unit value
+    with the resulting factor.
+
+    Parameters
+    ----------
+    pu_id
+        Prefixed (composed) unit id
+    npu_id
+        Non-prefixed (composed) unit id
+
+    Returns
+    -------
+    result
+        The conversion multiplier
+    """
+    # todo: make a method of the QUDT Ontology class
+    pu_name = pu_id.split("unit:")[-1]
+    npu_name = npu_id.split("unit:")[-1]
+    if remove_prefixes(pu_name) != npu_name:
+        raise ValueError(
+            f"The non-prefixed unit ID {npu_id} does not match the prefixed unit ID {pu_id} after removing the prefix."
+        )
+    # Get the conversion multipliers for both units
+    pu_index = ontologies["qudt"]["id_to_index"][pu_id]
+    pu_dict = ontologies["qudt"]["jsonld"]["@graph"][pu_index]
+    pu_conversion = float(pu_dict["qudt:conversionMultiplier"].get("@value"))
+    npu_index = ontologies["qudt"]["id_to_index"][npu_id]
+    npu_dict = ontologies["qudt"]["jsonld"]["@graph"][npu_index]
+    npu_conversion = float(npu_dict["qudt:conversionMultiplier"].get("@value"))
+    if npu_conversion == 0 or pu_conversion == 0:
+        npu_res = remove_prefixes_calc_multiplication(npu_name)
+        pu_res = remove_prefixes_calc_multiplication(pu_name)
+        if npu_res.multiplication_factor != 1.0 or pu_res.multiplication_factor == 1.0:
+            raise ValueError("This can't be!")
+        return pu_res.multiplication_factor
+        # raise ZeroDivisionError(f"Not allowed to divide by zero. npu: {npu_id}, pu: {pu_id}")
+    return pu_conversion / npu_conversion
+
+
 @log_call
 def create_quantity_unit_entities(
     unit_type_dict: dict,
 ) -> dict[str, model.QuantityUnit]:
+    # todo: make a method of the QUDT Ontology class
     func_log.has_required_calls([classify_and_enrich_qudt_units])
 
     # Non-composed units
@@ -1677,6 +1808,7 @@ def create_quantity_unit_entities(
     #   PrefixedComposedQuantityUnit entities in the 'scaledBy' property
 
     def create_prefix_unit(pu_id: str, npu_id: str) -> model.PrefixUnit:
+        _logger.info(f"Creating PrefixUnit entity for {pu_id}")
         pu_index = ontologies["qudt"]["id_to_index"][pu_id]
         pu_dict = ontologies["qudt"]["jsonld"]["@graph"][pu_index]
         pu_data = replace_keys(
@@ -1686,24 +1818,27 @@ def create_quantity_unit_entities(
                 # todo: check if correct or should here only be a ref to the npu?
             },
         )
-        prefix_id = pu_data["qudt:prefix"]["@id"]
+        prefix_id = pu_dict["qudt:prefix"]["@id"]
         prefix_index = ontologies["qudt"]["id_to_index"][prefix_id]
         pu_data.update(
             {
-                "conversion_factor_from_si": pu_data["qudt:conversionMultiplier"].get(
+                "conversion_factor_from_si": pu_dict["qudt:conversionMultiplier"].get(
                     "@value"
                 ),
-                "description": get_desc_from_dict(pu_data),
+                "conversion_factor_to_main_unit": pu_dict[
+                    "custom:conversionMultiplierBaseUnit"
+                ].get("@value"),
+                "description": get_desc_from_dict(pu_dict),
                 "exact_ontology_match": [resolve_prefix(pu_id, "qudt")],
-                "label": get_label_from_dict(pu_data),
+                "label": get_label_from_dict(pu_dict),
                 "osw_id": f"Item:{create_osw_id_for_subobject(npu_id, pu_id)}",
                 "prefix": f"Item:{create_osw_id(prefix_id)}",
                 "prefix_symbol": ontologies["qudt"]["jsonld"]["@graph"][prefix_index][
                     "qudt:symbol"
                 ],
                 "system_of_quantities_and_units": get_applicable_systems(pu_dict),
-                "ucum_codes": get_values(pu_data["qudt:ucumCode"], "@value")
-                if "qudt:ucumCode" in pu_data
+                "ucum_codes": get_values(pu_dict["qudt:ucumCode"], "@value")
+                if "qudt:ucumCode" in pu_dict
                 else [],
                 "uuid": create_uuid_str(pu_id),
             }
@@ -1747,17 +1882,17 @@ def create_quantity_unit_entities(
         )
         npu_data.update(
             {
-                "conversion_factor_from_si": npu_data["qudt:conversionMultiplier"].get(
+                "conversion_factor_from_si": npu_dict["qudt:conversionMultiplier"].get(
                     "@value"
                 ),
-                "description": get_desc_from_dict(npu_data),
+                "description": get_desc_from_dict(npu_dict),
                 "exact_ontology_match": [resolve_prefix(npu_id, "qudt")],
-                "label": get_label_from_dict(npu_data),
+                "label": get_label_from_dict(npu_dict),
                 "osw_id": f"Item:{create_osw_id(npu_id)}",
                 "prefix_units": prefixed_unit_entities,
                 "system_of_quantities_and_units": get_applicable_systems(npu_dict),
-                "ucum_codes": get_values(npu_data["qudt:ucumCode"], "@value")
-                if "qudt:ucumCode" in npu_data
+                "ucum_codes": get_values(npu_dict["qudt:ucumCode"], "@value")
+                if "qudt:ucumCode" in npu_dict
                 else [],
                 "uuid": create_uuid_str(npu_id),
             }
@@ -1789,20 +1924,23 @@ def create_quantity_unit_entities(
         pcu_data = replace_keys(pcu_dict, {"qudt:symbol": "main_symbol"})
         pcu_data.update(
             {
-                "conversion_factor_from_si": pcu_data["qudt:conversionMultiplier"].get(
+                "conversion_factor_from_si": pcu_dict["qudt:conversionMultiplier"].get(
                     "@value"
                 ),
-                "description": get_desc_from_dict(pcu_data),
+                "conversion_factor_to_main_unit": pcu_dict[
+                    "custom:conversionMultiplierBaseUnit"
+                ].get("@value"),
+                "description": get_desc_from_dict(pcu_dict),
                 "exact_ontology_match": [resolve_prefix(pcu_id, "qudt")],
                 "factor_units": get_factor_units(pcu_dict),
                 "factor_unit_scalar": int(
                     pcu_dict.get("qudt:hasFactorUnitScalar", {}).get("@value", 1)
                 ),
-                "label": get_label_from_dict(pcu_data),
+                "label": get_label_from_dict(pcu_dict),
                 "osw_id": f"Item:{create_osw_id_for_subobject(npcu_id, pcu_id)}",
                 "system_of_quantities_and_units": get_applicable_systems(pcu_dict),
-                "ucum_codes": get_values(pcu_data["qudt:ucumCode"], "@value")
-                if "qudt:ucumCode" in pcu_data
+                "ucum_codes": get_values(pcu_dict["qudt:ucumCode"], "@value")
+                if "qudt:ucumCode" in pcu_dict
                 else [],
                 "uuid": create_uuid_str(pcu_id),
             }
@@ -1845,20 +1983,20 @@ def create_quantity_unit_entities(
         npcu_data.update(
             {
                 "composed_units": prefixed_composed_unit_entities,
-                "conversion_factor_from_si": npcu_data["qudt:conversionMultiplier"].get(
+                "conversion_factor_from_si": npcu_dict["qudt:conversionMultiplier"].get(
                     "@value"
                 ),
-                "description": get_desc_from_dict(npcu_data),
+                "description": get_desc_from_dict(npcu_dict),
                 "exact_ontology_match": [resolve_prefix(npcu_id, "qudt")],
                 "factor_units": get_factor_units(npcu_dict),
                 "factor_unit_scalar": int(
                     npcu_dict.get("qudt:hasFactorUnitScalar", {}).get("@value", 1)
                 ),
-                "label": get_label_from_dict(npcu_data),
+                "label": get_label_from_dict(npcu_dict),
                 "osw_id": f"Item:{create_osw_id(npcu_id)}",
                 "system_of_quantities_and_units": get_applicable_systems(npcu_dict),
-                "ucum_codes": get_values(npcu_data["qudt:ucumCode"], "@value")
-                if "qudt:ucumCode" in npcu_data
+                "ucum_codes": get_values(npcu_dict["qudt:ucumCode"], "@value")
+                if "qudt:ucumCode" in npcu_dict
                 else [],
                 "uuid": create_uuid_str(npcu_id),
             }
@@ -1884,6 +2022,7 @@ def create_quantity_unit_entities(
 def load_ontology(ontology_acronym: str = "qudt", use_cache: bool = True) -> None:
     od = ontologies.get(ontology_acronym)
     """ontology dict"""
+    # todo: make method of the Ontology class
     if use_cache and od["dump_fp"] and Path(od["dump_fp"]).exists():
         od["jsonld"] = load_jsonld_from_file(Path(od["dump_fp"]))
         _logger.info(
@@ -1905,6 +2044,7 @@ def load_ontology(ontology_acronym: str = "qudt", use_cache: bool = True) -> Non
 def prepare_ontology(ontology_acronym: str, use_cache: bool = True) -> None:
     od = ontologies.get(ontology_acronym)
     """ontology dict"""
+    # todo: make method of the Ontology class
     if not od:
         raise ValueError(f"Ontology {ontology_acronym} not found.")
 
@@ -1919,6 +2059,8 @@ def prepare_ontology(ontology_acronym: str, use_cache: bool = True) -> None:
 
 @log_call
 def prepare_all_ontologies(use_cache: bool = True) -> None:
+    """Prepare all ontologies defined in the ontologies dict."""
+    # todo: make method of the Ontologies class
     _logger.info("Loading ontologies...")
     for ontology, value in ontologies.items():
         _logger.info(" - %s: %s", ontology, value["url"])
@@ -1928,6 +2070,9 @@ def prepare_all_ontologies(use_cache: bool = True) -> None:
 
 @log_call
 def build_indices():
+    """Build indices for the QUDT ontology."""
+    # todo: make method of the QUDT Ontology class
+    func_log.has_required_calls([prepare_ontology])
     qudt_id_dict_, qudt_id_to_index_ = build_iri_dict(ontologies["qudt"]["jsonld"])
     ontologies["qudt"]["id_dict"] = qudt_id_dict_
     ontologies["qudt"]["id_to_index"] = qudt_id_to_index_
@@ -1935,7 +2080,8 @@ def build_indices():
     ontologies["qudt"]["type_index"] = build_type_index(ontologies["qudt"]["jsonld"])
 
 
-def get_ids(inp: list[dict[str, Any]]) -> set[str]:
+def get_ids(inp: list[dict[str, str]]) -> set[str]:
+    """Get all @id values from a list of dicts and check for duplicates."""
     loi = [d.get("@id") for d in inp if isinstance(d, dict)]
     if len(set(loi)) != len(loi):
         _logger.warning(
@@ -1951,16 +2097,30 @@ def get_ids(inp: list[dict[str, Any]]) -> set[str]:
 
 def prefix_in(string: str) -> bool:
     """Check if a string contains any known prefix."""
+    # todo: move method to a utility module
     return any(prefix in string for prefix in PREFIXES)
 
 
 def consistency_check(unit_type_dict: dict) -> dict:
     """Perform a consistency check on the QUDT units."""
+    # todo: make a method of the QUDT Ontology class
+    # todo: Consistency check: if unit id contains prefix, check if also has prefix
+    #  statement
+    # todo: Check if scalingOf units of a composed unit have factor units - some
+    #  cases are valid without factor units
+    #  - unit:L -> unit:FemtoL => no factor unit (third square root of 10^-18 m3
+    #  - unit:VAR -> unit:PicoVAR => factor unti: unit:PicoJ , unit:SEC
+    # todo: check if unit is composed (hasFactorUnit / more than one unit string)
+    # todo: check if the chain is complete: composed prefixed unit: scalingOf ->
+    #  non-prefixed composed unit: hasFactorUnit -> non-prefixed composed unit /
+    #  non-prefixed non-composed unit -> hasFactorUnit / scalingOf -> non-prefixed
+    #  non-composed unit
     result = {
         "Unit (non-composed) with prefix in @id but no qudt:prefix property": [],
         "Unit with qudt:prefix property but no prefix in @id": [],
         "Unit with prefix but no scalingOf property": [],
         "Unit without prefix but with scalingOf property": [],
+        "Composed unit without hasFactorUnit property": [],
     }
     for unit_dict_ in unit_type_dict["All"]:
         unit_id = unit_dict_["@id"]
@@ -2072,7 +2232,9 @@ report_on_unit_types(
 )
 
 # Handling of quantity kinds
-qudt_quantity_kind_dict = classify_quantity_kinds(ontologies["qudt"]["type_dict"])
+qudt_quantity_kind_dict = classify_and_enrich_quantity_kinds(
+    ontologies["qudt"]["type_dict"]
+)
 
 
 # Create prefixes
@@ -2082,6 +2244,6 @@ _logger.info("Created %d unit prefix entities", len(unit_prefix_entities))
 # Creating systems of quantities and units
 soqau_entities = create_system_of_quantities_and_units_entities()
 _logger.info("Created %d systems of quantities and units entities", len(soqau_entities))
-# Create units and prefixed units
+# Create quantity units
 quantity_unit_entities = create_quantity_unit_entities(qudt_unit_type_dict)
 _logger.info("Created %d quantity unit entities", len(quantity_unit_entities))
