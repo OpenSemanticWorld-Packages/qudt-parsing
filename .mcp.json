@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "qudt-sparql-mcp-server": {
+      "type": "stdio",
+      "command": "C:/Users/gold/github/qudt-parsing/.venv/Scripts/python.exe",
+      "args": [
+        "-m",
+        "qudt_parsing.mcp_server"
+      ],
+      "env": {
+        "QUDT_SPARQL_ENDPOINT": "https://www.qudt.org/fuseki/qudt/sparql"
+      }
+    }
+  }
+}
